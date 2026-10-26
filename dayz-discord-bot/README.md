@@ -1,8 +1,8 @@
-# DayZ Discord-Bot mit Shop & Lieferung an Orte (PlayStation / Nitrado)
+# DayZ Discord-Bot (PlayStation / Nitrado)
 
-Spieler kaufen im Discord Items mit Spielgeld. Der Bot lässt die Items in DayZ an
-einem festen Ort oder direkt am eigenen Standort spawnen. Funktioniert ohne Mods,
-also auch auf PS4/PS5-Servern von Nitrado.
+Shop mit Lieferung an Orte, Killfeed mit Belohnung, Hitfeed, Kopfgeld-System mit
+automatischem Kopfgeld und anpassbaren Airdrops. Funktioniert ohne Mods, also auch
+auf PS4/PS5-Servern von Nitrado.
 
 ## Funktionen
 
@@ -14,14 +14,59 @@ also auch auf PS4/PS5-Servern von Nitrado.
 | `/shop [kategorie]` | Shop anzeigen |
 | `/kaufen <artikel> <ort>` | Kaufen und liefern lassen, mit Auswahlliste für Artikel und Ort |
 | `/bestellungen` | Eigene Bestellungen und deren Status |
+| `/statistik [gamertag]` | Kills, Tode, K/D, Killserie, weitester Kill |
+| `/bestenliste` | Top 10 nach Kills |
+| `/kopfgeld setzen <gamertag> <betrag>` | Kopfgeld aus eigenem Guthaben aussetzen |
+| `/kopfgeld liste` | Alle offenen Kopfgelder |
 | `/admin-geld <spieler> <betrag>` | Geld geben oder abziehen (negativer Betrag) |
+| `/admin-kopfgeld-entfernen <gamertag>` | Kopfgeld löschen |
+| `/admin-lootdrop [paket] [ort] [sofort] [ankuendigen]` | Airdrop planen (Paket und Ort wählbar oder Zufall) |
 | `/admin-neustart` | Server neu starten, damit alles sofort geliefert wird |
 | `/admin-einrichten` | Trägt die Lieferdatei automatisch in `cfggameplay.json` ein |
 
 Außerdem:
-- **Kill-Belohnung**: Für jeden Spieler-Kill gibt es Geld (aus dem Admin-Log).
 - **Lieferung an den eigenen Standort**: Die Position stammt aus dem Admin-Log
   (Spielerliste, etwa alle 5 Minuten).
+
+### Killfeed mit Kill-Belohnung
+Jeder Spieler-Kill erscheint im Killfeed-Kanal mit Täter, Opfer, Waffe, Distanz und
+Killserie. Der Täter bekommt `KILL_BELOHNUNG`, optional plus `KILL_BONUS_PRO_100M`
+für jede 100 m Distanz. Geld gibt es nur für verknüpfte Spieler.
+
+### Hitfeed
+Jeder Treffer von Spieler auf Spieler erscheint im Hitfeed-Kanal mit Körperteil,
+Waffe, Distanz, Schaden und restlicher HP. Kopftreffer sind orange markiert.
+Auf vollen Servern kann das viel werden, dann `HITFEED_KANAL` einfach leer lassen.
+
+### Kopfgeld-System
+- **Manuell**: Spieler setzen mit `/kopfgeld setzen` Geld auf einen anderen Spieler aus.
+  Mehrere Kopfgelder auf denselben Spieler werden addiert.
+- **Automatisch**: Ab einer Killserie von `AUTO_KOPFGELD_AB_SERIE` Kills ohne Tod
+  setzt der Server `AUTO_KOPFGELD_START` aus, danach `AUTO_KOPFGELD_PRO_KILL` pro
+  weiterem Kill.
+- Wer den Gesuchten tötet (und verknüpft ist), kassiert alles. Die Ankündigung zeigt
+  den ungefähren letzten Standort (± 100 m), abschaltbar mit `KOPFGELD_STANDORT_ZEIGEN`.
+- Stirbt der Gesuchte anders (Zombie, Hunger, Selbstmord, Täter nicht verknüpft),
+  verfällt nur der automatische Anteil. Von Spielern gesetztes Kopfgeld bleibt stehen.
+
+### Lootdrops / Airdrops
+Alles wird in **`lootdrops.json`** eingestellt:
+- **`pakete`**: beliebig viele Loot-Pakete (Beispiele: Militär, Medizin, Basisbau, Survival)
+  - `immer`: Items, die garantiert dabei sind
+  - `loot`: Pool, aus dem zufällig `anzahl_min` bis `anzahl_max` Items gezogen werden.
+    Ein höheres `gewicht` bedeutet häufiger, `menge` gibt die Stückzahl pro Ziehung an.
+  - `gewicht` des Pakets: wie oft es bei Zufallsauswahl gewählt wird
+  - `radius`: wie weit die Items um den Abwurfpunkt verteilt werden
+  - `markierung`: optionales Objekt in der Mitte (z. B. ein Wrack), vorher testen
+- **`orte`**: vorinstallierte Abwurforte `[x, höhe, z]`. Ohne Angabe wird zufällig
+  einer gewählt.
+- **`automatisch`**: Nach jedem Neustart plant der Bot mit `chance_pro_neustart` %
+  einen zufälligen Airdrop für den nächsten Neustart. Mit `ort_vorher_ankuendigen`
+  wird der Ort schon vorher verraten, sonst erst bei der Landung.
+
+Ankündigung und Landung (mit Koordinaten) erscheinen im Lootdrop-Kanal. Admins können
+mit `/admin-lootdrop` jederzeit einen Drop planen, mit `sofort: True` startet der
+Server direkt neu.
 
 ## So funktioniert die Lieferung
 
@@ -43,7 +88,10 @@ und die geplanten Nitrado-Neustarts nutzen (z. B. alle 3 Stunden).
 ### 1. Discord-Bot anlegen
 1. Auf https://discord.com/developers/applications eine **New Application** anlegen,
    dann unter **Bot** den Token kopieren.
-2. Unter **OAuth2 → URL Generator** die Scopes `bot` und `applications.commands`
+2. Für jeden Feed einen Discord-Kanal anlegen (Killfeed, Hitfeed, Kopfgeld, Airdrops)
+   und die Kanal-IDs in die `.env` eintragen (Entwicklermodus in Discord aktivieren,
+   dann Rechtsklick auf den Kanal → ID kopieren).
+3. Unter **OAuth2 → URL Generator** die Scopes `bot` und `applications.commands`
    wählen, als Rechte `Send Messages` und `Embed Links`. Mit dem Link den Bot auf
    deinen Discord einladen.
 
@@ -53,7 +101,8 @@ und die geplanten Nitrado-Neustarts nutzen (z. B. alle 3 Stunden).
 2. Die **Service-ID** steht in der URL deines Servers im Webinterface.
 3. In den Server-Einstellungen:
    - **cfggameplay.json aktivieren** (heißt je nach Oberfläche „enableCfgGameplayFile“)
-   - **Admin-Log / Spielerliste aktivieren**, sonst funktioniert „Mein Standort“ nicht
+   - **Admin-Log aktivieren, inklusive Spielerliste und Treffer (Hits)**. Sonst
+     funktionieren „Mein Standort“, Hitfeed und Kopfgeld-Standort nicht.
 
 ### 3. Bot installieren
 Benötigt wird Python 3.10 oder neuer, auf einem Rechner oder Raspberry Pi, der
@@ -81,11 +130,19 @@ Im Discord `/admin-einrichten` ausführen und danach den Server einmal neu start
   bekommst du sie aus dem Admin-Log: Stell dich an den Ort und lies deine Position ab.
   Im Log steht sie als `pos=<x, z, höhe>`.
   Die Beispielorte sind nur grobe Werte und müssen vor dem Einsatz geprüft werden.
-- **`.env`**: Startgeld, Bonus, Kill-Belohnung, Währungsname, Karte.
+- **`lootdrops.json`**: Airdrop-Pakete, Loot, Wahrscheinlichkeiten und Orte (siehe oben).
+- **`.env`**: Startgeld, Bonus, Kill-Belohnung, Kopfgeld-Regeln, Discord-Kanäle,
+  Währungsname, Karte.
 
 ## Bekannte Grenzen
 
-- Lieferungen kommen erst **nach einem Neustart** an. Anders geht es auf Konsole nicht.
+- Lieferungen und Airdrops kommen erst **nach einem Neustart** an. Anders geht es auf
+  Konsole nicht.
+- Killfeed und Hitfeed hängen ca. 1 Minute hinterher, weil das Admin-Log jede Minute
+  abgeholt wird.
+- Die Log-Formate (Kills, Treffer) sind nach dem bekannten DayZ-ADM-Format gebaut.
+  Weicht dein Log ab, schick mir ein paar Zeilen daraus, dann passe ich den Parser an.
+- Die Beispiel-Orte in `lootdrops.json` sind grobe Werte für Chernarus. Prüfe sie vorher.
 - Items, die über den Object Spawner erscheinen, sollten aufhebbar sein. Teste das
   mit einem günstigen Item, bevor du den Shop freigibst.
 - Die Pfade werden automatisch über die Nitrado-API ermittelt. Falls das nicht

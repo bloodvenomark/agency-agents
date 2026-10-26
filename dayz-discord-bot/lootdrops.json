@@ -1,0 +1,103 @@
+{
+  "_hinweis": "pakete: 'gewicht' = wie oft das Paket bei Zufallsauswahl gewählt wird. 'immer' = kommt garantiert. 'loot' = Pool, aus dem anzahl_min bis anzahl_max Einträge nach 'gewicht' gezogen werden. 'markierung' = optionales Objekt in der Mitte (leer lassen oder z. B. ein Wrack, vorher testen). orte: [x, hoehe, z].",
+
+  "automatisch": {
+    "aktiv": true,
+    "chance_pro_neustart": 50,
+    "ort_vorher_ankuendigen": false
+  },
+
+  "pakete": {
+    "Militär": {
+      "gewicht": 2,
+      "radius": 4,
+      "markierung": "",
+      "anzahl_min": 5,
+      "anzahl_max": 8,
+      "immer": [
+        {"klasse": "PlateCarrierVest"}
+      ],
+      "loot": [
+        {"klasse": "M4A1",                 "gewicht": 3},
+        {"klasse": "AKM",                  "gewicht": 3},
+        {"klasse": "SVD",                  "gewicht": 1},
+        {"klasse": "Mag_STANAG_30Rnd",     "gewicht": 6, "menge": 2},
+        {"klasse": "Mag_AKM_30Rnd",        "gewicht": 6, "menge": 2},
+        {"klasse": "AmmoBox_556x45_20Rnd", "gewicht": 5, "menge": 2},
+        {"klasse": "AmmoBox_762x39_20Rnd", "gewicht": 5, "menge": 2},
+        {"klasse": "M67Grenade",           "gewicht": 2},
+        {"klasse": "ACOGOptic",            "gewicht": 2},
+        {"klasse": "Ballistic_Helmet_Black", "gewicht": 2}
+      ]
+    },
+
+    "Medizin": {
+      "gewicht": 3,
+      "radius": 3,
+      "markierung": "",
+      "anzahl_min": 4,
+      "anzahl_max": 7,
+      "immer": [
+        {"klasse": "FirstAidKit"}
+      ],
+      "loot": [
+        {"klasse": "SalineBagIV",      "gewicht": 4},
+        {"klasse": "BloodBagIV",       "gewicht": 2},
+        {"klasse": "Morphine",         "gewicht": 4},
+        {"klasse": "Epinephrine",      "gewicht": 3},
+        {"klasse": "TetracyclineAntibiotics", "gewicht": 3},
+        {"klasse": "BandageDressing",  "gewicht": 6, "menge": 2},
+        {"klasse": "DisinfectantSpray","gewicht": 3}
+      ]
+    },
+
+    "Basisbau": {
+      "gewicht": 2,
+      "radius": 4,
+      "markierung": "",
+      "anzahl_min": 4,
+      "anzahl_max": 6,
+      "immer": [
+        {"klasse": "NailBox", "menge": 2}
+      ],
+      "loot": [
+        {"klasse": "CombinationLock4", "gewicht": 2},
+        {"klasse": "Hatchet",          "gewicht": 3},
+        {"klasse": "Shovel",           "gewicht": 3},
+        {"klasse": "Pliers",           "gewicht": 2},
+        {"klasse": "MetalWire",        "gewicht": 3},
+        {"klasse": "BarbedWire",       "gewicht": 2},
+        {"klasse": "LargeTent",        "gewicht": 1}
+      ]
+    },
+
+    "Survival": {
+      "gewicht": 3,
+      "radius": 3,
+      "markierung": "",
+      "anzahl_min": 5,
+      "anzahl_max": 8,
+      "immer": [],
+      "loot": [
+        {"klasse": "BakedBeansCan",    "gewicht": 5, "menge": 2},
+        {"klasse": "TacticalBaconCan", "gewicht": 4},
+        {"klasse": "WaterBottle",      "gewicht": 5},
+        {"klasse": "CombatKnife",      "gewicht": 2},
+        {"klasse": "Compass",          "gewicht": 2},
+        {"klasse": "Binoculars",       "gewicht": 2},
+        {"klasse": "Matchbox",         "gewicht": 4},
+        {"klasse": "MountainBag_Green","gewicht": 1}
+      ]
+    }
+  },
+
+  "orte": {
+    "NWAF Landebahn":   [4600.0, 339.0, 10200.0],
+    "Tisy Militär":     [1660.0, 450.0, 14000.0],
+    "Stary Sobor":      [6070.0, 300.0, 7750.0],
+    "Zelenogorsk Feld": [2550.0, 200.0, 5200.0],
+    "Berezino Wald":    [12000.0, 60.0, 9300.0],
+    "Myshkino Basis":   [1250.0, 185.0, 7250.0],
+    "Severograd":       [8400.0, 115.0, 12700.0]
+  }
+}

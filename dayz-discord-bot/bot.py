@@ -1,11 +1,13 @@
-"""DayZ-Discord-Bot mit Shopsystem und Lieferung an Orte (Nitrado / PlayStation).
+"""DayZ-Discord-Bot für Nitrado / PlayStation.
 
-Ablauf einer Lieferung:
-  1. Spieler kauft per /kaufen ein Item an einem Ort (fester Ort oder eigener Standort).
-  2. Der Bot schreibt alle wartenden Bestellungen in eine Object-Spawner-Datei
+Funktionen: Shop mit Lieferung an Orte, Killfeed mit Belohnung, Hitfeed,
+Kopfgeld-System (manuell + automatisch bei Killserien), Lootdrops/Airdrops.
+
+Ablauf einer Lieferung bzw. eines Lootdrops:
+  1. Der Bot schreibt alle wartenden Items in eine Object-Spawner-Datei
      (custom/shop_lieferungen.json im Missionsordner).
-  3. Beim nächsten Server-Neustart spawnt DayZ die Items an den Koordinaten.
-  4. Der Bot erkennt den Neustart, markiert die Bestellungen als geliefert
+  2. Beim nächsten Server-Neustart spawnt DayZ die Items an den Koordinaten.
+  3. Der Bot erkennt den Neustart, meldet die Lieferung bzw. den Airdrop
      und leert die Datei wieder (sonst würden sie bei jedem Neustart erneut spawnen).
 """
 
@@ -14,6 +16,7 @@ import json
 import logging
 import math
 import os
+import random
 import time
 from pathlib import Path
 
@@ -22,7 +25,8 @@ from discord import app_commands
 from discord.ext import commands, tasks
 from dotenv import load_dotenv
 
-from adm import parse_zeile
+import lootdrop
+from adm import Kill, Treffer, parse_zeile
 from db import DB
 from nitrado import Nitrado, NitradoError
 
@@ -30,18 +34,42 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("dayzbot")
 
+
+def _int(name: str, default: int) -> int:
+    wert = os.getenv(name, "").strip()
+    return int(wert) if wert else default
+
+
+def _bool(name: str, default: bool) -> bool:
+    wert = os.getenv(name, "").strip().lower()
+    return wert == "true" if wert else default
+
+
 BASIS = Path(__file__).parent
 GUILD = discord.Object(id=int(os.environ["GUILD_ID"]))
 ADMIN_ROLE = os.getenv("ADMIN_ROLE", "DayZ Admin")
 MISSION = os.getenv("MISSION", "dayzOffline.chernarusplus")
-START_GELD = int(os.getenv("START_GELD", "500"))
-TAEGLICH_BONUS = int(os.getenv("TAEGLICH_BONUS", "250"))
-KILL_BELOHNUNG = int(os.getenv("KILL_BELOHNUNG", "100"))
+START_GELD = _int("START_GELD", 500)
+TAEGLICH_BONUS = _int("TAEGLICH_BONUS", 250)
+KILL_BELOHNUNG = _int("KILL_BELOHNUNG", 100)
+KILL_BONUS_PRO_100M = _int("KILL_BONUS_PRO_100M", 0)
 WAEHRUNG = os.getenv("WAEHRUNG", "Rubel")
-NEUSTART_NACH_KAUF = os.getenv("NEUSTART_NACH_KAUF", "false").lower() == "true"
+NEUSTART_NACH_KAUF = _bool("NEUSTART_NACH_KAUF", False)
+
+KILLFEED_KANAL = _int("KILLFEED_KANAL", 0)
+HITFEED_KANAL = _int("HITFEED_KANAL", 0)
+KOPFGELD_KANAL = _int("KOPFGELD_KANAL", 0)
+LOOTDROP_KANAL = _int("LOOTDROP_KANAL", 0)
+
+KOPFGELD_MINIMUM = _int("KOPFGELD_MINIMUM", 100)
+AUTO_KOPFGELD_AB_SERIE = _int("AUTO_KOPFGELD_AB_SERIE", 5)    # 0 = aus
+AUTO_KOPFGELD_START = _int("AUTO_KOPFGELD_START", 500)
+AUTO_KOPFGELD_PRO_KILL = _int("AUTO_KOPFGELD_PRO_KILL", 100)
+KOPFGELD_STANDORT_ZEIGEN = _bool("KOPFGELD_STANDORT_ZEIGEN", True)
 
 SPAWN_DATEI = "custom/shop_lieferungen.json"   # relativ zum Missionsordner
 STANDORT = "Mein Standort"
+ZUFALL = "🎲 Zufall"
 STANDORT_MAX_ALTER = 15 * 60                    # Sekunden
 
 SHOP: dict[str, list[dict]] = json.loads((BASIS / "shop.json").read_text("utf-8"))
@@ -49,6 +77,14 @@ ARTIKEL = {a["name"]: a for kat in SHOP.values() for a in kat}
 ORTE: dict[str, list[float]] = {
     k: v for k, v in json.loads((BASIS / "orte.json").read_text("utf-8")).items()
     if not k.startswith("_")
+}
+LOOTDROPS: dict = json.loads((BASIS / "lootdrops.json").read_text("utf-8"))
+
+KOERPERTEILE = {
+    "Head": "Kopf", "Brain": "Kopf", "Torso": "Oberkörper", "Spine": "Oberkörper",
+    "Pelvis": "Hüfte", "LeftArm": "linken Arm", "RightArm": "rechten Arm",
+    "LeftHand": "linke Hand", "RightHand": "rechte Hand", "LeftLeg": "linkes Bein",
+    "RightLeg": "rechtes Bein", "LeftFoot": "linken Fuß", "RightFoot": "rechten Fuß",
 }
 
 db = DB(str(BASIS / "data" / "bot.db"))
@@ -61,6 +97,11 @@ def geld(betrag: int) -> str:
     return f"{betrag:,} {WAEHRUNG}".replace(",", ".")
 
 
+def koords(x: float, z: float, runden: int = 1) -> str:
+    """Koordinaten wie auf izurvive.com (x / z), optional auf z. B. 100 m gerundet."""
+    return f"{round(x / runden) * runden:.0f} / {round(z / runden) * runden:.0f}"
+
+
 async def pfade_ermitteln():
     gs = await nitrado.gameserver()
     basis = gs.get("game_specific", {}).get("path", "")
@@ -69,31 +110,41 @@ async def pfade_ermitteln():
     log.info("Missionsordner: %s | ADM-Logs: %s", pfade["mission"], pfade["adm"])
 
 
-# --- Lieferungen ----------------------------------------------------------
+# --- Spawn-Datei (Lieferungen + Lootdrops) --------------------------------
 
-def spawn_objekte(bestellungen) -> dict:
+def _objekt(klasse: str, x: float, y: float, z: float) -> dict:
+    return {"name": klasse, "pos": [round(x, 2), round(y, 2), round(z, 2)],
+            "ypr": [0.0, 0.0, 0.0], "scale": 1.0, "enableCEPersistency": 0}
+
+
+def spawn_objekte(bestellungen, drops=()) -> dict:
     """Baut den Inhalt der Object-Spawner-Datei. Mehrere Items werden im Kreis verteilt."""
     objekte = []
     for b in bestellungen:
         for i in range(b["menge"]):
             winkel = 2 * math.pi * i / max(b["menge"], 1)
             radius = 0.6 if b["menge"] > 1 else 0.0
-            objekte.append({
-                "name": b["klasse"],
-                "pos": [round(b["x"] + radius * math.cos(winkel), 2),
-                        round(b["y"], 2),
-                        round(b["z"] + radius * math.sin(winkel), 2)],
-                "ypr": [0.0, 0.0, 0.0],
-                "scale": 1.0,
-                "enableCEPersistency": 0,
-            })
+            objekte.append(_objekt(b["klasse"], b["x"] + radius * math.cos(winkel),
+                                   b["y"], b["z"] + radius * math.sin(winkel)))
+    for d in drops:
+        objekte += [_objekt(*o) for o in json.loads(d["objekte"])]
     return {"Objects": objekte}
 
 
 async def spawn_datei_schreiben():
     async with datei_lock:
-        inhalt = json.dumps(spawn_objekte(db.wartende()), indent=2)
+        inhalt = json.dumps(spawn_objekte(db.wartende(), db.lootdrops_wartend()), indent=2)
         await nitrado.upload(pfade["mission"] + SPAWN_DATEI, inhalt)
+
+
+async def datei_aktualisieren():
+    """Schreibt die Datei nur, wenn der Server läuft – während eines Neustarts würde
+    sonst neu Hinzugefügtes schon geladen und nach dem Neustart erneut gespawnt."""
+    if db.get("server_status") == "started":
+        try:
+            await spawn_datei_schreiben()
+        except NitradoError as e:
+            log.error("Upload fehlgeschlagen: %s", e)
 
 
 # --- Bot ------------------------------------------------------------------
@@ -130,9 +181,137 @@ async def benachrichtigen(discord_id: int, text: str):
         pass  # DMs deaktiviert
 
 
+async def posten(kanal_id: int, embed: discord.Embed):
+    if not kanal_id:
+        return
+    kanal = bot.get_channel(kanal_id)
+    if kanal is None:
+        log.warning("Kanal %s nicht gefunden", kanal_id)
+        return
+    try:
+        await kanal.send(embed=embed)
+    except discord.HTTPException as e:
+        log.warning("Posten in %s fehlgeschlagen: %s", kanal_id, e)
+
+
+# --- Killfeed, Hitfeed, Kopfgeld -------------------------------------------
+
+async def kill_verarbeiten(k: Kill):
+    serie = db.stat_kill(k.taeter, k.distanz)
+    db.stat_tod(k.opfer, durch_spieler=True)
+
+    belohnung = KILL_BELOHNUNG + KILL_BONUS_PRO_100M * int((k.distanz or 0) // 100)
+    konto = db.konto_per_gamertag(k.taeter)
+    kopf = db.kopfgeld(k.opfer)
+    kopfgeld = 0
+    if kopf and konto:
+        kopfgeld = kopf["betrag"] + kopf["auto_betrag"]
+        db.kopfgeld_entfernen(k.opfer)
+    else:
+        db.kopfgeld_auto_zuruecksetzen(k.opfer)   # Serie des Opfers ist vorbei
+
+    if konto:
+        db.geld_aendern(konto["discord_id"], belohnung + kopfgeld)
+
+    # Killfeed
+    waffe = k.waffe or "unbekannt"
+    distanz = f" aus **{k.distanz:.0f} m**" if k.distanz is not None else ""
+    embed = discord.Embed(
+        description=f"☠️ **{k.taeter}** hat **{k.opfer}** getötet\n🔫 {waffe}{distanz}",
+        color=0xB71C1C,
+    )
+    if konto and belohnung:
+        embed.add_field(name="Belohnung", value=f"+{geld(belohnung)}")
+    if serie >= 3:
+        embed.add_field(name="Killserie", value=f"🔥 {serie}")
+    if kopfgeld:
+        embed.add_field(name="Kopfgeld kassiert", value=f"💰 {geld(kopfgeld)}")
+    await posten(KILLFEED_KANAL, embed)
+
+    if konto:
+        text = f"💀 Kill an **{k.opfer}**: +{geld(belohnung)}"
+        if kopfgeld:
+            text += f"\n💰 Kopfgeld kassiert: +{geld(kopfgeld)}"
+        await benachrichtigen(konto["discord_id"], text)
+
+    if kopfgeld:
+        await posten(KOPFGELD_KANAL, discord.Embed(
+            title="💰 Kopfgeld kassiert!",
+            description=f"**{k.taeter}** hat **{k.opfer}** erledigt und "
+                        f"**{geld(kopfgeld)}** kassiert.",
+            color=0xF9A825,
+        ))
+
+    # Automatisches Kopfgeld bei Killserie
+    if AUTO_KOPFGELD_AB_SERIE and serie >= AUTO_KOPFGELD_AB_SERIE:
+        plus = AUTO_KOPFGELD_START if serie == AUTO_KOPFGELD_AB_SERIE else AUTO_KOPFGELD_PRO_KILL
+        db.kopfgeld_auto(k.taeter, plus)
+        await kopfgeld_ankuendigen(
+            k.taeter, f"🔥 **{k.taeter}** hat eine Killserie von **{serie}**!", automatisch=True)
+
+
+async def kopfgeld_ankuendigen(gamertag: str, grund: str, automatisch: bool = False):
+    kopf = db.kopfgeld(gamertag)
+    if not kopf:
+        return
+    gesamt = kopf["betrag"] + kopf["auto_betrag"]
+    embed = discord.Embed(
+        title="🎯 Kopfgeld ausgesetzt" + (" (automatisch)" if automatisch else ""),
+        description=f"{grund}\nAuf **{gamertag}** sind jetzt **{geld(gesamt)}** ausgesetzt.",
+        color=0xF9A825,
+    )
+    p = db.position(gamertag)
+    if KOPFGELD_STANDORT_ZEIGEN and p and time.time() - p["zeit"] < STANDORT_MAX_ALTER:
+        embed.add_field(name="Zuletzt gesehen (± 100 m)", value=koords(p["x"], p["z"], 100))
+    embed.set_footer(text="Wer ihn tötet, kassiert das Kopfgeld (Discord-Verknüpfung nötig).")
+    await posten(KOPFGELD_KANAL, embed)
+
+
+async def treffer_posten(t: Treffer):
+    if not HITFEED_KANAL:
+        return
+    teil = KOERPERTEILE.get(t.koerperteil or "", t.koerperteil or "Körper")
+    zeilen = [f"🎯 **{t.angreifer}** traf **{t.opfer}** am **{teil}**"]
+    details = []
+    if t.waffe:
+        details.append(f"🔫 {t.waffe}")
+    if t.distanz is not None:
+        details.append(f"📏 {t.distanz:.0f} m")
+    if t.schaden is not None:
+        details.append(f"💥 {t.schaden:.0f} Schaden")
+    details.append(f"❤️ {max(t.hp, 0):.0f} HP übrig")
+    zeilen.append(" • ".join(details))
+    farbe = 0xE65100 if t.koerperteil in ("Head", "Brain") else 0x546E7A
+    await posten(HITFEED_KANAL, discord.Embed(description="\n".join(zeilen), color=farbe))
+
+
+# --- Lootdrops ---------------------------------------------------------------
+
+async def lootdrop_planen(paket: str | None = None, ort: str | None = None) -> tuple:
+    paket, ort, pos, objekte = lootdrop.erzeugen(LOOTDROPS, paket, ort)
+    nr = db.lootdrop_anlegen(paket, ort, *pos, objekte)
+    log.info("Lootdrop #%d geplant: %s bei %s (%d Objekte)", nr, paket, ort, len(objekte))
+    return nr, paket, ort, pos
+
+
+async def lootdrop_gelandet(d):
+    anzahl = len(json.loads(d["objekte"]))
+    embed = discord.Embed(
+        title="🪂 Airdrop gelandet!",
+        description=f"Ein **{d['paket']}**-Paket ist bei **{d['ort']}** gelandet.",
+        color=0x1565C0,
+    )
+    embed.add_field(name="Koordinaten", value=koords(d["x"], d["z"]))
+    embed.add_field(name="Items", value=str(anzahl))
+    embed.set_footer(text="Wer zuerst kommt, mahlt zuerst. Vorsicht vor Campern!")
+    await posten(LOOTDROP_KANAL, embed)
+
+
+# --- Hintergrund-Schleifen -------------------------------------------------
+
 @tasks.loop(seconds=30)
 async def status_schleife():
-    """Erkennt Server-Neustarts und schließt Lieferungen ab."""
+    """Erkennt Server-Neustarts, schließt Lieferungen/Lootdrops ab, plant Airdrops."""
     try:
         jetzt = await nitrado.status()
     except NitradoError as e:
@@ -144,24 +323,45 @@ async def status_schleife():
     if vorher == "started" and jetzt != "started":
         # Neustart beginnt: alles bis hierhin ist in der Datei und wird gespawnt.
         db.set("liefer_snapshot", str(db.letzte_bestell_id()))
+        db.set("drop_snapshot", str(db.letzte_lootdrop_id()))
         log.info("Neustart erkannt (%s)", jetzt)
 
     elif vorher not in (None, "started") and jetzt == "started":
-        snapshot = int(db.get("liefer_snapshot", "0") or 0)
+        liefer = int(db.get("liefer_snapshot", "0") or 0)
+        drops = int(db.get("drop_snapshot", "0") or 0)
         db.set("liefer_snapshot", "0")
-        geliefert = db.als_geliefert(snapshot) if snapshot else []
-        await spawn_datei_schreiben()   # Datei leeren bzw. nur Neues behalten
-        log.info("Server läuft wieder, %d Bestellungen geliefert", len(geliefert))
+        db.set("drop_snapshot", "0")
+        geliefert = db.als_geliefert(liefer) if liefer else []
+        gelandet = db.lootdrops_gelandet(drops) if drops else []
+        log.info("Server läuft wieder: %d Lieferungen, %d Lootdrops",
+                 len(geliefert), len(gelandet))
+
         for b in geliefert:
             await benachrichtigen(
                 b["discord_id"],
                 f"📦 Deine Lieferung **{b['artikel']}** liegt jetzt bei **{b['ort']}** bereit!",
             )
+        for d in gelandet:
+            await lootdrop_gelandet(d)
+
+        # Automatischen Airdrop für den nächsten Neustart planen
+        auto = LOOTDROPS.get("automatisch", {})
+        if auto.get("aktiv") and random.uniform(0, 100) < auto.get("chance_pro_neustart", 0):
+            _, paket, ort, _ = await lootdrop_planen()
+            text = f"Beim nächsten Neustart wird ein **{paket}**-Paket abgeworfen"
+            text += f" bei **{ort}**!" if auto.get("ort_vorher_ankuendigen") else ". Ort: geheim 🤫"
+            await posten(LOOTDROP_KANAL, discord.Embed(
+                title="✈️ Airdrop angekündigt", description=text, color=0x1565C0))
+
+        try:
+            await spawn_datei_schreiben()   # Geliefertes entfernen, Neues behalten
+        except NitradoError as e:
+            log.error("Upload fehlgeschlagen: %s", e)
 
 
 @tasks.loop(seconds=60)
 async def log_schleife():
-    """Liest neue Zeilen aus dem ADM-Log: Positionen merken, Kills belohnen."""
+    """Liest neue Zeilen aus dem ADM-Log: Positionen, Kills, Treffer, Tode."""
     try:
         eintraege = [e for e in await nitrado.list_dir(pfade["adm"])
                      if e.get("name", "").upper().endswith(".ADM")]
@@ -184,17 +384,19 @@ async def log_schleife():
         start = 0
 
     for zeile in zeilen[start:]:
-        positionen, kill = parse_zeile(zeile)
-        for p in positionen:
+        e = parse_zeile(zeile)
+        for p in e.positionen:
             db.position_setzen(p.gamertag, p.x, p.hoehe, p.z)
-        if kill and KILL_BELOHNUNG:
-            konto = db.konto_per_gamertag(kill.taeter)
-            if konto:
-                db.geld_aendern(konto["discord_id"], KILL_BELOHNUNG)
-                await benachrichtigen(
-                    konto["discord_id"],
-                    f"💀 Kill an **{kill.opfer}**: +{geld(KILL_BELOHNUNG)}",
-                )
+        try:
+            if e.kill:
+                await kill_verarbeiten(e.kill)
+            elif e.treffer:
+                await treffer_posten(e.treffer)
+            elif e.tod:
+                db.stat_tod(e.tod, durch_spieler=False)
+                db.kopfgeld_auto_zuruecksetzen(e.tod)
+        except Exception:
+            log.exception("Fehler bei Logzeile: %s", zeile)
 
     db.set("adm_datei", pfad)
     db.set("adm_zeilen", str(len(zeilen)))
@@ -304,7 +506,7 @@ async def kaufen(interaction: discord.Interaction, artikel: str, ort: str):
                 "(Position wird ca. alle 5 Minuten aus dem Admin-Log gelesen).", ephemeral=True)
             return
         x, y, z = p["x"] + 1.5, p["y"], p["z"] + 1.5   # etwas neben den Spieler
-        ort_name = f"deinem Standort ({p['x']:.0f} / {p['z']:.0f})"
+        ort_name = f"deinem Standort ({koords(p['x'], p['z'])})"
     elif ort in ORTE:
         x, y, z = ORTE[ort]
         ort_name = ort
@@ -322,15 +524,12 @@ async def kaufen(interaction: discord.Interaction, artikel: str, ort: str):
         return
 
     await interaction.response.defer(ephemeral=True)
-    # Während eines Neustarts nicht hochladen, sonst würde die Bestellung doppelt spawnen.
-    # Die Datei wird nach dem Neustart ohnehin neu geschrieben.
-    if db.get("server_status") == "started":
+    await datei_aktualisieren()
+    if NEUSTART_NACH_KAUF and db.get("server_status") == "started":
         try:
-            await spawn_datei_schreiben()
-            if NEUSTART_NACH_KAUF:
-                await nitrado.restart("Shop-Lieferung")
+            await nitrado.restart("Shop-Lieferung")
         except NitradoError as e:
-            log.error("Upload fehlgeschlagen: %s", e)
+            log.error("Neustart fehlgeschlagen: %s", e)
 
     wann = "nach dem Neustart in wenigen Minuten" if NEUSTART_NACH_KAUF else "beim nächsten Server-Neustart"
     await interaction.followup.send(
@@ -350,6 +549,104 @@ async def bestellungen(interaction: discord.Interaction):
     await interaction.response.send_message(text, ephemeral=True)
 
 
+async def spieler_auswahl(interaction: discord.Interaction, aktuell: str):
+    return [app_commands.Choice(name=g, value=g) for g in db.bekannte_spieler(aktuell)]
+
+
+@bot.tree.command(name="statistik", description="Kills, Tode und Killserie eines Spielers")
+@app_commands.autocomplete(gamertag=spieler_auswahl)
+async def statistik(interaction: discord.Interaction, gamertag: str | None = None):
+    if not gamertag:
+        k = db.konto(interaction.user.id)
+        if not k:
+            await interaction.response.send_message("Nutze zuerst `/verknuepfen`.", ephemeral=True)
+            return
+        gamertag = k["gamertag"]
+    s = db.statistik(gamertag)
+    if not s:
+        await interaction.response.send_message(f"Keine Daten zu **{gamertag}**.", ephemeral=True)
+        return
+    kd = s["kills"] / s["tode"] if s["tode"] else s["kills"]
+    embed = discord.Embed(title=f"📊 {s['gamertag']}", color=0x37474F)
+    embed.add_field(name="Kills", value=str(s["kills"]))
+    embed.add_field(name="Tode (PvP)", value=str(s["tode"]))
+    embed.add_field(name="K/D", value=f"{kd:.2f}")
+    embed.add_field(name="Aktuelle Serie", value=str(s["serie"]))
+    embed.add_field(name="Beste Serie", value=str(s["beste_serie"]))
+    embed.add_field(name="Weitester Kill", value=f"{s['weitester']:.0f} m")
+    kopf = db.kopfgeld(gamertag)
+    if kopf:
+        embed.add_field(name="Kopfgeld", value=geld(kopf["betrag"] + kopf["auto_betrag"]))
+    await interaction.response.send_message(embed=embed)
+
+
+@bot.tree.command(name="bestenliste", description="Die Top 10 nach Kills")
+async def bestenliste(interaction: discord.Interaction):
+    rows = db.bestenliste()
+    if not rows:
+        await interaction.response.send_message("Noch keine Kills erfasst.")
+        return
+    medaillen = ["🥇", "🥈", "🥉"]
+    text = "\n".join(
+        f"{medaillen[i] if i < 3 else f'`{i + 1}.`'} **{r['gamertag']}** – "
+        f"{r['kills']} Kills / {r['tode']} Tode (beste Serie {r['beste_serie']})"
+        for i, r in enumerate(rows))
+    await interaction.response.send_message(
+        embed=discord.Embed(title="🏆 Bestenliste", description=text, color=0xF9A825))
+
+
+kopfgeld_gruppe = app_commands.Group(name="kopfgeld", description="Kopfgeld-System")
+
+
+@kopfgeld_gruppe.command(name="setzen", description="Setze ein Kopfgeld aus deinem Guthaben aus")
+@app_commands.describe(gamertag="Auf wen?", betrag="Wie viel?")
+@app_commands.autocomplete(gamertag=spieler_auswahl)
+async def kopfgeld_setzen(interaction: discord.Interaction, gamertag: str, betrag: int):
+    k = db.konto(interaction.user.id)
+    if not k:
+        await interaction.response.send_message("Nutze zuerst `/verknuepfen`.", ephemeral=True)
+        return
+    if betrag < KOPFGELD_MINIMUM:
+        await interaction.response.send_message(
+            f"❌ Mindestens {geld(KOPFGELD_MINIMUM)}.", ephemeral=True)
+        return
+    if gamertag.lower() == (k["gamertag"] or "").lower():
+        await interaction.response.send_message("❌ Nicht auf dich selbst.", ephemeral=True)
+        return
+    if not db.position(gamertag):
+        await interaction.response.send_message(
+            f"❌ **{gamertag}** war noch nie auf dem Server. Bitte Schreibweise prüfen.",
+            ephemeral=True)
+        return
+    try:
+        db.kopfgeld_setzen(interaction.user.id, gamertag, betrag)
+    except ValueError:
+        await interaction.response.send_message(
+            f"❌ Nicht genug Geld (du hast {geld(k['geld'])}).", ephemeral=True)
+        return
+    await interaction.response.send_message(
+        f"✅ {geld(betrag)} Kopfgeld auf **{gamertag}** ausgesetzt.", ephemeral=True)
+    await kopfgeld_ankuendigen(
+        gamertag, f"Ein Spieler hat **{geld(betrag)}** auf **{gamertag}** ausgesetzt.")
+
+
+@kopfgeld_gruppe.command(name="liste", description="Alle offenen Kopfgelder")
+async def kopfgeld_liste(interaction: discord.Interaction):
+    rows = db.kopfgelder()
+    if not rows:
+        await interaction.response.send_message("Keine offenen Kopfgelder. 🕊️")
+        return
+    text = "\n".join(
+        f"🎯 **{r['gamertag']}** – {geld(r['gesamt'])}"
+        + (" 🔥" if r["auto_betrag"] else "") for r in rows[:25])
+    await interaction.response.send_message(embed=discord.Embed(
+        title="🎯 Offene Kopfgelder", description=text, color=0xF9A825)
+        .set_footer(text="🔥 = enthält automatisches Kopfgeld durch Killserie"))
+
+
+bot.tree.add_command(kopfgeld_gruppe)
+
+
 # --- Admin-Befehle -------------------------------------------------------
 
 @bot.tree.command(name="admin-geld", description="[Admin] Geld geben oder abziehen")
@@ -363,18 +660,67 @@ async def admin_geld(interaction: discord.Interaction, spieler: discord.Member, 
         f"✅ {spieler.mention}: {'+' if betrag >= 0 else ''}{geld(betrag)}", ephemeral=True)
 
 
-@bot.tree.command(name="admin-neustart", description="[Admin] Server neu starten (liefert alle Bestellungen)")
+@bot.tree.command(name="admin-kopfgeld-entfernen", description="[Admin] Kopfgeld löschen")
+@app_commands.check(ist_admin)
+@app_commands.autocomplete(gamertag=spieler_auswahl)
+async def admin_kopfgeld_entfernen(interaction: discord.Interaction, gamertag: str):
+    db.kopfgeld_entfernen(gamertag)
+    await interaction.response.send_message(f"✅ Kopfgeld auf **{gamertag}** entfernt.",
+                                            ephemeral=True)
+
+
+async def paket_auswahl(interaction: discord.Interaction, aktuell: str):
+    namen = [ZUFALL, *LOOTDROPS["pakete"]]
+    return [app_commands.Choice(name=n, value=n) for n in namen
+            if aktuell.lower() in n.lower()][:25]
+
+
+async def drop_ort_auswahl(interaction: discord.Interaction, aktuell: str):
+    namen = [ZUFALL, *LOOTDROPS["orte"]]
+    return [app_commands.Choice(name=n, value=n) for n in namen
+            if aktuell.lower() in n.lower()][:25]
+
+
+@bot.tree.command(name="admin-lootdrop", description="[Admin] Airdrop für den nächsten Neustart planen")
+@app_commands.check(ist_admin)
+@app_commands.describe(paket="Loot-Paket (oder Zufall)", ort="Abwurfort (oder Zufall)",
+                       sofort="Server sofort neu starten", ankuendigen="Ort öffentlich ankündigen")
+@app_commands.autocomplete(paket=paket_auswahl, ort=drop_ort_auswahl)
+async def admin_lootdrop(interaction: discord.Interaction, paket: str = ZUFALL,
+                         ort: str = ZUFALL, sofort: bool = False, ankuendigen: bool = False):
+    paket = None if paket == ZUFALL else paket
+    ort = None if ort == ZUFALL else ort
+    if (paket and paket not in LOOTDROPS["pakete"]) or (ort and ort not in LOOTDROPS["orte"]):
+        await interaction.response.send_message("❌ Unbekanntes Paket oder unbekannter Ort.",
+                                                ephemeral=True)
+        return
+    await interaction.response.defer(ephemeral=True)
+    nr, paket, ort, pos = await lootdrop_planen(paket, ort)
+    await datei_aktualisieren()
+    if sofort:
+        await nitrado.restart("Airdrop")
+
+    text = f"Beim {'gleich folgenden' if sofort else 'nächsten'} Neustart wird ein **{paket}**-Paket abgeworfen"
+    text += f" bei **{ort}**!" if ankuendigen else ". Ort: geheim 🤫"
+    await posten(LOOTDROP_KANAL, discord.Embed(
+        title="✈️ Airdrop angekündigt", description=text, color=0x1565C0))
+    await interaction.followup.send(
+        f"✅ Lootdrop #{nr}: **{paket}** bei **{ort}** ({koords(pos[0], pos[2])}).",
+        ephemeral=True)
+
+
+@bot.tree.command(name="admin-neustart", description="[Admin] Server neu starten (liefert alles aus)")
 @app_commands.check(ist_admin)
 async def admin_neustart(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
     await spawn_datei_schreiben()
     await nitrado.restart("Shop-Lieferung")
     await interaction.followup.send(
-        f"🔄 Neustart ausgelöst, {len(db.wartende())} Bestellung(en) werden geliefert.",
-        ephemeral=True)
+        f"🔄 Neustart ausgelöst: {len(db.wartende())} Lieferung(en), "
+        f"{len(db.lootdrops_wartend())} Lootdrop(s).", ephemeral=True)
 
 
-@bot.tree.command(name="admin-einrichten", description="[Admin] Trägt die Shop-Datei in cfggameplay.json ein")
+@bot.tree.command(name="admin-einrichten", description="[Admin] Trägt die Spawn-Datei in cfggameplay.json ein")
 @app_commands.check(ist_admin)
 async def admin_einrichten(interaction: discord.Interaction):
     await interaction.response.defer(ephemeral=True)
