@@ -1,0 +1,27 @@
+{
+  "Waffen": [
+    {"name": "M4A1",            "klasse": "M4A1",             "preis": 2500, "menge": 1},
+    {"name": "AKM",             "klasse": "AKM",              "preis": 2000, "menge": 1},
+    {"name": "Mosin 91/30",     "klasse": "Mosin9130",        "preis": 900,  "menge": 1},
+    {"name": "SKS",             "klasse": "SKS",              "preis": 1000, "menge": 1}
+  ],
+  "Munition": [
+    {"name": "5.56 Munition (3 Packungen)", "klasse": "AmmoBox_556x45_20Rnd", "preis": 300, "menge": 3},
+    {"name": "7.62x39 Munition (3 Packungen)", "klasse": "AmmoBox_762x39_20Rnd", "preis": 250, "menge": 3},
+    {"name": "STANAG Magazin 30", "klasse": "Mag_STANAG_30Rnd", "preis": 200, "menge": 1}
+  ],
+  "Medizin": [
+    {"name": "Erste-Hilfe-Set", "klasse": "FirstAidKit",      "preis": 150, "menge": 1},
+    {"name": "Kochsalzlösung",  "klasse": "SalineBagIV",      "preis": 200, "menge": 1},
+    {"name": "Morphin",         "klasse": "Morphine",         "preis": 120, "menge": 1}
+  ],
+  "Essen": [
+    {"name": "Bohnen (3x)",     "klasse": "BakedBeansCan",    "preis": 60,  "menge": 3},
+    {"name": "Wasserflasche",   "klasse": "WaterBottle",      "preis": 40,  "menge": 1}
+  ],
+  "Basisbau": [
+    {"name": "Nägel",           "klasse": "NailBox",          "preis": 100, "menge": 1},
+    {"name": "Zahlenschloss",   "klasse": "CombinationLock4", "preis": 400, "menge": 1},
+    {"name": "Zelt (groß)",     "klasse": "LargeTent",        "preis": 600, "menge": 1}
+  ]
+}
