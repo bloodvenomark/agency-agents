@@ -56,10 +56,19 @@ KILL_BONUS_PRO_100M = _int("KILL_BONUS_PRO_100M", 0)
 WAEHRUNG = os.getenv("WAEHRUNG", "Rubel")
 NEUSTART_NACH_KAUF = _bool("NEUSTART_NACH_KAUF", False)
 
-KILLFEED_KANAL = _int("KILLFEED_KANAL", 0)
-HITFEED_KANAL = _int("HITFEED_KANAL", 0)
-KOPFGELD_KANAL = _int("KOPFGELD_KANAL", 0)
-LOOTDROP_KANAL = _int("LOOTDROP_KANAL", 0)
+# Schlüssel -> (Kanalname, .env-Variable, Spieler dürfen schreiben)
+KANAELE = {
+    "shop":     ("🛒│shop",     None,             True),
+    "killfeed": ("💀│killfeed", "KILLFEED_KANAL", False),
+    "hitfeed":  ("🎯│hitfeed",  "HITFEED_KANAL",  False),
+    "kopfgeld": ("💰│kopfgeld", "KOPFGELD_KANAL", False),
+    "airdrops": ("🪂│airdrops", "LOOTDROP_KANAL", False),
+}
+KATEGORIE = os.getenv("KATEGORIE", "🧟 DayZ")
+KANAELE_AUTOMATISCH = _bool("KANAELE_AUTOMATISCH", True)
+HITFEED_AN = _bool("HITFEED_AN", True)
+if not HITFEED_AN:
+    del KANAELE["hitfeed"]
 
 KOPFGELD_MINIMUM = _int("KOPFGELD_MINIMUM", 100)
 AUTO_KOPFGELD_AB_SERIE = _int("AUTO_KOPFGELD_AB_SERIE", 5)    # 0 = aus
@@ -157,6 +166,18 @@ class DayZBot(commands.Bot):
         status_schleife.start()
         log_schleife.start()
 
+    async def on_ready(self):
+        log.info("Eingeloggt als %s", self.user)
+        if KANAELE_AUTOMATISCH and not db.get("kanaele_erstellt"):
+            guild = self.get_guild(GUILD.id)
+            if guild:
+                try:
+                    await kanaele_erstellen(guild)
+                    db.set("kanaele_erstellt", "1")
+                except discord.Forbidden:
+                    log.error("Keine Rechte zum Erstellen der Kanäle/Rolle "
+                              "(Kanäle verwalten + Rollen verwalten nötig).")
+
     async def close(self):
         await nitrado.close()
         await super().close()
@@ -181,17 +202,58 @@ async def benachrichtigen(discord_id: int, text: str):
         pass  # DMs deaktiviert
 
 
-async def posten(kanal_id: int, embed: discord.Embed):
-    if not kanal_id:
+def kanal_id(schluessel: str) -> int:
+    """Kanal-ID aus der .env, sonst die vom Bot selbst erstellte."""
+    if schluessel not in KANAELE:
+        return 0
+    env = KANAELE[schluessel][1]
+    return (_int(env, 0) if env else 0) or int(db.get(f"kanal_{schluessel}", "0") or 0)
+
+
+async def kanaele_erstellen(guild: discord.Guild) -> list[str]:
+    """Legt Kategorie, Kanäle und Admin-Rolle an. Vorhandenes wird wiederverwendet."""
+    erledigt = []
+    if not discord.utils.get(guild.roles, name=ADMIN_ROLE):
+        await guild.create_role(name=ADMIN_ROLE, reason="DayZ-Bot Einrichtung")
+        erledigt.append(f"Rolle **{ADMIN_ROLE}** erstellt")
+
+    kategorie = discord.utils.get(guild.categories, name=KATEGORIE)
+    if not kategorie:
+        kategorie = await guild.create_category(KATEGORIE, reason="DayZ-Bot Einrichtung")
+        erledigt.append(f"Kategorie **{KATEGORIE}** erstellt")
+
+    for schluessel, (name, _, schreiben) in KANAELE.items():
+        vorhanden = guild.get_channel(kanal_id(schluessel)) or discord.utils.get(
+            guild.text_channels, name=name)
+        if vorhanden:
+            db.set(f"kanal_{schluessel}", str(vorhanden.id))
+            continue
+        rechte = {
+            guild.default_role: discord.PermissionOverwrite(
+                view_channel=True, send_messages=schreiben, add_reactions=True),
+            guild.me: discord.PermissionOverwrite(
+                view_channel=True, send_messages=True, embed_links=True),
+        }
+        kanal = await guild.create_text_channel(
+            name, category=kategorie, overwrites=rechte, reason="DayZ-Bot Einrichtung")
+        db.set(f"kanal_{schluessel}", str(kanal.id))
+        erledigt.append(f"Kanal {kanal.mention} erstellt")
+    log.info("Kanal-Einrichtung: %s", erledigt or "alles vorhanden")
+    return erledigt
+
+
+async def posten(schluessel: str, embed: discord.Embed):
+    kanal_id_ = kanal_id(schluessel)
+    if not kanal_id_:
         return
-    kanal = bot.get_channel(kanal_id)
+    kanal = bot.get_channel(kanal_id_)
     if kanal is None:
-        log.warning("Kanal %s nicht gefunden", kanal_id)
+        log.warning("Kanal %s nicht gefunden", kanal_id_)
         return
     try:
         await kanal.send(embed=embed)
     except discord.HTTPException as e:
-        log.warning("Posten in %s fehlgeschlagen: %s", kanal_id, e)
+        log.warning("Posten in %s fehlgeschlagen: %s", kanal_id_, e)
 
 
 # --- Killfeed, Hitfeed, Kopfgeld -------------------------------------------
@@ -226,7 +288,7 @@ async def kill_verarbeiten(k: Kill):
         embed.add_field(name="Killserie", value=f"🔥 {serie}")
     if kopfgeld:
         embed.add_field(name="Kopfgeld kassiert", value=f"💰 {geld(kopfgeld)}")
-    await posten(KILLFEED_KANAL, embed)
+    await posten("killfeed", embed)
 
     if konto:
         text = f"💀 Kill an **{k.opfer}**: +{geld(belohnung)}"
@@ -235,7 +297,7 @@ async def kill_verarbeiten(k: Kill):
         await benachrichtigen(konto["discord_id"], text)
 
     if kopfgeld:
-        await posten(KOPFGELD_KANAL, discord.Embed(
+        await posten("kopfgeld", discord.Embed(
             title="💰 Kopfgeld kassiert!",
             description=f"**{k.taeter}** hat **{k.opfer}** erledigt und "
                         f"**{geld(kopfgeld)}** kassiert.",
@@ -264,11 +326,11 @@ async def kopfgeld_ankuendigen(gamertag: str, grund: str, automatisch: bool = Fa
     if KOPFGELD_STANDORT_ZEIGEN and p and time.time() - p["zeit"] < STANDORT_MAX_ALTER:
         embed.add_field(name="Zuletzt gesehen (± 100 m)", value=koords(p["x"], p["z"], 100))
     embed.set_footer(text="Wer ihn tötet, kassiert das Kopfgeld (Discord-Verknüpfung nötig).")
-    await posten(KOPFGELD_KANAL, embed)
+    await posten("kopfgeld", embed)
 
 
 async def treffer_posten(t: Treffer):
-    if not HITFEED_KANAL:
+    if not kanal_id("hitfeed"):
         return
     teil = KOERPERTEILE.get(t.koerperteil or "", t.koerperteil or "Körper")
     zeilen = [f"🎯 **{t.angreifer}** traf **{t.opfer}** am **{teil}**"]
@@ -282,7 +344,7 @@ async def treffer_posten(t: Treffer):
     details.append(f"❤️ {max(t.hp, 0):.0f} HP übrig")
     zeilen.append(" • ".join(details))
     farbe = 0xE65100 if t.koerperteil in ("Head", "Brain") else 0x546E7A
-    await posten(HITFEED_KANAL, discord.Embed(description="\n".join(zeilen), color=farbe))
+    await posten("hitfeed", discord.Embed(description="\n".join(zeilen), color=farbe))
 
 
 # --- Lootdrops ---------------------------------------------------------------
@@ -304,7 +366,7 @@ async def lootdrop_gelandet(d):
     embed.add_field(name="Koordinaten", value=koords(d["x"], d["z"]))
     embed.add_field(name="Items", value=str(anzahl))
     embed.set_footer(text="Wer zuerst kommt, mahlt zuerst. Vorsicht vor Campern!")
-    await posten(LOOTDROP_KANAL, embed)
+    await posten("airdrops", embed)
 
 
 # --- Hintergrund-Schleifen -------------------------------------------------
@@ -350,7 +412,7 @@ async def status_schleife():
             _, paket, ort, _ = await lootdrop_planen()
             text = f"Beim nächsten Neustart wird ein **{paket}**-Paket abgeworfen"
             text += f" bei **{ort}**!" if auto.get("ort_vorher_ankuendigen") else ". Ort: geheim 🤫"
-            await posten(LOOTDROP_KANAL, discord.Embed(
+            await posten("airdrops", discord.Embed(
                 title="✈️ Airdrop angekündigt", description=text, color=0x1565C0))
 
         try:
@@ -702,7 +764,7 @@ async def admin_lootdrop(interaction: discord.Interaction, paket: str = ZUFALL,
 
     text = f"Beim {'gleich folgenden' if sofort else 'nächsten'} Neustart wird ein **{paket}**-Paket abgeworfen"
     text += f" bei **{ort}**!" if ankuendigen else ". Ort: geheim 🤫"
-    await posten(LOOTDROP_KANAL, discord.Embed(
+    await posten("airdrops", discord.Embed(
         title="✈️ Airdrop angekündigt", description=text, color=0x1565C0))
     await interaction.followup.send(
         f"✅ Lootdrop #{nr}: **{paket}** bei **{ort}** ({koords(pos[0], pos[2])}).",
@@ -718,6 +780,22 @@ async def admin_neustart(interaction: discord.Interaction):
     await interaction.followup.send(
         f"🔄 Neustart ausgelöst: {len(db.wartende())} Lieferung(en), "
         f"{len(db.lootdrops_wartend())} Lootdrop(s).", ephemeral=True)
+
+
+@bot.tree.command(name="admin-kanaele", description="[Admin] Erstellt alle Bot-Kanäle und die Admin-Rolle")
+@app_commands.check(ist_admin)
+async def admin_kanaele(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)
+    try:
+        erledigt = await kanaele_erstellen(interaction.guild)
+    except discord.Forbidden:
+        await interaction.followup.send(
+            "❌ Mir fehlen Rechte: **Kanäle verwalten** und **Rollen verwalten**.", ephemeral=True)
+        return
+    db.set("kanaele_erstellt", "1")
+    await interaction.followup.send(
+        "✅ " + ("\n✅ ".join(erledigt) if erledigt else "Alle Kanäle sind schon vorhanden."),
+        ephemeral=True)
 
 
 @bot.tree.command(name="admin-einrichten", description="[Admin] Trägt die Spawn-Datei in cfggameplay.json ein")

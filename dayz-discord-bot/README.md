@@ -23,6 +23,7 @@ auf PS4/PS5-Servern von Nitrado.
 | `/admin-lootdrop [paket] [ort] [sofort] [ankuendigen]` | Airdrop planen (Paket und Ort wählbar oder Zufall) |
 | `/admin-neustart` | Server neu starten, damit alles sofort geliefert wird |
 | `/admin-einrichten` | Trägt die Lieferdatei automatisch in `cfggameplay.json` ein |
+| `/admin-kanaele` | Erstellt fehlende Bot-Kanäle und die Admin-Rolle neu |
 
 Außerdem:
 - **Lieferung an den eigenen Standort**: Die Position stammt aus dem Admin-Log
@@ -36,7 +37,7 @@ für jede 100 m Distanz. Geld gibt es nur für verknüpfte Spieler.
 ### Hitfeed
 Jeder Treffer von Spieler auf Spieler erscheint im Hitfeed-Kanal mit Körperteil,
 Waffe, Distanz, Schaden und restlicher HP. Kopftreffer sind orange markiert.
-Auf vollen Servern kann das viel werden, dann `HITFEED_KANAL` einfach leer lassen.
+Auf vollen Servern kann das viel werden, dann `HITFEED_AN=false` setzen.
 
 ### Kopfgeld-System
 - **Manuell**: Spieler setzen mit `/kopfgeld setzen` Geld auf einen anderen Spieler aus.
@@ -88,12 +89,32 @@ und die geplanten Nitrado-Neustarts nutzen (z. B. alle 3 Stunden).
 ### 1. Discord-Bot anlegen
 1. Auf https://discord.com/developers/applications eine **New Application** anlegen,
    dann unter **Bot** den Token kopieren.
-2. Für jeden Feed einen Discord-Kanal anlegen (Killfeed, Hitfeed, Kopfgeld, Airdrops)
-   und die Kanal-IDs in die `.env` eintragen (Entwicklermodus in Discord aktivieren,
-   dann Rechtsklick auf den Kanal → ID kopieren).
-3. Unter **OAuth2 → URL Generator** die Scopes `bot` und `applications.commands`
-   wählen, als Rechte `Send Messages` und `Embed Links`. Mit dem Link den Bot auf
-   deinen Discord einladen.
+2. Unter **OAuth2 → URL Generator** die Scopes `bot` und `applications.commands`
+   wählen. Als Rechte brauchst du:
+   `Manage Roles`, `Manage Channels`, `View Channels`, `Send Messages` und `Embed Links`.
+   Mit dem Link den Bot auf deinen Discord einladen.
+3. In Discord unter Einstellungen → Erweitert den **Entwicklermodus** einschalten,
+   dann Rechtsklick auf deinen Server → **Server-ID kopieren** und als `GUILD_ID`
+   in die `.env` eintragen.
+
+**Kanäle und Rolle legt der Bot beim ersten Start selbst an:**
+
+```
+🧟 DayZ
+├── 🛒│shop       Spieler nutzen hier die Befehle
+├── 💀│killfeed   nur lesen
+├── 🎯│hitfeed    nur lesen (abschaltbar mit HITFEED_AN=false)
+├── 💰│kopfgeld   nur lesen
+└── 🪂│airdrops   nur lesen
++ Rolle „DayZ Admin“
+```
+
+Vorhandene Kanäle mit gleichem Namen werden wiederverwendet, es entsteht also nichts
+doppelt. Wer eigene, schon bestehende Kanäle nutzen will, trägt deren IDs in die
+`.env` ein (`KILLFEED_KANAL` usw.). Mit `KANAELE_AUTOMATISCH=false` schaltest du die
+automatische Erstellung ab. Gelöschte Kanäle stellt `/admin-kanaele` wieder her.
+Kanäle und Rolle kannst du danach frei umbenennen. Die Rolle muss sich aber weiter
+mit `ADMIN_ROLE` decken.
 
 ### 2. Nitrado vorbereiten
 1. Einen Long-Life-Token erstellen: https://server.nitrado.net/deu/developer/tokens
@@ -118,7 +139,8 @@ python bot.py
 ```
 
 ### 4. Einmalig einrichten
-Im Discord `/admin-einrichten` ausführen und danach den Server einmal neu starten.
+Gib dir die neue Rolle **DayZ Admin**. Dann im Discord `/admin-einrichten` ausführen
+und den DayZ-Server einmal neu starten.
 
 ## Anpassen
 
