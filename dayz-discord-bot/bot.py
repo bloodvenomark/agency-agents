@@ -819,6 +819,34 @@ async def admin_einrichten(interaction: discord.Interaction):
         "**cfggameplay.json aktiviert** sein.", ephemeral=True)
 
 
+@bot.tree.command(name="admin-basisschaden",
+                  description="[Admin] Schaden an Basen/Containern in cfggameplay.json ein- oder ausschalten")
+@app_commands.check(ist_admin)
+@app_commands.describe(basis_schaden="Dürfen Zäune und Wachtürme beschädigt werden?",
+                       container_schaden="Dürfen Zelte, Fässer und Kisten beschädigt werden?")
+async def admin_basisschaden(interaction: discord.Interaction, basis_schaden: bool,
+                             container_schaden: bool | None = None):
+    """Ist cfggameplay.json aktiv, gelten deren GeneralData-Werte statt der Schalter
+    im Nitrado-Webinterface. Deshalb wird der Wert hier direkt in der Datei gesetzt."""
+    await interaction.response.defer(ephemeral=True)
+    pfad = pfade["mission"] + "cfggameplay.json"
+    try:
+        cfg = json.loads(await nitrado.download(pfad))
+    except (NitradoError, json.JSONDecodeError) as e:
+        await interaction.followup.send(f"❌ cfggameplay.json nicht lesbar: {e}", ephemeral=True)
+        return
+    general = cfg.setdefault("GeneralData", {})
+    general["disableBaseDamage"] = not basis_schaden
+    if container_schaden is not None:
+        general["disableContainerDamage"] = not container_schaden
+    await nitrado.upload(pfad, json.dumps(cfg, indent=4))
+    await interaction.followup.send(
+        f"✅ cfggameplay.json gespeichert:\n"
+        f"• `disableBaseDamage`: **{str(general['disableBaseDamage']).lower()}**\n"
+        f"• `disableContainerDamage`: **{str(general.get('disableContainerDamage', False)).lower()}**\n"
+        "Wirksam nach dem nächsten Server-Neustart.", ephemeral=True)
+
+
 @bot.tree.error
 async def fehler(interaction: discord.Interaction, error: app_commands.AppCommandError):
     if isinstance(error, app_commands.CheckFailure):

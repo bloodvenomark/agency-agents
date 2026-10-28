@@ -24,6 +24,7 @@ auf PS4/PS5-Servern von Nitrado.
 | `/admin-neustart` | Server neu starten, damit alles sofort geliefert wird |
 | `/admin-einrichten` | Trägt die Lieferdatei automatisch in `cfggameplay.json` ein |
 | `/admin-kanaele` | Erstellt fehlende Bot-Kanäle und die Admin-Rolle neu |
+| `/admin-basisschaden <basis_schaden> [container_schaden]` | Schaltet Schaden an Zäunen/Wachtürmen bzw. Zelten/Fässern direkt in `cfggameplay.json` ein oder aus |
 
 Außerdem:
 - **Lieferung an den eigenen Standort**: Die Position stammt aus dem Admin-Log
@@ -155,6 +156,14 @@ und den DayZ-Server einmal neu starten.
 - **`lootdrops.json`**: Airdrop-Pakete, Loot, Wahrscheinlichkeiten und Orte (siehe oben).
 - **`.env`**: Startgeld, Bonus, Kill-Belohnung, Kopfgeld-Regeln, Discord-Kanäle,
   Währungsname, Karte.
+
+## Wichtig: Basisschaden und cfggameplay.json
+
+Der Bot braucht eine aktivierte `cfggameplay.json`. Sobald sie aktiv ist, gelten deren
+Werte unter `GeneralData` (`disableBaseDamage`, `disableContainerDamage`) und **nicht mehr**
+die Schalter im Nitrado-Webinterface. Steht dort `false`, lässt sich der Zaunschaden
+über Nitrado nicht abschalten. Lösung: `/admin-basisschaden basis_schaden:False`
+ausführen (oder den Wert in der Datei per Hand auf `true` setzen) und den Server neu starten.
 
 ## Bekannte Grenzen
 
