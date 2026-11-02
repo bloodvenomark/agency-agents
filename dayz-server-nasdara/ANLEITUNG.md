@@ -14,6 +14,7 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 | `env/zombie_territories.xml` | `dayzOffline.nasdara/env/zombie_territories.xml` |
 | `cfgspawnabletypes.xml` | `dayzOffline.nasdara/cfgspawnabletypes.xml` |
 | `cfggameplay.json` | `dayzOffline.nasdara/cfggameplay.json` |
+| `cfgplayerspawnpoints.xml` | `dayzOffline.nasdara/cfgplayerspawnpoints.xml` |
 | `custom/startgear.json` | `dayzOffline.nasdara/custom/startgear.json` (neu) |
 
 Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den Server starten.
@@ -71,6 +72,14 @@ unter *Geplante Neustarts* einstellen. Die M4A1-Zeiten sind darauf abgestimmt.
 **Eigener Charakter:** Aussehen (Gesicht, Körper) bleibt erhalten, die Kleidung ist aber für alle
 die kartentypische Startkleidung.
 
+### Spieler-Spawns (`cfgplayerspawnpoints.xml`)
+- **50 Spawnpunkte** für neue Charaktere statt 20, verteilt über die ganze Karte (Nord bis Süd).
+- **Nicht in Ortschaften:** jeder Punkt 400–900 m von der nächsten Ortschaft entfernt,
+  mindestens 700 m von Militär und 500 m von den Giftgas-Tunneln.
+- Das Spiel sucht rund um jeden Punkt (200 × 200 m) eine trockene, nicht zu steile Stelle.
+- Übersicht: `spawns_vorschau.png` (grüne Sterne = neu, blaue Kreuze = bisher).
+- Spawns für Server-Wechsler (`hop`) sind unverändert.
+
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
 - **Ausdauer nur beim Springen/Klettern:** Sprinten, Schwimmen, Leitern, Nahkampf, Luftanhalten und
@@ -86,10 +95,17 @@ die kartentypische Startkleidung.
 3. **Ausdauer:** Lange sprinten, sinkt die Ausdauer? Nur beim Springen/Klettern sollte sie sinken.
 4. **Fahrzeuge:** Sind alle Teile dran? Liegen Kanister und Wasserflaschen im Kofferraum, und sind sie voll?
 5. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
-6. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
+6. **Spawns:** Ein paar Mal neu spawnen. Landet man immer im Gelände außerhalb von Orten?
+   Liegt ein Spawn ungünstig (Berg, Wasser), Nummer aus `spawns_vorschau.png` melden.
+7. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
 
 Wenn etwas fehlt oder der Server nicht startet: die Originaldatei zurückspielen und mir
 den Fehler schicken.
 
 Hinweis: Durch +50 % Loot braucht der Server nach dem Hochladen einige Neustarts, bis die Welt
 richtig gefüllt ist.
+
+## Werkzeuge
+
+Im Ordner `werkzeuge/` liegen die Scripte, mit denen diese Dateien aus den Nitrado-Originalen
+erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`). Sie werden auf dem Server nicht gebraucht.
