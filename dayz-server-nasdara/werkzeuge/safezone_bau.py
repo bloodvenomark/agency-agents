@@ -99,7 +99,7 @@ def boden_bei(x: float, z: float) -> float:
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.7        # Höhe der Tischplatte über dem Boden (0.85 war zu hoch, Spray schwebte)
-KISTEN_HOEHE = 0.8       # Höhe der Holzkisten (Land_Misc_WoodenCrate_Spawn_DE), geschätzt
+KISTEN_HOEHE = 1.2       # Ablagehöhe auf den Holzkisten (0.8 war zu tief, Essen steckte drin)
 
 # Einrichtung im Innenhof. Koordinaten relativ zur Hofmitte, ausgerichtet an den Mauern:
 # u = entlang der Südmauer nach Osten, v = nach Norden (Richtung Hauptgebäude), in Metern.
@@ -179,15 +179,20 @@ for n, x, y, z, rollen, nicken, gier in teile:
 # Container-Sockel unter den Mauerstücken
 sockel = 0
 for teil in list(objekte):
-    if teil["name"] != "Land_Mosque_Big_Wall":   # Eckstücke liegen genau auf einem Mauerstück
-        continue
     mx, fuss, mz = teil["pos"]
-    gier = teil["ypr"][0]
-    wand = (math.cos(math.radians(gier)), -math.sin(math.radians(gier)))   # Längsrichtung der Mauer
-    for seite in (-1, 1):
-        objekte.append(objekt(SOCKEL_CONTAINER, mx + seite * SOCKEL_VERSATZ * wand[0], fuss - SOCKEL_HOEHE,
-                              mz + seite * SOCKEL_VERSATZ * wand[1], gier + 90.0))
-        sockel += 1
+    if teil["name"] == "Land_Mosque_Big_Wall":
+        richtungen = [teil["ypr"][0]]
+    elif teil["name"] == "Land_Mosque_Big_Wall_Corner":
+        # Ecke: das gleichliegende Mauerstück deckt eine Richtung ab, hier die querlaufende Mauer
+        richtungen = [teil["ypr"][0] + 90.0]
+    else:
+        continue
+    for gier in richtungen:
+        wand = (math.cos(math.radians(gier)), -math.sin(math.radians(gier)))   # Längsrichtung
+        for seite in (-1, 1):
+            objekte.append(objekt(SOCKEL_CONTAINER, mx + seite * SOCKEL_VERSATZ * wand[0],
+                                  fuss - SOCKEL_HOEHE, mz + seite * SOCKEL_VERSATZ * wand[1], gier + 90.0))
+            sockel += 1
 
 drehung = STRASSE_PEILUNG
 rad = math.radians(drehung)
