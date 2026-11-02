@@ -55,7 +55,7 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
 seinen eigenen Charakter gestaltet, behält Aussehen und gewählte Kleidung. Nur der Turban kommt dazu.
 
 ### Sonstiges (`cfggameplay.json`)
-- **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition`, Karte muss im Inventar sein).
+- **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
 - **Ausdauer nur beim Springen/Klettern:** Sprinten, Schwimmen, Leitern, Nahkampf, Luftanhalten und
   Gewicht kosten keine Ausdauer mehr (`StaminaData`).
 - `disableItemFalling` = true gegen einstürzende Bauten.
