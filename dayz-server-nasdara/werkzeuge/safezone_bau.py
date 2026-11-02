@@ -32,6 +32,7 @@ MESSUNGEN = [
     ("Wasser-Tankwagen (neue Lage, schwebte ca. 2-3 m)", 8661.0, 8246.0, 285.0),
     ("Trader 6 vorne rechts (neue Lage)", 8716.0, 8226.0, 280.0),
     ("Trader 4 rechts vor dem Hauptgebäude (neue Lage)", 8722.0, 8277.0, 280.0),
+    ("Trader 3 vor dem Hauptgebäude (neue Lage)", 8703.0, 8286.0, 282.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
