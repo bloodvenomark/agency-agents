@@ -75,6 +75,7 @@ die kartentypische Startkleidung.
 
 ### Spieler-Spawns (`cfgplayerspawnpoints.xml`)
 - **50 Spawnpunkte** für neue Charaktere statt 20, verteilt über die ganze Karte (Nord bis Süd).
+- **+1 Spawnpunkt in der Safezone-Moschee** (x 8610 / z 8354), also insgesamt 51.
 - **Nicht in Ortschaften:** jeder Punkt 400–900 m von der nächsten Ortschaft entfernt,
   mindestens 700 m von Militär und 500 m von den Giftgas-Tunneln.
 - Das Spiel sucht rund um jeden Punkt (200 × 200 m) eine trockene, nicht zu steile Stelle.
