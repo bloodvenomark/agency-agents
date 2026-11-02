@@ -27,6 +27,8 @@ MESSUNGEN = [
     ("innere Ecke rechts neben dem Hauptgebäude (Nordost)", 8772.0, 8299.0, 274.0),
     ("Mauer vorne links (Südwest)", 8678.0, 8233.0, 286.0),
     ("Mauer vorne rechts (Südost)", 8757.0, 8218.0, 272.0),
+    # Messung in der neuen, zur Straße gedrehten Lage
+    ("Sanitätszelt (neue Lage)", 8677.0, 8257.0, 284.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
@@ -60,7 +62,7 @@ def boden_bei(x: float, z: float) -> float:
     return a + b * dx + c * dz + d * dx * dz
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
-TISCH_HOEHE = 0.85       # Höhe der Tischplatte über dem Boden (geschätzt)
+TISCH_HOEHE = 0.7        # Höhe der Tischplatte über dem Boden (0.85 war zu hoch, Spray schwebte)
 KISTEN_HOEHE = 0.8       # Höhe der Holzkisten (Land_Misc_WoodenCrate_Spawn_DE), geschätzt
 
 # Einrichtung im Innenhof. Koordinaten relativ zur Hofmitte, ausgerichtet an den Mauern:
@@ -169,7 +171,7 @@ for u, v, hoehe, name, gier in EINRICHTUNG:
     elif hoehe < 0.5:
         korrektur = ITEM_ZUSCHLAG
     elif hoehe < 2:
-        korrektur = 0.1
+        korrektur = 0.03
     else:
         korrektur = 0.0
     objekte.append(objekt(name, x, boden_bei(x, z) + hoehe + korrektur, z, drehung + gier))
