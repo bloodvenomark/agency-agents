@@ -111,10 +111,25 @@ def koords(x: float, z: float, runden: int = 1) -> str:
     return f"{round(x / runden) * runden:.0f} / {round(z / runden) * runden:.0f}"
 
 
+async def missionsordner_suchen(basis: str) -> str:
+    """Konsolen-Server haben die Missionen je nach Nitrado-Setup unter
+    <basis>/mpmissions/ oder neben dem Spielordner unter dayzps_missions/."""
+    eltern = basis.rstrip("/").rpartition("/")[0] + "/"
+    kandidaten = [f"{eltern}dayzps_missions/{MISSION}/", f"{basis}mpmissions/{MISSION}/"]
+    for ordner in kandidaten:
+        try:
+            if any(e.get("name") == "cfggameplay.json" for e in await nitrado.list_dir(ordner)):
+                return ordner
+        except NitradoError:
+            continue
+    log.warning("Missionsordner nicht gefunden, bitte MISSION_DIR in der .env setzen")
+    return kandidaten[0]
+
+
 async def pfade_ermitteln():
     gs = await nitrado.gameserver()
     basis = gs.get("game_specific", {}).get("path", "")
-    pfade["mission"] = os.getenv("MISSION_DIR") or f"{basis}mpmissions/{MISSION}/"
+    pfade["mission"] = os.getenv("MISSION_DIR") or await missionsordner_suchen(basis)
     pfade["adm"] = os.getenv("ADM_LOG_DIR") or f"{basis}config/"
     log.info("Missionsordner: %s | ADM-Logs: %s", pfade["mission"], pfade["adm"])
 
