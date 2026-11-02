@@ -124,8 +124,18 @@ for name, u, v, blick, marker in TRADER:
 for u, v, hoehe, name, gier in EINRICHTUNG:
     x = MITTE_X + u * ost[0] + v * nord[0]
     z = MITTE_Z + u * ost[1] + v * nord[1]
-    # Gebäude (Land_) leicht einsinken lassen, lose Items etwas über dem gemessenen Hofboden
-    korrektur = HOEHE_KORREKTUR if name.startswith("Land_") else ITEM_ZUSCHLAG if hoehe < 2 else 0.0
+    # Gebäude (Land_) leicht einsinken lassen, Tische nicht (sonst stimmt die Tischhöhe nicht);
+    # lose Items am Boden etwas höher, Items auf Tischen nur knapp über der Platte
+    if name == "Land_Roadblock_Table_DE":
+        korrektur = 0.0
+    elif name.startswith("Land_"):
+        korrektur = HOEHE_KORREKTUR
+    elif hoehe < 0.5:
+        korrektur = ITEM_ZUSCHLAG
+    elif hoehe < 2:
+        korrektur = 0.1
+    else:
+        korrektur = 0.0
     objekte.append(objekt(name, x, HOF_BODEN + hoehe + korrektur, z, drehung + gier))
     items.append(name)
 
