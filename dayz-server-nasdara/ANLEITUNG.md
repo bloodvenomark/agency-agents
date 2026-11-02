@@ -16,6 +16,7 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 | `cfggameplay.json` | `dayzOffline.nasdara/cfggameplay.json` |
 | `cfgplayerspawnpoints.xml` | `dayzOffline.nasdara/cfgplayerspawnpoints.xml` |
 | `custom/startgear.json` | `dayzOffline.nasdara/custom/startgear.json` (neu) |
+| `custom/safezone.json` | `dayzOffline.nasdara/custom/safezone.json` (neu) |
 
 Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den Server starten.
 
@@ -80,6 +81,17 @@ die kartentypische Startkleidung.
 - Übersicht: `spawns_vorschau.png` (grüne Sterne = neu, blaue Kreuze = bisher).
 - Spawns für Server-Wechsler (`hop`) sind unverändert.
 
+### Safezone: Moschee südlich von Bam-e Sabz (`custom/safezone.json`)
+- **Kopie der großen Nasdara-Moschee** (28 Teile, ca. 100 × 100 m) bei **x 8610 / z 8354**,
+  30 m westlich deiner Markierung, auf einer freien Fläche. Die Original-Moschee in Nasdara bleibt stehen.
+- **Im Innenhof nach jedem Restart neu:** 10× Essen (4 Dosenspeck, 3 Bohnen, 3 Pfirsiche),
+  10× Wasserflasche, Erste Hilfe (5 Verbände, 2 Desinfektionsspray, 1 Erste-Hilfe-Kasten).
+  Liegengebliebenes verschwindet beim Restart, es häuft sich also nichts an.
+- **Keine Zombies:** Zombie-Zonen im Umkreis von 300 m entfernt (`env/zombie_territories.xml`).
+- **Bot-Strafe:** Wer in der Safezone jemanden **tötet**, wird **30 Tage gebannt** (Notwehr ausgenommen).
+  Im Bot: `/admin-safezone 8610 8354 75`.
+- Eingetragen in `cfggameplay.json` unter `objectSpawnersArr`.
+
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
 - **Ausdauer nur beim Springen/Klettern:** Sprinten, Schwimmen, Leitern, Nahkampf, Luftanhalten und
@@ -97,7 +109,10 @@ die kartentypische Startkleidung.
 5. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
 6. **Spawns:** Ein paar Mal neu spawnen. Landet man immer im Gelände außerhalb von Orten?
    Liegt ein Spawn ungünstig (Berg, Wasser), Nummer aus `spawns_vorschau.png` melden.
-7. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
+7. **Safezone:** Zur Moschee laufen (x 8610 / z 8354). Steht sie sauber auf dem Boden, oder schwebt
+   bzw. versinkt sie? Liegen Essen, Wasser und Erste Hilfe im Hof und lassen sich aufheben?
+   Höhe falsch → Höhe von `/admin-position` (in der Hofmitte stehend) an mich schicken.
+8. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
 
 Wenn etwas fehlt oder der Server nicht startet: die Originaldatei zurückspielen und mir
 den Fehler schicken.
@@ -108,4 +123,4 @@ richtig gefüllt ist.
 ## Werkzeuge
 
 Im Ordner `werkzeuge/` liegen die Scripte, mit denen diese Dateien aus den Nitrado-Originalen
-erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`). Sie werden auf dem Server nicht gebraucht.
+erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`, `safezone_bau.py`). Sie werden auf dem Server nicht gebraucht.

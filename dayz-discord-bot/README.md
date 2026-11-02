@@ -164,9 +164,11 @@ und den DayZ-Server einmal neu starten.
 ## Safezone mit automatischem Bann
 
 Auf Konsole gibt es keine echte Safezone ohne Schaden. Der Bot überwacht deshalb die Zone:
-- Trifft oder tötet ein Spieler jemanden **in der Zone** (Angreifer oder Opfer steht darin),
-  wird der Angreifer **automatisch für 30 Tage gebannt** (`SAFEZONE_BANN_TAGE`).
-- **Notwehr** ist erlaubt: Wer in den letzten 2 Minuten zuerst angegriffen wurde, darf zurückschießen.
+- Tötet ein Spieler jemanden **in der Zone** (Täter oder Opfer steht darin), wird der Täter
+  **automatisch für 30 Tage gebannt** (`SAFEZONE_BANN_TAGE`). Treffer allein werden nicht bestraft.
+- **Notwehr** ist erlaubt: Wer in den letzten 2 Minuten zuerst angeschossen wurde und den
+  Angreifer tötet, wird nicht gebannt.
+- Standard-Zone: Moschee südlich von Bam-e Sabz, Mitte x 8610 / z 8354, Radius 75 m.
 - Der Bann wird in die **Nitrado-Bannliste** eingetragen (Einstellung `bans`) und greift
   vermutlich erst nach dem nächsten Server-Neustart. Nach Ablauf entbannt der Bot automatisch.
 - Meldungen landen im privaten Kanal **🛡│admin-log** (nur für die Admin-Rolle sichtbar).

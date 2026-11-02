@@ -427,9 +427,7 @@ async def safezone_pruefen(e, zeile: str):
     bann = db.bann(taeter)
     if bann and bann["bis"] > time.time():
         return   # schon gebannt, nicht für jeden weiteren Treffer neu melden
-    art = "Kill" if e.kill else "Treffer"
-    opfer = e.kill.opfer if e.kill else e.treffer.opfer
-    await spieler_bannen(taeter, SAFEZONE_BANN_TAGE, f"{art} an {opfer} in der Safezone")
+    await spieler_bannen(taeter, SAFEZONE_BANN_TAGE, f"Kill an {e.kill.opfer} in der Safezone")
 
 
 @tasks.loop(minutes=30)
@@ -962,7 +960,7 @@ async def admin_safezone(interaction: discord.Interaction, x: float, z: float, r
     db.set("safezone_z", str(z))
     db.set("safezone_radius", str(radius) if radius > 0 else "")
     text = (f"✅ Safezone: Mitte **{koords(x, z)}**, Radius **{radius:.0f} m**. "
-            f"Angriffe dort = {SAFEZONE_BANN_TAGE} Tage Bann." if radius > 0 else "✅ Safezone ausgeschaltet.")
+            f"Kills dort = {SAFEZONE_BANN_TAGE} Tage Bann." if radius > 0 else "✅ Safezone ausgeschaltet.")
     await interaction.response.send_message(text, ephemeral=True)
 
 

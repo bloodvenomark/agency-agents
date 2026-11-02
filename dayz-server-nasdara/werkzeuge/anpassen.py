@@ -179,6 +179,13 @@ bericht.append(f"globals.xml: ZombieMaxCount 1000 -> 1300, Loot-Schaden {LOOT_SC
 # --- env/zombie_territories.xml: Zombies +30 % -------------------------------
 (DST / "env").mkdir(exist_ok=True)
 zt = (SRC / "zombie_territories.xml").read_text("utf-8")
+# Safezone (Moschee bei x 8610 / z 8354): keine Zombie-Zonen im Umkreis von 300 m
+SAFEZONE, SAFEZONE_ZOMBIEFREI = (8610.0, 8354.0), 300
+zonen_vorher = zt.count("<zone ")
+zt = re.sub(r'\s*<zone [^>]*x="([\d.]+)" z="([\d.]+)"[^>]*/>',
+            lambda m: "" if math.dist((float(m.group(1)), float(m.group(2))), SAFEZONE) < SAFEZONE_ZOMBIEFREI
+            else m.group(0), zt)
+bericht.append(f"zombie_territories.xml: {zonen_vorher - zt.count('<zone ')} Zombie-Zonen an der Safezone entfernt")
 zz_alt = sum(int(x) for x in re.findall(r'dmax="(\d+)"', zt))
 zt = re.sub(r'(smin|smax|dmin|dmax)="(\d+)"', lambda m: f'{m.group(1)}="{hoch(int(m.group(2)), 1.3)}"', zt)
 zz_neu = sum(int(x) for x in re.findall(r'dmax="(\d+)"', zt))
@@ -246,6 +253,8 @@ ersetzungen = [
     # Positionspunkt ohne Kompass/GPS anzeigen
     ('"ignoreNavItemsOwnership": false', '"ignoreNavItemsOwnership": true'),
     ('"disableItemFalling": false', '"disableItemFalling": true'),
+    # Safezone-Moschee mit Vorrat (Object Spawner)
+    ('"objectSpawnersArr": []', '"objectSpawnersArr": ["custom/safezone.json"]'),
     # Ausdauer nur noch beim Springen/Klettern (obstacleTraversal bleibt 1.0)
     ('"sprintStaminaModifierErc": 1.0', '"sprintStaminaModifierErc": 0.0'),
     ('"sprintStaminaModifierCro": 1.0', '"sprintStaminaModifierCro": 0.0'),

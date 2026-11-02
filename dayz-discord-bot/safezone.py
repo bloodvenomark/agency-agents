@@ -1,4 +1,7 @@
-"""Safezone: erkennt Angriffe in der Zone und unterscheidet Angreifer von Notwehr."""
+"""Safezone: erkennt Kills in der Zone und unterscheidet Angreifer von Notwehr.
+
+Treffer werden nicht bestraft, aber gemerkt: Wer zuerst angeschossen wurde und den Angreifer
+dann tötet, handelt in Notwehr."""
 
 import math
 import re
@@ -20,14 +23,16 @@ class Safezone:
         self._angriffe: dict[tuple[str, str], int] = {}   # (angreifer, opfer) -> Log-Sekunde
 
     def verstoss(self, e: Ereignisse, sekunde: int, x: float, z: float, radius: float) -> str | None:
-        """Gibt den Gamertag des Angreifers zurück, wenn er in der Zone angegriffen hat."""
+        """Gibt den Gamertag des Täters zurück, wenn er in der Zone jemanden getötet hat."""
         if e.kill:
             angreifer, opfer = e.kill.taeter, e.kill.opfer
         elif e.treffer:
             angreifer, opfer = e.treffer.angreifer, e.treffer.opfer
         else:
             return None
-        self._angriffe[(angreifer.lower(), opfer.lower())] = sekunde
+        if e.treffer:
+            self._angriffe[(angreifer.lower(), opfer.lower())] = sekunde
+            return None   # nur Kills werden bestraft
 
         positionen = {p.gamertag.lower(): p for p in e.positionen}
         in_zone = any(
@@ -36,7 +41,7 @@ class Safezone:
         )
         if not in_zone:
             return None
-        # Notwehr: das Opfer hat den Angreifer kurz vorher selbst angegriffen
+        # Notwehr: das Opfer hat den Täter kurz vorher selbst angeschossen
         gegenangriff = self._angriffe.get((opfer.lower(), angreifer.lower()))
         if gegenangriff is not None and 0 <= (sekunde - gegenangriff) % 86400 <= NOTWEHR_SEKUNDEN:
             return None

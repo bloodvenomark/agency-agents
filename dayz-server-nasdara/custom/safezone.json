@@ -1,0 +1,844 @@
+{
+  "Objects": [
+    {
+      "name": "Land_Mosque_Big_Minaret2",
+      "pos": [
+        8570.59,
+        278.745,
+        8326.027
+      ],
+      "ypr": [
+        54.7112,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall_Corner",
+      "pos": [
+        8567.304,
+        278.5,
+        8315.611
+      ],
+      "ypr": [
+        -169.7817,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8578.329,
+        278.5,
+        8313.561
+      ],
+      "ypr": [
+        -169.5238,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8567.294,
+        278.5,
+        8315.618
+      ],
+      "ypr": [
+        -169.6528,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8561.275,
+        278.501,
+        8338.284
+      ],
+      "ypr": [
+        -79.2831,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Gate",
+      "pos": [
+        8568.261,
+        278.501,
+        8361.909
+      ],
+      "ypr": [
+        -79.8238,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8563.288,
+        278.501,
+        8349.319
+      ],
+      "ypr": [
+        -79.6698,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Minaret2",
+      "pos": [
+        8582.713,
+        278.745,
+        8393.97
+      ],
+      "ypr": [
+        150.1087,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall_Corner",
+      "pos": [
+        8571.821,
+        278.501,
+        8397.642
+      ],
+      "ypr": [
+        -79.6698,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8569.901,
+        278.501,
+        8386.57
+      ],
+      "ypr": [
+        -80.0565,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8571.829,
+        278.501,
+        8397.642
+      ],
+      "ypr": [
+        -80.0565,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8615.59,
+        278.5,
+        8306.673
+      ],
+      "ypr": [
+        -169.5239,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Gate",
+      "pos": [
+        8602.985,
+        278.503,
+        8311.725
+      ],
+      "ypr": [
+        -169.524,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Main",
+      "pos": [
+        8617.771,
+        279.883,
+        8396.339
+      ],
+      "ypr": [
+        -169.592,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Side",
+      "pos": [
+        8601.059,
+        279.867,
+        8399.45
+      ],
+      "ypr": [
+        -169.5919,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8594.562,
+        278.501,
+        8403.691
+      ],
+      "ypr": [
+        10.4421,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8626.624,
+        278.5,
+        8304.641
+      ],
+      "ypr": [
+        -169.5239,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Minaret2",
+      "pos": [
+        8638.224,
+        278.745,
+        8313.984
+      ],
+      "ypr": [
+        -35.9164,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall_Corner",
+      "pos": [
+        8649.355,
+        278.5,
+        8310.678
+      ],
+      "ypr": [
+        100.3642,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8649.364,
+        278.5,
+        8310.653
+      ],
+      "ypr": [
+        100.0384,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8651.301,
+        278.5,
+        8321.666
+      ],
+      "ypr": [
+        99.7806,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Gate",
+      "pos": [
+        8652.739,
+        278.5,
+        8346.347
+      ],
+      "ypr": [
+        99.3325,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Side",
+      "pos": [
+        8634.56,
+        279.867,
+        8393.379
+      ],
+      "ypr": [
+        10.4082,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Minaret2",
+      "pos": [
+        8649.884,
+        278.745,
+        8381.59
+      ],
+      "ypr": [
+        -120.4238,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall_Corner",
+      "pos": [
+        8653.198,
+        278.5,
+        8392.887
+      ],
+      "ypr": [
+        10.0554,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8653.201,
+        278.5,
+        8392.903
+      ],
+      "ypr": [
+        10.4421,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8659.405,
+        278.5,
+        8370.158
+      ],
+      "ypr": [
+        99.7806,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Mosque_Big_Wall",
+      "pos": [
+        8657.573,
+        278.5,
+        8359.082
+      ],
+      "ypr": [
+        99.5227,
+        0.0,
+        -0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "TacticalBaconCan",
+      "pos": [
+        8603.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "TacticalBaconCan",
+      "pos": [
+        8604.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "TacticalBaconCan",
+      "pos": [
+        8605.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "TacticalBaconCan",
+      "pos": [
+        8606.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BakedBeansCan",
+      "pos": [
+        8607.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BakedBeansCan",
+      "pos": [
+        8608.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BakedBeansCan",
+      "pos": [
+        8609.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "PeachesCan",
+      "pos": [
+        8610.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "PeachesCan",
+      "pos": [
+        8611.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "PeachesCan",
+      "pos": [
+        8612.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8613.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8614.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8615.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8616.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8617.0,
+        279.3,
+        8353.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8603.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8604.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8605.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8606.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8607.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8608.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8609.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8610.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8611.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8612.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "DisinfectantSpray",
+      "pos": [
+        8613.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "DisinfectantSpray",
+      "pos": [
+        8614.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "FirstAidKit",
+      "pos": [
+        8615.0,
+        279.3,
+        8355.0
+      ],
+      "ypr": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    }
+  ]
+}
