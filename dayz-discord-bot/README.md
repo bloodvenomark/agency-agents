@@ -24,6 +24,7 @@ auf PS4/PS5-Servern von Nitrado.
 | `/admin-neustart` | Server neu starten, damit alles sofort geliefert wird |
 | `/admin-einrichten` | Trägt die Lieferdatei automatisch in `cfggameplay.json` ein |
 | `/admin-safezone <x> <z> <radius>` | Safezone festlegen (Radius 0 = aus) |
+| `/admin-bauverbot <x> <z> <radius>` | Bauverbotszone festlegen (Radius 0 = aus) |
 | `/admin-position <gamertag>` | Letzte Position eines Spielers inkl. Höhe (aus dem Admin-Log) |
 | `/admin-banns` | Aktive Banns anzeigen |
 | `/admin-entbannen <gamertag>` | Bann sofort aufheben |
@@ -173,6 +174,18 @@ Auf Konsole gibt es keine echte Safezone ohne Schaden. Der Bot überwacht deshal
   vermutlich erst nach dem nächsten Server-Neustart. Nach Ablauf entbannt der Bot automatisch.
 - Meldungen landen im privaten Kanal **🛡│admin-log** (nur für die Admin-Rolle sichtbar).
 - Der Bot reagiert mit ca. 1 Minute Verzögerung, weil er das Admin-Log jede Minute liest.
+
+## Bauverbotszone (nur Trader und Admins)
+
+Auch Bauen lässt sich auf Konsole nicht technisch verhindern. Der Bot überwacht es:
+- Platziert oder baut jemand in der Zone (Zelt, Zaun, Wachturm, Fahne …), prüft der Bot die
+  **Discord-Rolle** des verknüpften Kontos. **Trader** (`TRADER_ROLE`) und **Admins** dürfen bauen.
+- Alle anderen (auch nicht verknüpfte Spieler) werden im **🛡│admin-log** gemeldet und per DM
+  verwarnt, höchstens einmal pro 10 Minuten. Mit `BAUVERBOT_BANN_TAGE` > 0 wird zusätzlich gebannt.
+- Abbauen müssen die Admins im Spiel, der Bot kann Gebäude nicht entfernen.
+- Standard-Zone: Safezone-Moschee, Mitte x 8610 / z 8354, Radius 150 m.
+- Die Rolle **Trader** legt der Bot automatisch an. Admins vergeben sie in Discord.
+- Voraussetzung: Im Nitrado-Webinterface muss das **Admin-Log für Platzieren/Bauen** aktiv sein.
 
 ## Wichtig: Basisschaden und cfggameplay.json
 

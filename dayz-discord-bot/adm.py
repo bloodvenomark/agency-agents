@@ -16,6 +16,9 @@ _HIT = re.compile(r'Player "([^"]+)"[^\[\n]*\[HP: (-?[\d.]+)\] hit by Player "([
 _HIT_DETAIL = re.compile(r'into (\w+)\(\d+\) for (-?[\d.]+) damage(?: \(([^)]+)\))?')
 _WAFFE = re.compile(r'\) with (.+?)(?: from (-?[\d.]+) meters)?\s*$')
 _TOD = re.compile(r'Player "([^"]+)" \(DEAD\)')
+# Player "Name" (id=... pos=<...>) placed Fence Kit<FenceKit>
+# Player "Name" (id=... pos=<...>)Built base on Fence with Shovel
+_BAU = re.compile(r'Player "([^"]+)"[^\n]*?>\)\s*(placed|built)\s+(.+?)\s*$', re.I)
 
 
 @dataclass
@@ -46,11 +49,19 @@ class Treffer:
 
 
 @dataclass
+class Bau:
+    spieler: str
+    aktion: str    # "placed" oder "built"
+    objekt: str
+
+
+@dataclass
 class Ereignisse:
     positionen: list[Position] = field(default_factory=list)
     kill: Kill | None = None
     treffer: Treffer | None = None
     tod: str | None = None   # Gamertag bei Tod ohne Spieler-Täter (Zombie, Hunger ...)
+    bau: Bau | None = None   # Platzieren oder Bauen (Zelt, Zaun, Wachturm, Fahne ...)
 
 
 def _waffe(rest: str) -> tuple[str | None, float | None]:
@@ -92,4 +103,9 @@ def parse_zeile(zeile: str) -> Ereignisse:
     m = _TOD.search(zeile)
     if m:
         e.tod = m.group(1)
+        return e
+
+    m = _BAU.search(zeile)
+    if m:
+        e.bau = Bau(m.group(1), m.group(2).lower(), m.group(3))
     return e

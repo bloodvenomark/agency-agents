@@ -92,6 +92,8 @@ die kartentypische Startkleidung.
 - **Bot-Strafe:** Wer in der Safezone jemanden **tötet**, wird **30 Tage gebannt** (Notwehr ausgenommen).
   Im Bot: `/admin-safezone 8610 8354 75`.
 - Eingetragen in `cfggameplay.json` unter `objectSpawnersArr`.
+- **Bauverbot (Bot):** Im Umkreis von 150 m dürfen nur Spieler mit der Discord-Rolle **Trader**
+  oder **Admin** bauen. Andere werden gemeldet und verwarnt. Im Bot: `/admin-bauverbot 8610 8354 150`.
 
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).

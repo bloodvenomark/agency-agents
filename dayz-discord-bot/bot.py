@@ -49,6 +49,7 @@ def _bool(name: str, default: bool) -> bool:
 BASIS = Path(__file__).parent
 GUILD = discord.Object(id=int(os.environ["GUILD_ID"]))
 ADMIN_ROLE = os.getenv("ADMIN_ROLE", "DayZ Admin")
+TRADER_ROLE = os.getenv("TRADER_ROLE", "Trader")   # darf in der Bauverbotszone bauen
 MISSION = os.getenv("MISSION", "dayzOffline.chernarusplus")
 START_GELD = _int("START_GELD", 500)
 TAEGLICH_BONUS = _int("TAEGLICH_BONUS", 250)
@@ -73,6 +74,11 @@ KANAELE_AUTOMATISCH = _bool("KANAELE_AUTOMATISCH", True)
 SAFEZONE_STANDARD = (os.getenv("SAFEZONE_X", ""), os.getenv("SAFEZONE_Z", ""),
                      os.getenv("SAFEZONE_RADIUS", "150"))
 SAFEZONE_BANN_TAGE = _int("SAFEZONE_BANN_TAGE", 30)
+
+# Bauverbotszone: nur Trader- und Admin-Rolle dürfen dort bauen (per /admin-bauverbot änderbar)
+BAUVERBOT_STANDARD = (os.getenv("BAUVERBOT_X", ""), os.getenv("BAUVERBOT_Z", ""),
+                      os.getenv("BAUVERBOT_RADIUS", "150"))
+BAUVERBOT_BANN_TAGE = _int("BAUVERBOT_BANN_TAGE", 0)   # 0 = nur verwarnen und Admins melden
 HITFEED_AN = _bool("HITFEED_AN", True)
 if not HITFEED_AN:
     del KANAELE["hitfeed"]
@@ -240,6 +246,9 @@ async def kanaele_erstellen(guild: discord.Guild) -> list[str]:
     if not admin_rolle:
         admin_rolle = await guild.create_role(name=ADMIN_ROLE, reason="DayZ-Bot Einrichtung")
         erledigt.append(f"Rolle **{ADMIN_ROLE}** erstellt")
+    if not discord.utils.get(guild.roles, name=TRADER_ROLE):
+        await guild.create_role(name=TRADER_ROLE, reason="DayZ-Bot Einrichtung")
+        erledigt.append(f"Rolle **{TRADER_ROLE}** erstellt")
 
     kategorie = discord.utils.get(guild.categories, name=KATEGORIE)
     if not kategorie:
@@ -414,6 +423,62 @@ async def spieler_bannen(gamertag: str, tage: int, grund: str):
                               f"🚫 Du bist für {tage} Tage gebannt. Grund: {grund}")
 
 
+def bauverbot() -> tuple[float, float, float] | None:
+    x = db.get("bauverbot_x", BAUVERBOT_STANDARD[0])
+    z = db.get("bauverbot_z", BAUVERBOT_STANDARD[1])
+    r = db.get("bauverbot_radius", BAUVERBOT_STANDARD[2])
+    return (float(x), float(z), float(r)) if x and z and r else None
+
+
+async def darf_bauen(gamertag: str) -> bool:
+    """Trader- oder Admin-Rolle (bzw. Administrator-Recht) des verknüpften Discord-Kontos."""
+    konto = db.konto_per_gamertag(gamertag)
+    guild = bot.get_guild(GUILD.id)
+    if not konto or not guild:
+        return False
+    try:
+        mitglied = guild.get_member(konto["discord_id"]) or await guild.fetch_member(konto["discord_id"])
+    except discord.HTTPException:
+        return False
+    return mitglied.guild_permissions.administrator or any(
+        r.name in (TRADER_ROLE, ADMIN_ROLE) for r in mitglied.roles)
+
+
+bau_meldungen: dict[str, float] = {}   # Gamertag -> Zeit der letzten Meldung
+
+
+async def bau_pruefen(e):
+    zone = bauverbot()
+    if not zone or not e.bau:
+        return
+    p = next((p for p in e.positionen if p.gamertag.lower() == e.bau.spieler.lower()), None)
+    if not p or math.dist((p.x, p.z), zone[:2]) > zone[2]:
+        return
+    if await darf_bauen(e.bau.spieler):
+        return
+    # Ein Bauvorgang erzeugt viele Logzeilen: höchstens eine Meldung pro Spieler alle 10 Minuten
+    if time.time() - bau_meldungen.get(e.bau.spieler.lower(), 0) < 600:
+        return
+    bau_meldungen[e.bau.spieler.lower()] = time.time()
+
+    taetigkeit = "platziert" if e.bau.aktion == "placed" else "gebaut"
+    embed = discord.Embed(
+        title="🚧 Bauen in der Bauverbotszone",
+        description=f"**{e.bau.spieler}** hat **{e.bau.objekt}** {taetigkeit}.",
+        color=0xEF6C00,
+    )
+    embed.add_field(name="Position", value=f"x {p.x:.0f} / z {p.z:.0f}")
+    embed.set_footer(text="Bitte im Spiel abbauen. Nur Trader und Admins dürfen hier bauen.")
+    await posten("admin", embed)
+    konto = db.konto_per_gamertag(e.bau.spieler)
+    if konto:
+        await benachrichtigen(konto["discord_id"],
+                              "🚧 In der Safezone darfst du nicht bauen. Bitte sofort wieder abbauen, "
+                              "sonst entfernen es die Admins.")
+    if BAUVERBOT_BANN_TAGE > 0:
+        await spieler_bannen(e.bau.spieler, BAUVERBOT_BANN_TAGE, "Bauen in der Bauverbotszone")
+
+
 async def safezone_pruefen(e, zeile: str):
     zone = safezone()
     if not zone or not (e.kill or e.treffer):
@@ -554,6 +619,7 @@ async def log_schleife():
             db.position_setzen(p.gamertag, p.x, p.hoehe, p.z)
         try:
             await safezone_pruefen(e, zeile)
+            await bau_pruefen(e)
             if e.kill:
                 await kill_verarbeiten(e.kill)
             elif e.treffer:
@@ -961,6 +1027,19 @@ async def admin_safezone(interaction: discord.Interaction, x: float, z: float, r
     db.set("safezone_radius", str(radius) if radius > 0 else "")
     text = (f"✅ Safezone: Mitte **{koords(x, z)}**, Radius **{radius:.0f} m**. "
             f"Kills dort = {SAFEZONE_BANN_TAGE} Tage Bann." if radius > 0 else "✅ Safezone ausgeschaltet.")
+    await interaction.response.send_message(text, ephemeral=True)
+
+
+@bot.tree.command(name="admin-bauverbot", description="[Admin] Bauverbotszone festlegen (Mitte x/z und Radius in Metern)")
+@app_commands.check(ist_admin)
+@app_commands.describe(x="x-Koordinate der Mitte", z="z-Koordinate der Mitte", radius="Radius in Metern (0 = aus)")
+async def admin_bauverbot(interaction: discord.Interaction, x: float, z: float, radius: float):
+    db.set("bauverbot_x", str(x))
+    db.set("bauverbot_z", str(z))
+    db.set("bauverbot_radius", str(radius) if radius > 0 else "")
+    text = (f"✅ Bauverbotszone: Mitte **{koords(x, z)}**, Radius **{radius:.0f} m**. "
+            f"Bauen dürfen nur **{TRADER_ROLE}** und **{ADMIN_ROLE}**." if radius > 0
+            else "✅ Bauverbotszone ausgeschaltet.")
     await interaction.response.send_message(text, ephemeral=True)
 
 
