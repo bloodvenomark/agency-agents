@@ -45,14 +45,15 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
 - `db/events.xml`: Infected-Events +30 %, `db/globals.xml`: Obergrenze 1000 → 1300.
 
 ### Startausrüstung (`custom/startgear.json`)
-**Turban** (zufällige Farbe) als Kopfbedeckung, Umhängetasche, 2× Essen (Cracker, Salzstangen),
+**Kartentypische Kleidung** in zufälligen Farben: **Turban**, Kameez-Hemd, Shalwar-Hose und
+**Sandalen**. Dazu Umhängetasche, 2× Essen (Cracker, Salzstangen),
 3× Trinken (Wasserflasche, 2 Dosen), Verband, **Schiene**, Knicklicht, Papierkarte,
 1 zufälliges **Messer**, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
 - Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
 - Messer: Küchenmesser, Steakmesser, Jagdmesser, Kampfmesser, Kukri, Fange-Messer, Dönermesser.
 
-**Eigener Charakter:** Kleidung (Oberteil, Hose, Schuhe) wird nicht vorgegeben. Wer im Menü
-seinen eigenen Charakter gestaltet, behält Aussehen und gewählte Kleidung. Nur der Turban kommt dazu.
+**Eigener Charakter:** Aussehen (Gesicht, Körper) bleibt erhalten, die Kleidung ist aber für alle
+die kartentypische Startkleidung.
 
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
@@ -64,7 +65,7 @@ seinen eigenen Charakter gestaltet, behält Aussehen und gewählte Kleidung. Nur
 ## Bitte nach dem ersten Start testen
 
 1. **Startausrüstung:** Ist alles da (Turban, Messer, Pistole)? Wie viel Munition?
-   Mit eigenem Charakter spawnen: Bleibt die eigene Kleidung?
+   Tragen alle Kameez, Shalwar und Sandalen? Bleibt beim eigenen Charakter das Gesicht?
 2. **Karte:** Zeigt die Papierkarte Nasdara und einen Punkt an deiner Position?
 3. **Ausdauer:** Lange sprinten, sinkt die Ausdauer? Nur beim Springen/Klettern sollte sie sinken.
 4. **Fahrzeuge:** Sind alle Teile dran? Liegen Kanister und Wasserflaschen im Kofferraum, und sind sie voll?

@@ -209,6 +209,343 @@
             ]
         },
         {
+            "slotName": "Body",
+            "discreteItemSets": [
+                {
+                    "itemType": "KameezShirt_Beige",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_Brown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_Grey",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_Olive",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_White",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_NavyBlue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "KameezShirt_SkyBlue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "slotName": "Legs",
+            "discreteItemSets": [
+                {
+                    "itemType": "MensShalwarPants_Beige",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_Brown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_Grey",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_NavyBlue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_SkyBlue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "MensShalwarPants_White",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "slotName": "Feet",
+            "discreteItemSets": [
+                {
+                    "itemType": "TraditionalSandalShoes_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TraditionalSandalShoes_Brown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TraditionalSandalShoes_LightBrown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TraditionalSandalShoes_NavyBlue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "SandalsShoes_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "SandalsShoes_BlueNavy",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "SandalsShoes_Brown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "SandalsShoes_Grey",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
             "slotName": "Back",
             "discreteItemSets": [
                 {
