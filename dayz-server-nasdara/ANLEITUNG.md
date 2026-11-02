@@ -17,6 +17,8 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 | `cfgplayerspawnpoints.xml` | `dayzOffline.nasdara/cfgplayerspawnpoints.xml` |
 | `custom/startgear.json` | `dayzOffline.nasdara/custom/startgear.json` (neu) |
 | `custom/safezone.json` | `dayzOffline.nasdara/custom/safezone.json` (neu) |
+| `custom/teleport_dixi.json` | `dayzOffline.nasdara/custom/teleport_dixi.json` (neu) |
+| `custom/teleport_safezone.json` | `dayzOffline.nasdara/custom/teleport_safezone.json` (neu) |
 
 Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den Server starten.
 
@@ -89,9 +91,6 @@ die kartentypische Startkleidung.
   Abstand zu den Häusern. Jedes Teil steht auf seiner eigenen Bodenhöhe aus 12 Messungen im Spiel
   (Ecken, Sanitätszelt, Tankwagen, alle 6 Läden; Gelände ist verdreht, ca. 272–286 m).
   Messpunkte stehen in `werkzeuge/safezone_bau.py` (MESSUNGEN). Übersicht: `safezone_standort.png`. Die Original-Moschee in Nasdara bleibt stehen.
-- **Container-Sockel:** Unter jedem Mauerstück (nicht unter den Toren) stehen 2 verschlossene
-  Militärcontainer, Oberkante am Mauerfuß. Sie füllen Lücken, wo das Gelände unter der Mauer
-  abfällt; wo nicht, stecken sie unsichtbar im Boden. 36 Container (auch an den 4 Ecken).
 - **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
   - **Grillplatz (Südosten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
     4× Streichhölzern sowie 2 Kisten mit Essen **obendrauf**: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche
@@ -121,6 +120,17 @@ die kartentypische Startkleidung.
 - **Bauverbot (Bot):** Im Umkreis von 150 m dürfen nur Spieler mit der Discord-Rolle **Trader**
   oder **Admin** bauen. Andere werden gemeldet und verwarnt. Im Bot: `/admin-bauverbot 8700 8264 150`.
 
+### Relog-Teleporter zur Safezone (`custom/teleport_dixi.json`, `custom/teleport_safezone.json`)
+- **86 Dixi-Klos** (`Land_Misc_Toilet_Mobile`) in allen Orten der Karte, große Städte haben mehrere
+  (mind. 700 m Abstand). Liste mit Koordinaten: `TELEPORTER.md`, Karte: `teleporter_vorschau.png`.
+- **So geht's:** Im Dixi-Klo ausloggen → beim nächsten Einloggen steht man im Hof der
+  Safezone-Moschee.
+- Technik: `playerRestrictedAreaFiles` in `cfggameplay.json` (eigentlich für den Bunker auf Sakhal,
+  seit 1.26). Um jedes Klo liegt eine unsichtbare Zone von 4 × 4 m und 14 m Höhe.
+- Die Höhe der Klos ist aus den Gebäudedaten geschätzt (ca. ±2 m). Die Zone ist bewusst hoch, damit
+  der Teleport auch bei leicht schwebendem oder eingesunkenem Klo funktioniert. Schwebt ein Klo stark
+  oder ist es unsichtbar: Höhe am Klo messen und mit Nr. aus `TELEPORTER.md` melden.
+
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
 - **Ausdauer nur beim Springen/Klettern:** Sprinten, Schwimmen, Leitern, Nahkampf, Luftanhalten und
@@ -138,10 +148,12 @@ die kartentypische Startkleidung.
 5. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
 6. **Spawns:** Ein paar Mal neu spawnen. Landet man immer im Gelände außerhalb von Orten?
    Liegt ein Spawn ungünstig (Berg, Wasser), Nummer aus `spawns_vorschau.png` melden.
-7. **Safezone:** Zur Moschee laufen (x 8700 / z 8264). Steht sie sauber auf dem Boden, oder schwebt
+7. **Teleporter:** In einem Dixi-Klo ausloggen, wieder einloggen → Safezone? Stehen die Klos
+   sichtbar auf dem Boden (ein paar Orte stichprobenartig anschauen)?
+8. **Safezone:** Zur Moschee laufen (x 8700 / z 8264). Steht sie sauber auf dem Boden, oder schwebt
    bzw. versinkt sie? Liegen Essen, Wasser und Erste Hilfe im Hof und lassen sich aufheben?
    Höhe falsch → Höhe von `/admin-position` (in der Hofmitte stehend) an mich schicken.
-8. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
+9. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
 
 Wenn etwas fehlt oder der Server nicht startet: die Originaldatei zurückspielen und mir
 den Fehler schicken.
@@ -152,4 +164,5 @@ richtig gefüllt ist.
 ## Werkzeuge
 
 Im Ordner `werkzeuge/` liegen die Scripte, mit denen diese Dateien aus den Nitrado-Originalen
-erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`, `safezone_bau.py`, `grundriss.py`). Sie werden auf dem Server nicht gebraucht.
+erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`, `safezone_bau.py`, `grundriss.py`,
+`teleporter_bau.py`). Sie werden auf dem Server nicht gebraucht.

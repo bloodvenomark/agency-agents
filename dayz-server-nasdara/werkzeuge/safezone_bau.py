@@ -85,6 +85,10 @@ HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
 # Sockel aus verschlossenen Militärcontainern unter jedem Mauerstück (nicht unter Toren): füllt
+# Lücken unter der Mauer. Abgeschaltet: die Container sind kleine grüne Container und sehen
+# unpassend aus (Wunsch: wieder entfernen).
+SOCKEL_AKTIV = False
+#
 # Lücken, wo das Gelände unter der Mauer tiefer liegt als berechnet; wo nicht, stecken sie im Boden.
 # Container: Ursprung am Boden, Längsseite in lokaler Z-Richtung (aus Container-Paaren der Karte).
 SOCKEL_CONTAINER = "Land_Mil_ContainerHabitat_Armory_Locked_Green_DE"
@@ -178,7 +182,7 @@ for n, x, y, z, rollen, nicken, gier in teile:
 
 # Container-Sockel unter den Mauerstücken
 sockel = 0
-for teil in list(objekte):
+for teil in list(objekte) if SOCKEL_AKTIV else []:
     mx, fuss, mz = teil["pos"]
     if teil["name"] == "Land_Mosque_Big_Wall":
         richtungen = [teil["ypr"][0]]

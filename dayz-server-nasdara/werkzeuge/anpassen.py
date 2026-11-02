@@ -254,7 +254,11 @@ ersetzungen = [
     ('"ignoreNavItemsOwnership": false', '"ignoreNavItemsOwnership": true'),
     ('"disableItemFalling": false', '"disableItemFalling": true'),
     # Safezone-Moschee mit Vorrat (Object Spawner)
-    ('"objectSpawnersArr": []', '"objectSpawnersArr": ["custom/safezone.json"]'),
+    ('"objectSpawnersArr": []', '"objectSpawnersArr": ["custom/safezone.json", "custom/teleport_dixi.json"]'),
+    # Relog-Teleporter: wer sich in einem Dixi-Klo ausloggt, landet beim Einloggen in der Safezone
+    ('"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0]',
+     '"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0],\n    '
+     '"playerRestrictedAreaFiles": ["custom/teleport_safezone.json"]'),
     # Ausdauer nur noch beim Springen/Klettern (obstacleTraversal bleibt 1.0)
     ('"sprintStaminaModifierErc": 1.0', '"sprintStaminaModifierErc": 0.0'),
     ('"sprintStaminaModifierCro": 1.0', '"sprintStaminaModifierCro": 0.0'),
