@@ -1,0 +1,1195 @@
+{
+    "spawnWeight": 1,
+    "name": "Broken-LegZ Start",
+    "characterTypes": [
+        "SurvivorM_Boris",
+        "SurvivorM_Cyril",
+        "SurvivorM_Denis",
+        "SurvivorM_Elias",
+        "SurvivorM_Francis",
+        "SurvivorM_Guo",
+        "SurvivorM_Hassan",
+        "SurvivorM_Indar",
+        "SurvivorM_Jose",
+        "SurvivorM_Kaito",
+        "SurvivorM_Lewis",
+        "SurvivorM_Manua",
+        "SurvivorM_Mirek",
+        "SurvivorM_Niki",
+        "SurvivorM_Oliver",
+        "SurvivorM_Peter",
+        "SurvivorM_Quinn",
+        "SurvivorM_Rolf",
+        "SurvivorM_Seth",
+        "SurvivorM_Taiki",
+        "SurvivorF_Eva",
+        "SurvivorF_Frida",
+        "SurvivorF_Gabi",
+        "SurvivorF_Helga",
+        "SurvivorF_Irena",
+        "SurvivorF_Judy",
+        "SurvivorF_Keiko",
+        "SurvivorF_Linda",
+        "SurvivorF_Maria",
+        "SurvivorF_Naomi",
+        "SurvivorF_Baty"
+    ],
+    "attachmentSlotItemSets": [
+        {
+            "slotName": "Body",
+            "discreteItemSets": [
+                {
+                    "itemType": "TShirt_Beige",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TShirt_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TShirt_Blue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TShirt_Green",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "TShirt_Grey",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "slotName": "Legs",
+            "discreteItemSets": [
+                {
+                    "itemType": "CargoPants_Beige",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "CargoPants_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "CargoPants_Blue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "CargoPants_Green",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "slotName": "Feet",
+            "discreteItemSets": [
+                {
+                    "itemType": "AthleticShoes_Black",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "AthleticShoes_Blue",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "AthleticShoes_Brown",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                },
+                {
+                    "itemType": "AthleticShoes_Grey",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "slotName": "Back",
+            "discreteItemSets": [
+                {
+                    "itemType": "CourierBag",
+                    "spawnWeight": 1,
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": [],
+                    "complexChildrenTypes": []
+                }
+            ]
+        }
+    ],
+    "discreteUnsortedItemSets": [
+        {
+            "name": "Start_MakarovIJ70",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "MakarovIJ70",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_380",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_CZ75",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "CZ75",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_9x19",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_Glock19",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Glock19",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_9x19",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_P1",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "P1",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_9x19",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_FNX45",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "FNX45",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_45ACP",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_Colt1911",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Colt1911",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_45ACP",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.3,
+                        "quantityMax": 0.4
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        },
+        {
+            "name": "Start_MKII",
+            "spawnWeight": 1,
+            "attributes": {
+                "healthMin": 1.0,
+                "healthMax": 1.0,
+                "quantityMin": 1.0,
+                "quantityMax": 1.0
+            },
+            "simpleChildrenUseDefaultAttributes": true,
+            "simpleChildrenTypes": [],
+            "complexChildrenTypes": [
+                {
+                    "itemType": "Crackers",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SaltySticks",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "WaterBottle",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Cola",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "SodaCan_Pipsi",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "BandageDressing",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Chemlight_White",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 2,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "ChernarusMap",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "MKII",
+                    "attributes": {
+                        "healthMin": 0.6,
+                        "healthMax": 0.8,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": 0,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Ammo_22",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 0.2,
+                        "quantityMax": 0.30000000000000004
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                }
+            ]
+        }
+    ]
+}
