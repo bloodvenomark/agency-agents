@@ -89,6 +89,9 @@ die kartentypische Startkleidung.
   Abstand zu den Häusern. Jedes Teil steht auf seiner eigenen Bodenhöhe aus 12 Messungen im Spiel
   (Ecken, Sanitätszelt, Tankwagen, alle 6 Läden; Gelände ist verdreht, ca. 272–286 m).
   Messpunkte stehen in `werkzeuge/safezone_bau.py` (MESSUNGEN). Übersicht: `safezone_standort.png`. Die Original-Moschee in Nasdara bleibt stehen.
+- **Container-Sockel:** Unter jedem Mauerstück (nicht unter den Toren) stehen 2 verschlossene
+  Militärcontainer, Oberkante am Mauerfuß. Sie füllen Lücken, wo das Gelände unter der Mauer
+  abfällt; wo nicht, stecken sie unsichtbar im Boden. 28 Container.
 - **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
   - **Grillplatz (Südosten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
     4× Streichhölzern sowie 2 Kisten mit Essen **obendrauf**: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche

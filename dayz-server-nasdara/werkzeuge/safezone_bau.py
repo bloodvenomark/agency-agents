@@ -84,6 +84,13 @@ _GEWICHTE = _loese([[_kern(x1, z1, x2, z2) for _, x2, z2, _ in MESSUNGEN] for _,
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
+# Sockel aus verschlossenen Militärcontainern unter jedem Mauerstück (nicht unter Toren): füllt
+# Lücken, wo das Gelände unter der Mauer tiefer liegt als berechnet; wo nicht, stecken sie im Boden.
+# Container: Ursprung am Boden, Längsseite in lokaler Z-Richtung (aus Container-Paaren der Karte).
+SOCKEL_CONTAINER = "Land_Mil_ContainerHabitat_Armory_Locked_Green_DE"
+SOCKEL_HOEHE = 2.75      # Containerhöhe (geschätzt), Oberkante schließt am Mauerfuß ab
+SOCKEL_VERSATZ = 3.0     # zwei Container je Mauerstück, je 3 m links/rechts der Mitte
+
 
 def boden_bei(x: float, z: float) -> float:
     """Bodenhöhe an einer Stelle: Fläche durch alle Messungen plus örtliche Korrektur."""
@@ -169,6 +176,19 @@ for n, x, y, z, rollen, nicken, gier in teile:
     objekte.append(objekt(n, nx, y - ORIGINAL_BODEN + boden_bei(nx, nz) + HOEHE_KORREKTUR, nz,
                           gier + zusatz, nicken, rollen))
 
+# Container-Sockel unter den Mauerstücken
+sockel = 0
+for teil in list(objekte):
+    if teil["name"] != "Land_Mosque_Big_Wall":   # Eckstücke liegen genau auf einem Mauerstück
+        continue
+    mx, fuss, mz = teil["pos"]
+    gier = teil["ypr"][0]
+    wand = (math.cos(math.radians(gier)), -math.sin(math.radians(gier)))   # Längsrichtung der Mauer
+    for seite in (-1, 1):
+        objekte.append(objekt(SOCKEL_CONTAINER, mx + seite * SOCKEL_VERSATZ * wand[0], fuss - SOCKEL_HOEHE,
+                              mz + seite * SOCKEL_VERSATZ * wand[1], gier + 90.0))
+        sockel += 1
+
 drehung = STRASSE_PEILUNG
 rad = math.radians(drehung)
 ost = (math.cos(rad), -math.sin(rad))      # u-Achse in Weltkoordinaten (x, z)
@@ -212,6 +232,7 @@ ziel.write_text(json.dumps({"Objects": objekte}, indent=2), "utf-8")
 if len(sys.argv) > 3:
     Path(sys.argv[3]).write_text(json.dumps({"laeden": laeden}, indent=2, ensure_ascii=False), "utf-8")
     print(f"{sys.argv[3]}: {len(laeden)} Läden für den Bot")
+print(f"{ziel}: {sockel} Sockel-Container unter den Mauern")
 print(f"{ziel}: {len(teile)} Moschee-Teile + {len(items)} Items, Mitte x {MITTE_X} z {MITTE_Z}, "
       f"Boden {boden_bei(MITTE_X, MITTE_Z):.1f} in der Mitte (Ausdehnung "
       f"{max(t[1] for t in teile) - min(t[1] for t in teile):.0f} x "
