@@ -1186,14 +1186,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Blue",
+      "name": "StaticObj_Bucket_Red_DE",
       "pos": [
-        8577.595,
-        279.0,
-        8329.992
+        8577.778,
+        282.0,
+        8337.585
       ],
       "ypr": [
-        10.4762,
+        100.4762,
         0.0,
         0.0
       ],
@@ -1216,14 +1216,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Green",
+      "name": "StaticObj_Stretcher_Green_DE",
       "pos": [
-        8584.868,
-        279.0,
-        8369.325
+        8585.051,
+        282.0,
+        8376.918
       ],
       "ypr": [
-        10.4762,
+        100.4762,
         0.0,
         0.0
       ],
@@ -1246,14 +1246,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Red",
+      "name": "StaticObj_RoadCone_DE",
       "pos": [
-        8594.809,
-        279.0,
-        8373.589
+        8602.402,
+        282.0,
+        8373.405
       ],
       "ypr": [
-        10.4762,
+        190.4762,
         0.0,
         0.0
       ],
@@ -1276,14 +1276,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Yellow",
+      "name": "StaticObj_Sign_Roadblock_Stop_DE",
       "pos": [
-        8616.442,
-        279.0,
-        8369.589
+        8624.035,
+        282.0,
+        8369.405
       ],
       "ypr": [
-        10.4762,
+        190.4762,
         0.0,
         0.0
       ],
@@ -1306,29 +1306,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Blue",
+      "name": "StaticObj_Sign_Roadblock_Arrow_DE",
       "pos": [
-        8641.678,
-        279.0,
-        8374.075
+        8641.494,
+        282.0,
+        8366.482
       ],
       "ypr": [
-        10.4762,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "Barrel_Yellow",
-      "pos": [
-        8641.46,
-        279.0,
-        8372.895
-      ],
-      "ypr": [
-        10.4762,
+        -79.5238,
         0.0,
         0.0
       ],
@@ -1351,29 +1336,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Barrel_Red",
+      "name": "StaticObj_Furniture_PlasticBucket_DE",
       "pos": [
-        8634.405,
-        279.0,
-        8334.741
+        8634.221,
+        282.0,
+        8327.148
       ],
       "ypr": [
-        10.4762,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "Barrel_Green",
-      "pos": [
-        8634.187,
-        279.0,
-        8333.561
-      ],
-      "ypr": [
-        10.4762,
+        -79.5238,
         0.0,
         0.0
       ],

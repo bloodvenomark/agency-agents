@@ -96,8 +96,9 @@ die kartentypische Startkleidung.
   - Eine Couch gibt es in den Nasdara-Dateien nicht.
 - **Traderbereich:** 6 Ladengeschäfte (`Land_Store_Street1`) im Innenhof, Fenster zur Hofmitte:
   Trader 1 + 2 an der Westmauer, Trader 3 + 4 vor dem Hauptgebäude, Trader 5 + 6 an der Ostmauer.
-  - **Farbmarkierung** mit farbigen Fässern vor dem Laden: 1 Blau, 2 Grün, 3 Rot, 4 Gelb,
-    5 Blau + Gelb, 6 Rot + Grün.
+  - **Markierung über dem Fenster** mit festen Objekten (nicht aufhebbar), ca. 3 m hoch an der Front:
+    1 roter Eimer, 2 grüne Trage, 3 orange Leitkegel, 4 rot-weißes Stoppschild, 5 Pfeilschild,
+    6 Plastikeimer. Keine Fässer mehr, die man wegnehmen könnte.
   - Seemannskisten stellen die Trader selbst auf (bleiben so mit Inhalt erhalten).
   - **Eingang:** Der Trader baut selbst ein Tor mit Zahlenschloss (Trader-Rollen dürfen in der Bauverbotszone bauen).
   - **Zutritt:** Nur die Discord-Rolle des Ladens (Trader 1 … 6) und Admins. Der Bot meldet Fremde.

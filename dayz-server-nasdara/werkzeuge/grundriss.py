@@ -21,8 +21,8 @@ for x in o[:28]:
     if t in ("Main", "Gate"):
         ax.annotate({"Main": "Hauptgebäude", "Gate": "Tor"}[t], (x["pos"][0], x["pos"][2]),
                     fontsize=8, xytext=(5, 5), textcoords="offset points")
-farbe = {"Trader 1": "#1e88e5", "Trader 2": "#43a047", "Trader 3": "#e53935",
-         "Trader 4": "#fdd835", "Trader 5": "#1e88e5", "Trader 6": "#e53935"}
+farbe = {"Trader 1": "#e53935", "Trader 2": "#43a047", "Trader 3": "#fb8c00",
+         "Trader 4": "#e53935", "Trader 5": "#9e9e9e", "Trader 6": "#1e88e5"}
 for l in laeden:
     b = math.radians(l["blick"])
     v, r = (math.sin(b), math.cos(b)), (math.cos(b), -math.sin(b))
@@ -44,11 +44,15 @@ gruppen = [
 for label, klassen, c, m in gruppen:
     pts = [(x["pos"][0], x["pos"][2]) for x in o[28:] if x["name"] in klassen]
     ax.scatter(*zip(*pts), c=c, marker=m, s=40, label=label)
-for fass, c in (("Barrel_Blue", "#1e88e5"), ("Barrel_Green", "#43a047"),
-                ("Barrel_Red", "#e53935"), ("Barrel_Yellow", "#fdd835")):
-    pts = [(x["pos"][0], x["pos"][2]) for x in o[28:] if x["name"] == fass]
-    ax.scatter(*zip(*pts), c=c, edgecolors="k", s=90, marker="o")
-ax.scatter([], [], c="w", edgecolors="k", s=90, label="Farb-Fass (Markierung)")
+marker = {"StaticObj_Bucket_Red_DE": "roter Eimer", "StaticObj_Stretcher_Green_DE": "grüne Trage",
+          "StaticObj_RoadCone_DE": "Leitkegel", "StaticObj_Sign_Roadblock_Stop_DE": "Stoppschild",
+          "StaticObj_Sign_Roadblock_Arrow_DE": "Pfeilschild", "StaticObj_Furniture_PlasticBucket_DE": "Plastikeimer"}
+for x in o[28:]:
+    if x["name"] in marker:
+        ax.scatter(x["pos"][0], x["pos"][2], c="k", marker="*", s=90)
+        ax.annotate(marker[x["name"]], (x["pos"][0], x["pos"][2]), fontsize=7, xytext=(4, -10),
+                    textcoords="offset points")
+ax.scatter([], [], c="k", marker="*", s=90, label="Markierung über dem Fenster")
 ax.set_aspect("equal")
 ax.grid(alpha=.3)
 ax.legend(loc="lower right", fontsize=8)

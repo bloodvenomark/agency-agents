@@ -56,15 +56,17 @@ EINRICHTUNG = [
 LADEN_BREITE, LADEN_TIEFE = 18.0, 12.0
 # Zeigt das Schaufenster im Spiel zur Mauer statt zur Hofmitte, hier 180 eintragen.
 LADEN_FRONT_KORREKTUR = 0
+# Markierung über dem Fenster: statische Objekte (nicht aufhebbar), an der Front in dieser Höhe.
+MARKER_HOEHE = 3.0
 # (Name, u, v, Blickrichtung des Fensters relativ zur Moschee in Grad: 0 = Norden, 90 = Osten,
-#  Farbmarkierung als farbige Fässer vor dem Laden)
+#  Markierung über dem Fenster)
 TRADER = [
-    ("Trader 1", -35, -22, 90, ["Barrel_Blue"]),
-    ("Trader 2", -35, 18, 90, ["Barrel_Green"]),
-    ("Trader 3", -11, 24, 180, ["Barrel_Red"]),
-    ("Trader 4", 11, 24, 180, ["Barrel_Yellow"]),
-    ("Trader 5", 35, 18, -90, ["Barrel_Blue", "Barrel_Yellow"]),
-    ("Trader 6", 35, -22, -90, ["Barrel_Red", "Barrel_Green"]),
+    ("Trader 1", -35, -22, 90, ["StaticObj_Bucket_Red_DE"]),                 # roter Eimer
+    ("Trader 2", -35, 18, 90, ["StaticObj_Stretcher_Green_DE"]),             # grüne Trage
+    ("Trader 3", -11, 24, 180, ["StaticObj_RoadCone_DE"]),                   # orange Leitkegel
+    ("Trader 4", 11, 24, 180, ["StaticObj_Sign_Roadblock_Stop_DE"]),         # rot-weißes Stoppschild
+    ("Trader 5", 35, 18, -90, ["StaticObj_Sign_Roadblock_Arrow_DE"]),        # Pfeilschild
+    ("Trader 6", 35, -22, -90, ["StaticObj_Furniture_PlasticBucket_DE"]),    # Plastikeimer
 ]
 
 text = Path(sys.argv[1]).read_text("utf-8")
@@ -93,19 +95,18 @@ ost = (math.cos(rad), -math.sin(rad))      # u-Achse in Weltkoordinaten (x, z)
 nord = (math.sin(rad), math.cos(rad))      # v-Achse
 items = []
 laeden = []
-for name, u, v, blick, faesser in TRADER:
+for name, u, v, blick, marker in TRADER:
     EINRICHTUNG.append((u, v, 0.0, "Land_Store_Street1", blick + LADEN_FRONT_KORREKTUR))
     laeden.append({"name": name, "rolle": name, "x": round(MITTE_X + u * ost[0] + v * nord[0], 2),
                    "z": round(MITTE_Z + u * ost[1] + v * nord[1], 2),
                    "blick": round(drehung + blick, 2), "breite": LADEN_BREITE, "tiefe": LADEN_TIEFE})
-    # Fässer vorne rechts neben dem Fenster
+    # Markierung mittig über dem Fenster, knapp vor der Fassade, zur Hofmitte gedreht
     b = math.radians(blick)
-    vorne, rechts = (math.sin(b), math.cos(b)), (math.cos(b), -math.sin(b))
-    for i, fass in enumerate(faesser):
-        abstand_vorne = LADEN_TIEFE / 2 + 1.5
-        seitlich = LADEN_BREITE / 2 - 1.5 - i * 1.2
-        EINRICHTUNG.append((u + vorne[0] * abstand_vorne + rechts[0] * seitlich,
-                            v + vorne[1] * abstand_vorne + rechts[1] * seitlich, 0.0, fass, 0))
+    vorne = (math.sin(b), math.cos(b))
+    for objekt_name in marker:
+        abstand_vorne = LADEN_TIEFE / 2 + 0.3
+        EINRICHTUNG.append((u + vorne[0] * abstand_vorne, v + vorne[1] * abstand_vorne,
+                            MARKER_HOEHE, objekt_name, blick))
 
 for u, v, hoehe, name, gier in EINRICHTUNG:
     x = MITTE_X + u * ost[0] + v * nord[0]
