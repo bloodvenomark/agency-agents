@@ -30,6 +30,7 @@ MESSUNGEN = [
     # Messung in der neuen, zur Straße gedrehten Lage
     ("Sanitätszelt (neue Lage)", 8677.0, 8257.0, 284.0),
     ("Wasser-Tankwagen (neue Lage, schwebte ca. 2-3 m)", 8661.0, 8246.0, 285.0),
+    ("Trader 6 vorne rechts (neue Lage)", 8716.0, 8226.0, 280.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
