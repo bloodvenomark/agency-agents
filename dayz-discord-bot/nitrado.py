@@ -43,6 +43,16 @@ class Nitrado:
         """z. B. 'started', 'stopped', 'restarting', 'starting'."""
         return (await self.gameserver()).get("status", "unknown")
 
+    async def bannliste(self) -> list[str]:
+        """Gamertags aus der Nitrado-Einstellung 'bans' (eine Zeile pro Spieler)."""
+        bans = (await self.gameserver()).get("settings", {}).get("general", {}).get("bans") or ""
+        return [z.strip() for z in bans.replace("\r", "\n").split("\n") if z.strip()]
+
+    async def bannliste_setzen(self, gamertags: list[str]):
+        """Wirkt vermutlich erst nach dem nächsten Server-Neustart."""
+        await self._api("POST", "/settings", json={
+            "category": "general", "key": "bans", "value": "\r\n".join(gamertags)})
+
     async def restart(self, message: str = "Shop-Lieferung"):
         await self._api("POST", "/restart", params={"message": message})
 

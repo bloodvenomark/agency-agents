@@ -29,6 +29,7 @@ import lootdrop
 from adm import Kill, Treffer, parse_zeile
 from db import DB
 from nitrado import Nitrado, NitradoError
+from safezone import Safezone, log_sekunden
 
 load_dotenv()
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -63,9 +64,15 @@ KANAELE = {
     "hitfeed":  ("🎯│hitfeed",  "HITFEED_KANAL",  False),
     "kopfgeld": ("💰│kopfgeld", "KOPFGELD_KANAL", False),
     "airdrops": ("🪂│airdrops", "LOOTDROP_KANAL", False),
+    "admin":    ("🛡│admin-log", "ADMIN_KANAL",    False),   # nur für die Admin-Rolle sichtbar
 }
 KATEGORIE = os.getenv("KATEGORIE", "🧟 DayZ")
 KANAELE_AUTOMATISCH = _bool("KANAELE_AUTOMATISCH", True)
+
+# Safezone: Mittelpunkt und Radius in Metern (per /admin-safezone änderbar)
+SAFEZONE_STANDARD = (os.getenv("SAFEZONE_X", ""), os.getenv("SAFEZONE_Z", ""),
+                     os.getenv("SAFEZONE_RADIUS", "150"))
+SAFEZONE_BANN_TAGE = _int("SAFEZONE_BANN_TAGE", 30)
 HITFEED_AN = _bool("HITFEED_AN", True)
 if not HITFEED_AN:
     del KANAELE["hitfeed"]
@@ -180,6 +187,7 @@ class DayZBot(commands.Bot):
         await self.tree.sync(guild=GUILD)
         status_schleife.start()
         log_schleife.start()
+        bann_schleife.start()
 
     async def on_ready(self):
         log.info("Eingeloggt als %s", self.user)
@@ -228,8 +236,9 @@ def kanal_id(schluessel: str) -> int:
 async def kanaele_erstellen(guild: discord.Guild) -> list[str]:
     """Legt Kategorie, Kanäle und Admin-Rolle an. Vorhandenes wird wiederverwendet."""
     erledigt = []
-    if not discord.utils.get(guild.roles, name=ADMIN_ROLE):
-        await guild.create_role(name=ADMIN_ROLE, reason="DayZ-Bot Einrichtung")
+    admin_rolle = discord.utils.get(guild.roles, name=ADMIN_ROLE)
+    if not admin_rolle:
+        admin_rolle = await guild.create_role(name=ADMIN_ROLE, reason="DayZ-Bot Einrichtung")
         erledigt.append(f"Rolle **{ADMIN_ROLE}** erstellt")
 
     kategorie = discord.utils.get(guild.categories, name=KATEGORIE)
@@ -245,10 +254,12 @@ async def kanaele_erstellen(guild: discord.Guild) -> list[str]:
             continue
         rechte = {
             guild.default_role: discord.PermissionOverwrite(
-                view_channel=True, send_messages=schreiben, add_reactions=True),
+                view_channel=schluessel != "admin", send_messages=schreiben, add_reactions=True),
             guild.me: discord.PermissionOverwrite(
                 view_channel=True, send_messages=True, embed_links=True),
         }
+        if schluessel == "admin":
+            rechte[admin_rolle] = discord.PermissionOverwrite(view_channel=True, send_messages=True)
         kanal = await guild.create_text_channel(
             name, category=kategorie, overwrites=rechte, reason="DayZ-Bot Einrichtung")
         db.set(f"kanal_{schluessel}", str(kanal.id))
@@ -362,6 +373,85 @@ async def treffer_posten(t: Treffer):
     await posten("hitfeed", discord.Embed(description="\n".join(zeilen), color=farbe))
 
 
+# --- Safezone und Banns ------------------------------------------------------
+
+safezone_pruefer = Safezone()
+
+
+def safezone() -> tuple[float, float, float] | None:
+    x = db.get("safezone_x", SAFEZONE_STANDARD[0])
+    z = db.get("safezone_z", SAFEZONE_STANDARD[1])
+    r = db.get("safezone_radius", SAFEZONE_STANDARD[2])
+    return (float(x), float(z), float(r)) if x and z and r else None
+
+
+async def spieler_bannen(gamertag: str, tage: int, grund: str):
+    """Bannt per Nitrado-Bannliste und merkt sich das Ende für das automatische Entbannen."""
+    bis = int(time.time()) + tage * 86400
+    db.bann_setzen(gamertag, bis, grund)
+    nitrado_ok = True
+    try:
+        liste = await nitrado.bannliste()
+        if gamertag.lower() not in (n.lower() for n in liste):
+            await nitrado.bannliste_setzen(liste + [gamertag])
+    except NitradoError as e:
+        nitrado_ok = False
+        log.error("Bann von %s bei Nitrado fehlgeschlagen: %s", gamertag, e)
+
+    embed = discord.Embed(
+        title="🚫 Spieler gebannt",
+        description=f"**{gamertag}** ist für **{tage} Tage** gebannt.\nGrund: {grund}",
+        color=0xB71C1C,
+    )
+    embed.add_field(name="Bis", value=f"<t:{bis}:f>")
+    if not nitrado_ok:
+        embed.add_field(name="⚠️ Nitrado", value="Eintrag in die Bannliste fehlgeschlagen, bitte von Hand bannen.",
+                        inline=False)
+    await posten("admin", embed)
+    konto = db.konto_per_gamertag(gamertag)
+    if konto:
+        await benachrichtigen(konto["discord_id"],
+                              f"🚫 Du bist für {tage} Tage gebannt. Grund: {grund}")
+
+
+async def safezone_pruefen(e, zeile: str):
+    zone = safezone()
+    if not zone or not (e.kill or e.treffer):
+        return
+    sekunde = log_sekunden(zeile)
+    if sekunde is None:
+        return
+    taeter = safezone_pruefer.verstoss(e, sekunde, *zone)
+    if not taeter:
+        return
+    bann = db.bann(taeter)
+    if bann and bann["bis"] > time.time():
+        return   # schon gebannt, nicht für jeden weiteren Treffer neu melden
+    art = "Kill" if e.kill else "Treffer"
+    opfer = e.kill.opfer if e.kill else e.treffer.opfer
+    await spieler_bannen(taeter, SAFEZONE_BANN_TAGE, f"{art} an {opfer} in der Safezone")
+
+
+@tasks.loop(minutes=30)
+async def bann_schleife():
+    """Entbannt Spieler, deren Bann abgelaufen ist."""
+    abgelaufen = db.banns_abgelaufen(int(time.time()))
+    if not abgelaufen:
+        return
+    try:
+        namen = {b["gamertag"].lower() for b in abgelaufen}
+        liste = await nitrado.bannliste()
+        await nitrado.bannliste_setzen([n for n in liste if n.lower() not in namen])
+    except NitradoError as e:
+        log.warning("Entbannen fehlgeschlagen, neuer Versuch in 30 min: %s", e)
+        return
+    for b in abgelaufen:
+        db.bann_entfernen(b["gamertag"])
+        await posten("admin", discord.Embed(
+            description=f"✅ Bann von **{b['gamertag']}** ist abgelaufen und wurde aufgehoben.",
+            color=0x2E7D32))
+
+
 # --- Lootdrops ---------------------------------------------------------------
 
 async def lootdrop_planen(paket: str | None = None, ort: str | None = None) -> tuple:
@@ -465,6 +555,7 @@ async def log_schleife():
         for p in e.positionen:
             db.position_setzen(p.gamertag, p.x, p.hoehe, p.z)
         try:
+            await safezone_pruefen(e, zeile)
             if e.kill:
                 await kill_verarbeiten(e.kill)
             elif e.treffer:
@@ -481,6 +572,7 @@ async def log_schleife():
 
 @status_schleife.before_loop
 @log_schleife.before_loop
+@bann_schleife.before_loop
 async def warten():
     await bot.wait_until_ready()
 
@@ -860,6 +952,55 @@ async def admin_basisschaden(interaction: discord.Interaction, basis_schaden: bo
         f"• `disableBaseDamage`: **{str(general['disableBaseDamage']).lower()}**\n"
         f"• `disableContainerDamage`: **{str(general.get('disableContainerDamage', False)).lower()}**\n"
         "Wirksam nach dem nächsten Server-Neustart.", ephemeral=True)
+
+
+@bot.tree.command(name="admin-safezone", description="[Admin] Safezone festlegen (Mitte x/z und Radius in Metern)")
+@app_commands.check(ist_admin)
+@app_commands.describe(x="x-Koordinate der Mitte", z="z-Koordinate der Mitte", radius="Radius in Metern (0 = aus)")
+async def admin_safezone(interaction: discord.Interaction, x: float, z: float, radius: float):
+    db.set("safezone_x", str(x))
+    db.set("safezone_z", str(z))
+    db.set("safezone_radius", str(radius) if radius > 0 else "")
+    text = (f"✅ Safezone: Mitte **{koords(x, z)}**, Radius **{radius:.0f} m**. "
+            f"Angriffe dort = {SAFEZONE_BANN_TAGE} Tage Bann." if radius > 0 else "✅ Safezone ausgeschaltet.")
+    await interaction.response.send_message(text, ephemeral=True)
+
+
+@bot.tree.command(name="admin-position", description="[Admin] Letzte bekannte Position eines Spielers (inkl. Höhe)")
+@app_commands.check(ist_admin)
+@app_commands.autocomplete(gamertag=spieler_auswahl)
+async def admin_position(interaction: discord.Interaction, gamertag: str):
+    p = db.position(gamertag)
+    if not p:
+        await interaction.response.send_message("Keine Position bekannt.", ephemeral=True)
+        return
+    alter = int(time.time() - p["zeit"]) // 60
+    await interaction.response.send_message(
+        f"📍 **{p['gamertag']}**: x **{p['x']:.1f}**, z **{p['z']:.1f}**, Höhe **{p['y']:.1f}** "
+        f"(vor {alter} min)", ephemeral=True)
+
+
+@bot.tree.command(name="admin-banns", description="[Admin] Aktive Banns anzeigen")
+@app_commands.check(ist_admin)
+async def admin_banns(interaction: discord.Interaction):
+    rows = db.banns()
+    text = "\n".join(f"🚫 **{b['gamertag']}** bis <t:{b['bis']}:d> – {b['grund']}" for b in rows[:25])
+    await interaction.response.send_message(text or "Keine aktiven Banns.", ephemeral=True)
+
+
+@bot.tree.command(name="admin-entbannen", description="[Admin] Bann sofort aufheben")
+@app_commands.check(ist_admin)
+async def admin_entbannen(interaction: discord.Interaction, gamertag: str):
+    await interaction.response.defer(ephemeral=True)
+    try:
+        liste = await nitrado.bannliste()
+        await nitrado.bannliste_setzen([n for n in liste if n.lower() != gamertag.lower()])
+    except NitradoError as e:
+        await interaction.followup.send(f"❌ Nitrado-Fehler: {e}", ephemeral=True)
+        return
+    db.bann_entfernen(gamertag)
+    await interaction.followup.send(f"✅ **{gamertag}** entbannt (wirkt nach dem nächsten Neustart).",
+                                    ephemeral=True)
 
 
 @bot.tree.error

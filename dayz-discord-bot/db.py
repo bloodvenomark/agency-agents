@@ -50,6 +50,12 @@ CREATE TABLE IF NOT EXISTS lootdrops (
     status   TEXT NOT NULL DEFAULT 'wartend', -- wartend | gelandet
     erstellt INTEGER NOT NULL
 );
+CREATE TABLE IF NOT EXISTS banns (
+    gamertag TEXT PRIMARY KEY COLLATE NOCASE,
+    bis      INTEGER NOT NULL,                -- Unix-Zeit, Ende des Banns
+    grund    TEXT NOT NULL,
+    erstellt INTEGER NOT NULL
+);
 CREATE TABLE IF NOT EXISTS zustand (
     schluessel TEXT PRIMARY KEY,
     wert       TEXT
@@ -276,6 +282,30 @@ class DB:
     def letzte_lootdrop_id(self) -> int:
         row = self.con.execute("SELECT MAX(id) FROM lootdrops").fetchone()
         return row[0] or 0
+
+    # --- Banns -------------------------------------------------------------
+    def bann(self, gamertag: str) -> sqlite3.Row | None:
+        return self.con.execute(
+            "SELECT * FROM banns WHERE gamertag = ?", (gamertag,)
+        ).fetchone()
+
+    def bann_setzen(self, gamertag: str, bis: int, grund: str):
+        self.con.execute(
+            "INSERT INTO banns (gamertag, bis, grund, erstellt) VALUES (?, ?, ?, ?) "
+            "ON CONFLICT(gamertag) DO UPDATE SET bis = excluded.bis, grund = excluded.grund",
+            (gamertag, bis, grund, int(time.time())),
+        )
+        self.con.commit()
+
+    def bann_entfernen(self, gamertag: str):
+        self.con.execute("DELETE FROM banns WHERE gamertag = ?", (gamertag,))
+        self.con.commit()
+
+    def banns(self) -> list[sqlite3.Row]:
+        return self.con.execute("SELECT * FROM banns ORDER BY bis").fetchall()
+
+    def banns_abgelaufen(self, jetzt: int) -> list[sqlite3.Row]:
+        return self.con.execute("SELECT * FROM banns WHERE bis <= ?", (jetzt,)).fetchall()
 
     # --- Zustand (z. B. Log-Fortschritt) ---------------------------------
     def get(self, schluessel: str, default: str | None = None) -> str | None:

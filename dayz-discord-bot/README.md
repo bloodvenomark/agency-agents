@@ -23,6 +23,10 @@ auf PS4/PS5-Servern von Nitrado.
 | `/admin-lootdrop [paket] [ort] [sofort] [ankuendigen]` | Airdrop planen (Paket und Ort wählbar oder Zufall) |
 | `/admin-neustart` | Server neu starten, damit alles sofort geliefert wird |
 | `/admin-einrichten` | Trägt die Lieferdatei automatisch in `cfggameplay.json` ein |
+| `/admin-safezone <x> <z> <radius>` | Safezone festlegen (Radius 0 = aus) |
+| `/admin-position <gamertag>` | Letzte Position eines Spielers inkl. Höhe (aus dem Admin-Log) |
+| `/admin-banns` | Aktive Banns anzeigen |
+| `/admin-entbannen <gamertag>` | Bann sofort aufheben |
 | `/admin-kanaele` | Erstellt fehlende Bot-Kanäle und die Admin-Rolle neu |
 | `/admin-basisschaden <basis_schaden> [container_schaden]` | Schaltet Schaden an Zäunen/Wachtürmen bzw. Zelten/Fässern direkt in `cfggameplay.json` ein oder aus |
 
@@ -156,6 +160,17 @@ und den DayZ-Server einmal neu starten.
 - **`lootdrops.json`**: Airdrop-Pakete, Loot, Wahrscheinlichkeiten und Orte (siehe oben).
 - **`.env`**: Startgeld, Bonus, Kill-Belohnung, Kopfgeld-Regeln, Discord-Kanäle,
   Währungsname, Karte.
+
+## Safezone mit automatischem Bann
+
+Auf Konsole gibt es keine echte Safezone ohne Schaden. Der Bot überwacht deshalb die Zone:
+- Trifft oder tötet ein Spieler jemanden **in der Zone** (Angreifer oder Opfer steht darin),
+  wird der Angreifer **automatisch für 30 Tage gebannt** (`SAFEZONE_BANN_TAGE`).
+- **Notwehr** ist erlaubt: Wer in den letzten 2 Minuten zuerst angegriffen wurde, darf zurückschießen.
+- Der Bann wird in die **Nitrado-Bannliste** eingetragen (Einstellung `bans`) und greift
+  vermutlich erst nach dem nächsten Server-Neustart. Nach Ablauf entbannt der Bot automatisch.
+- Meldungen landen im privaten Kanal **🛡│admin-log** (nur für die Admin-Rolle sichtbar).
+- Der Bot reagiert mit ca. 1 Minute Verzögerung, weil er das Admin-Log jede Minute liest.
 
 ## Wichtig: Basisschaden und cfggameplay.json
 
