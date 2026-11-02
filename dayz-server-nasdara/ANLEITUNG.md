@@ -39,8 +39,9 @@ unter *Geplante Neustarts* einstellen. Die M4A1-Zeiten sind darauf abgestimmt.
 - **Loot-Respawn höchstens 15 Minuten:** 112 Items (vor allem Waffen und seltene Sachen) hatten
   30 Minuten bis 24 Stunden Wartezeit, jetzt 15 Minuten. Alle anderen respawnen wie bisher sofort
   bzw. schneller. Ausnahme: M4A1 (fest pro Restart, siehe oben).
-- **Zustand des Loots zwischen „abgenutzt“ und „stark beschädigt“** (`db/globals.xml`:
-  LootDamageMin 0.3 / LootDamageMax 0.85). Kein makelloser und kein ruinierter Loot mehr.
+- **Zustand des Loots nur „abgenutzt“ oder „beschädigt“** (`db/globals.xml`:
+  LootDamageMin 0.3 / LootDamageMax 0.7). Kein makelloser, kein stark beschädigter und kein
+  ruinierter Loot mehr.
   Auch Waffen und Optiken mit eigenen Zustandswerten (96 Einträge in `cfgspawnabletypes.xml`)
   sind angeglichen. Fahrzeuge sind davon ausgenommen.
 - **Magazine** spawnen mit 10–90 % Füllung statt 5–50 %, also mal fast leer, mal fast voll.
