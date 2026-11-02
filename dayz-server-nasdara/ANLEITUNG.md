@@ -45,22 +45,31 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
 - `db/events.xml`: Infected-Events +30 %, `db/globals.xml`: Obergrenze 1000 → 1300.
 
 ### Startausrüstung (`custom/startgear.json`)
-Kleidung, Umhängetasche, 2× Essen (Cracker, Salzstangen), 3× Trinken (Wasserflasche, 2 Dosen),
-Verband, Knicklicht, Papierkarte, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
-Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
+**Turban** (zufällige Farbe) als Kopfbedeckung, Umhängetasche, 2× Essen (Cracker, Salzstangen),
+3× Trinken (Wasserflasche, 2 Dosen), Verband, Knicklicht, Papierkarte,
+1 zufälliges **Messer**, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
+- Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
+- Messer: Küchenmesser, Steakmesser, Jagdmesser, Kampfmesser, Kukri, Fange-Messer, Dönermesser.
+
+**Eigener Charakter:** Kleidung (Oberteil, Hose, Schuhe) wird nicht vorgegeben. Wer im Menü
+seinen eigenen Charakter gestaltet, behält Aussehen und gewählte Kleidung. Nur der Turban kommt dazu.
 
 ### Sonstiges (`cfggameplay.json`)
-- Karte zeigt die eigene Position (mit Karte im Inventar).
+- **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition`, Karte muss im Inventar sein).
+- **Ausdauer nur beim Springen/Klettern:** Sprinten, Schwimmen, Leitern, Nahkampf, Luftanhalten und
+  Gewicht kosten keine Ausdauer mehr (`StaminaData`).
 - `disableItemFalling` = true gegen einstürzende Bauten.
 - Basisschaden unverändert (kommt später).
 
 ## Bitte nach dem ersten Start testen
 
-1. **Startausrüstung:** Ist alles da? Wie viel Munition?
-2. **Karte:** Zeigt die Papierkarte Nasdara und deine Position?
-3. **Fahrzeuge:** Sind alle Teile dran? Liegen Kanister und Wasserflaschen im Kofferraum, und sind sie voll?
-4. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
-5. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
+1. **Startausrüstung:** Ist alles da (Turban, Messer, Pistole)? Wie viel Munition?
+   Mit eigenem Charakter spawnen: Bleibt die eigene Kleidung?
+2. **Karte:** Zeigt die Papierkarte Nasdara und einen Punkt an deiner Position?
+3. **Ausdauer:** Lange sprinten, sinkt die Ausdauer? Nur beim Springen/Klettern sollte sie sinken.
+4. **Fahrzeuge:** Sind alle Teile dran? Liegen Kanister und Wasserflaschen im Kofferraum, und sind sie voll?
+5. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
+6. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
 
 Wenn etwas fehlt oder der Server nicht startet: die Originaldatei zurückspielen und mir
 den Fehler schicken.
