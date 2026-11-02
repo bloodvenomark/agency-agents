@@ -46,7 +46,7 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
 
 ### Startausrüstung (`custom/startgear.json`)
 **Turban** (zufällige Farbe) als Kopfbedeckung, Umhängetasche, 2× Essen (Cracker, Salzstangen),
-3× Trinken (Wasserflasche, 2 Dosen), Verband, Knicklicht, Papierkarte,
+3× Trinken (Wasserflasche, 2 Dosen), Verband, **Schiene**, Knicklicht, Papierkarte,
 1 zufälliges **Messer**, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
 - Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
 - Messer: Küchenmesser, Steakmesser, Jagdmesser, Kampfmesser, Kukri, Fange-Messer, Dönermesser.

@@ -314,6 +314,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -456,6 +468,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -606,6 +630,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -748,6 +784,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -898,6 +946,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -1040,6 +1100,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -1190,6 +1262,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -1332,6 +1416,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -1482,6 +1578,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -1624,6 +1732,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -1774,6 +1894,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -1916,6 +2048,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -2066,6 +2210,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -2208,6 +2364,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -2358,6 +2526,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -2500,6 +2680,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -2650,6 +2842,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -2792,6 +2996,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -2942,6 +3158,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -3084,6 +3312,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -3234,6 +3474,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -3376,6 +3628,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -3526,6 +3790,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -3668,6 +3944,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -3818,6 +4106,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -3960,6 +4260,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -4110,6 +4422,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -4252,6 +4576,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -4402,6 +4738,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -4544,6 +4892,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -4694,6 +5054,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -4836,6 +5208,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -4986,6 +5370,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -5128,6 +5524,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -5278,6 +5686,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -5420,6 +5840,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -5570,6 +6002,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -5712,6 +6156,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -5862,6 +6318,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -6004,6 +6472,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -6154,6 +6634,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -6296,6 +6788,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -6446,6 +6950,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -6588,6 +7104,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -6738,6 +7266,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -6880,6 +7420,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
@@ -7030,6 +7582,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -7176,6 +7740,18 @@
                     "simpleChildrenTypes": []
                 },
                 {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
                     "itemType": "Chemlight_White",
                     "attributes": {
                         "healthMin": 1.0,
@@ -7318,6 +7894,18 @@
                         "quantityMax": 1.0
                     },
                     "quickBarSlot": 1,
+                    "simpleChildrenUseDefaultAttributes": true,
+                    "simpleChildrenTypes": []
+                },
+                {
+                    "itemType": "Splint",
+                    "attributes": {
+                        "healthMin": 1.0,
+                        "healthMax": 1.0,
+                        "quantityMin": 1.0,
+                        "quantityMax": 1.0
+                    },
+                    "quickBarSlot": -1,
                     "simpleChildrenUseDefaultAttributes": true,
                     "simpleChildrenTypes": []
                 },
