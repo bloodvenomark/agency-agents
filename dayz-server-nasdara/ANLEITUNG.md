@@ -86,8 +86,9 @@ die kartentypische Startkleidung.
 - **Kopie der großen Nasdara-Moschee** (28 Teile, ca. 100 × 100 m) bei **x 8700 / z 8264**,
   südlich deiner Markierung **auf der Straße**: Die Straße kommt im Südwesten von der Hauptstraße
   und führt **gerade ins Haupttor** (das Tor gegenüber dem Hauptgebäude). Ca. 2 % Bäume, ca. 6 m
-  Abstand zu den Häusern. Jedes Teil steht auf seiner eigenen geschätzten Bodenhöhe, verankert am
-  im Spiel gemessenen Wert von 281 m (Gelände nicht eben, fällt nach Osten ab). Die Original-Moschee in Nasdara bleibt stehen.
+  Abstand zu den Häusern. Jedes Teil steht auf seiner eigenen Bodenhöhe: Gelände fällt nach Osten
+  um ca. 6–7 % ab, Grundhöhe aus zwei Messungen im Spiel (innere Ecken neben dem Hauptgebäude:
+  279 m links, 274 m rechts). Übersicht: `safezone_standort.png`. Die Original-Moschee in Nasdara bleibt stehen.
 - **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
   - **Grillplatz (Südosten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
     4× Streichhölzern sowie 2 Kisten mit Essen **obendrauf**: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche

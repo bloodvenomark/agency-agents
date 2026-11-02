@@ -18,15 +18,17 @@ from pathlib import Path
 # Hauptgebäude) zeigt zur ankommenden Straße. Ca. 6 m Abstand zu den Häusern, ca. 2 % Bäume.
 MITTE_X, MITTE_Z = 8699.5, 8263.6
 STRASSE_PEILUNG = 33.8   # Richtung der Straße nach Nordosten; das Haupttor blickt entgegengesetzt
-# Gelände als schräge Ebene: Gefälle aus den Höhen der Objekte im Umkreis von 150 m geschätzt,
-# Höhe an einem im Spiel gemessenen Punkt verankert (Karte im Spiel: 281 m im Hof der alten Lage).
-MESS_X, MESS_Z, MESS_HOEHE = 8725.0, 8275.0, 281.0
-# Weitere Messungen (Karte im Spiel) an eindeutigen Stellen der bisher aufgebauten Moschee
-# (Mitte x 8725 / z 8265, alte Ausrichtung). Ab drei genauen Punkten wird daraus die Ebene berechnet.
+# Gelände als schräge Ebene: Gefälle aus den Höhen der Objekte im Umkreis von 150 m geschätzt
+# (bestätigt durch die Messungen unten), Grundhöhe aus den Messungen im Spiel (Karte im Spiel)
+# an eindeutigen Stellen der vorher aufgebauten Moschee (Mitte x 8725 / z 8265, alte Ausrichtung).
+GEFAELLE_OST, GEFAELLE_NORD = -0.066, 0.017
 MESSUNGEN = [
+    ("innere Ecke links neben dem Hauptgebäude (Nordwest)", 8693.0, 8314.0, 279.0),
     ("innere Ecke rechts neben dem Hauptgebäude (Nordost)", 8772.0, 8299.0, 274.0),
 ]
-GEFAELLE_OST, GEFAELLE_NORD = -0.066, 0.017
+MESS_X, MESS_Z = 8725.0, 8265.0
+MESS_HOEHE = sum(h - GEFAELLE_OST * (x - MESS_X) - GEFAELLE_NORD * (z - MESS_Z)
+                 for _, x, z, h in MESSUNGEN) / len(MESSUNGEN)
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
