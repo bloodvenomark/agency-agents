@@ -94,6 +94,16 @@ die kartentypische Startkleidung.
     2 Desinfektionsspray, 1 Erste-Hilfe-Kasten.
   - Die Items liegen neben den Kisten (in Kisten hineinlegen kann der Object Spawner nicht).
   - Eine Couch gibt es in den Nasdara-Dateien nicht.
+- **Traderbereich:** 6 Ladengeschäfte (`Land_Store_Street1`) im Innenhof, Fenster zur Hofmitte:
+  Trader 1 + 2 an der Westmauer, Trader 3 + 4 vor dem Hauptgebäude, Trader 5 + 6 an der Ostmauer.
+  - **Farbmarkierung** mit farbigen Fässern vor dem Laden: 1 Blau, 2 Grün, 3 Rot, 4 Gelb,
+    5 Blau + Gelb, 6 Rot + Grün.
+  - Seemannskisten stellen die Trader selbst auf (bleiben so mit Inhalt erhalten).
+  - **Eingang:** Der Trader baut selbst ein Tor mit Zahlenschloss (Trader-Rollen dürfen in der Bauverbotszone bauen).
+  - **Zutritt:** Nur die Discord-Rolle des Ladens (Trader 1 … 6) und Admins. Der Bot meldet Fremde.
+  - Zeigt ein Schaufenster zur Mauer statt zur Hofmitte: in `werkzeuge/safezone_bau.py`
+    `LADEN_FRONT_KORREKTUR = 180` setzen bzw. mir Bescheid geben.
+  - Ein Gitter vor dem Fenster gibt es in den Nasdara-Dateien nicht.
   - Liegengebliebenes verschwindet beim Restart, es häuft sich also nichts an.
 - **Keine Zombies:** Zombie-Zonen im Umkreis von 300 m entfernt (`env/zombie_territories.xml`).
 - **Bot-Strafe:** Wer in der Safezone jemanden **tötet**, wird **30 Tage gebannt** (Notwehr ausgenommen).
@@ -133,4 +143,4 @@ richtig gefüllt ist.
 ## Werkzeuge
 
 Im Ordner `werkzeuge/` liegen die Scripte, mit denen diese Dateien aus den Nitrado-Originalen
-erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`, `safezone_bau.py`). Sie werden auf dem Server nicht gebraucht.
+erzeugt wurden (`anpassen.py`, `startgear.py`, `spawns.py`, `safezone_bau.py`, `grundriss.py`). Sie werden auf dem Server nicht gebraucht.

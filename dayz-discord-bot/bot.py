@@ -79,6 +79,13 @@ SAFEZONE_BANN_TAGE = _int("SAFEZONE_BANN_TAGE", 30)
 BAUVERBOT_STANDARD = (os.getenv("BAUVERBOT_X", ""), os.getenv("BAUVERBOT_Z", ""),
                       os.getenv("BAUVERBOT_RADIUS", "150"))
 BAUVERBOT_BANN_TAGE = _int("BAUVERBOT_BANN_TAGE", 0)   # 0 = nur verwarnen und Admins melden
+
+# Trader-Läden: jeder Laden darf nur von seiner Rolle (z. B. "Trader 1") und Admins betreten werden.
+# Grundrisse erzeugt dayz-server-nasdara/werkzeuge/safezone_bau.py.
+_laeden_datei = BASIS / "trader_laeden.json"
+TRADER_LAEDEN: list[dict] = (json.loads(_laeden_datei.read_text("utf-8"))["laeden"]
+                             if _laeden_datei.exists() else [])
+LADEN_BANN_TAGE = _int("LADEN_BANN_TAGE", 0)   # 0 = nur verwarnen und Admins melden
 HITFEED_AN = _bool("HITFEED_AN", True)
 if not HITFEED_AN:
     del KANAELE["hitfeed"]
@@ -246,9 +253,10 @@ async def kanaele_erstellen(guild: discord.Guild) -> list[str]:
     if not admin_rolle:
         admin_rolle = await guild.create_role(name=ADMIN_ROLE, reason="DayZ-Bot Einrichtung")
         erledigt.append(f"Rolle **{ADMIN_ROLE}** erstellt")
-    if not discord.utils.get(guild.roles, name=TRADER_ROLE):
-        await guild.create_role(name=TRADER_ROLE, reason="DayZ-Bot Einrichtung")
-        erledigt.append(f"Rolle **{TRADER_ROLE}** erstellt")
+    for rolle in [TRADER_ROLE, *(l["rolle"] for l in TRADER_LAEDEN)]:
+        if not discord.utils.get(guild.roles, name=rolle):
+            await guild.create_role(name=rolle, reason="DayZ-Bot Einrichtung")
+            erledigt.append(f"Rolle **{rolle}** erstellt")
 
     kategorie = discord.utils.get(guild.categories, name=KATEGORIE)
     if not kategorie:
@@ -430,8 +438,8 @@ def bauverbot() -> tuple[float, float, float] | None:
     return (float(x), float(z), float(r)) if x and z and r else None
 
 
-async def darf_bauen(gamertag: str) -> bool:
-    """Trader- oder Admin-Rolle (bzw. Administrator-Recht) des verknüpften Discord-Kontos."""
+async def hat_rolle(gamertag: str, rollen: tuple[str, ...]) -> bool:
+    """Hat das verknüpfte Discord-Konto eine der Rollen (Admins dürfen immer)?"""
     konto = db.konto_per_gamertag(gamertag)
     guild = bot.get_guild(GUILD.id)
     if not konto or not guild:
@@ -441,7 +449,44 @@ async def darf_bauen(gamertag: str) -> bool:
     except discord.HTTPException:
         return False
     return mitglied.guild_permissions.administrator or any(
-        r.name in (TRADER_ROLE, ADMIN_ROLE) for r in mitglied.roles)
+        r.name in (*rollen, ADMIN_ROLE) for r in mitglied.roles)
+
+
+def im_laden(x: float, z: float) -> dict | None:
+    """Laden, dessen Grundriss die Position enthält (gedrehtes Rechteck)."""
+    for laden in TRADER_LAEDEN:
+        b = math.radians(laden["blick"])
+        dx, dz = x - laden["x"], z - laden["z"]
+        vorne = dx * math.sin(b) + dz * math.cos(b)
+        seite = dx * math.cos(b) - dz * math.sin(b)
+        if abs(vorne) <= laden["tiefe"] / 2 and abs(seite) <= laden["breite"] / 2:
+            return laden
+    return None
+
+
+laden_meldungen: dict[tuple[str, str], float] = {}
+
+
+async def laden_pruefen(p):
+    """Meldet Spieler, die sich in einem fremden Trader-Laden aufhalten."""
+    laden = im_laden(p.x, p.z)
+    if not laden or await hat_rolle(p.gamertag, (laden["rolle"],)):
+        return
+    schluessel = (p.gamertag.lower(), laden["name"])
+    if time.time() - laden_meldungen.get(schluessel, 0) < 600:
+        return
+    laden_meldungen[schluessel] = time.time()
+    await posten("admin", discord.Embed(
+        title="🚪 Fremder im Trader-Laden",
+        description=f"**{p.gamertag}** war im Laden von **{laden['name']}** "
+                    f"(nur Rolle **{laden['rolle']}** und Admins).",
+        color=0xEF6C00))
+    konto = db.konto_per_gamertag(p.gamertag)
+    if konto:
+        await benachrichtigen(konto["discord_id"],
+                              f"🚪 Der Laden von {laden['name']} ist nur für den Trader. Bitte verlassen.")
+    if LADEN_BANN_TAGE > 0:
+        await spieler_bannen(p.gamertag, LADEN_BANN_TAGE, f"Betreten des Ladens von {laden['name']}")
 
 
 bau_meldungen: dict[str, float] = {}   # Gamertag -> Zeit der letzten Meldung
@@ -454,7 +499,7 @@ async def bau_pruefen(e):
     p = next((p for p in e.positionen if p.gamertag.lower() == e.bau.spieler.lower()), None)
     if not p or math.dist((p.x, p.z), zone[:2]) > zone[2]:
         return
-    if await darf_bauen(e.bau.spieler):
+    if await hat_rolle(e.bau.spieler, (TRADER_ROLE, *(l["rolle"] for l in TRADER_LAEDEN))):
         return
     # Ein Bauvorgang erzeugt viele Logzeilen: höchstens eine Meldung pro Spieler alle 10 Minuten
     if time.time() - bau_meldungen.get(e.bau.spieler.lower(), 0) < 600:
@@ -618,6 +663,8 @@ async def log_schleife():
         for p in e.positionen:
             db.position_setzen(p.gamertag, p.x, p.hoehe, p.z)
         try:
+            for p in e.positionen:
+                await laden_pruefen(p)
             await safezone_pruefen(e, zeile)
             await bau_pruefen(e)
             if e.kill:

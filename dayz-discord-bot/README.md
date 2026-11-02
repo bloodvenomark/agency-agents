@@ -187,6 +187,18 @@ Auch Bauen lässt sich auf Konsole nicht technisch verhindern. Der Bot überwach
 - Die Rolle **Trader** legt der Bot automatisch an. Admins vergeben sie in Discord.
 - Voraussetzung: Im Nitrado-Webinterface muss das **Admin-Log für Platzieren/Bauen** aktiv sein.
 
+## Trader-Läden (Zutritt nur für den eigenen Trader)
+
+- `trader_laeden.json` enthält die Grundrisse der 6 Läden im Safezone-Innenhof (erzeugt von
+  `dayz-server-nasdara/werkzeuge/safezone_bau.py`).
+- Jeder Laden gehört zu einer Discord-Rolle **Trader 1** … **Trader 6** (legt der Bot automatisch an).
+- Taucht ein anderer Spieler im Admin-Log innerhalb eines Ladens auf, meldet der Bot das im
+  **🛡│admin-log** und verwarnt per DM (höchstens alle 10 Minuten). `LADEN_BANN_TAGE` > 0 bannt zusätzlich.
+- **Wichtig:** Positionen stehen nur alle paar Minuten im Admin-Log (Spielerliste, Treffer, Bauen).
+  Kurzes Betreten bemerkt der Bot daher oft nicht. Den echten Schutz bietet ein **Tor mit
+  Zahlenschloss**, das der Trader in seinen Eingang baut.
+- Alle Trader-Rollen dürfen in der Bauverbotszone bauen.
+
 ## Wichtig: Basisschaden und cfggameplay.json
 
 Der Bot braucht eine aktivierte `cfggameplay.json`. Sobald sie aktiv ist, gelten deren
