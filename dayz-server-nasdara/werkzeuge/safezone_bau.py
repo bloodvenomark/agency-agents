@@ -31,9 +31,10 @@ MESSUNGEN = [
     ("Sanitätszelt (neue Lage)", 8677.0, 8257.0, 284.0),
     ("Wasser-Tankwagen (neue Lage, schwebte ca. 2-3 m)", 8661.0, 8246.0, 285.0),
     ("Trader 6 vorne rechts (neue Lage)", 8716.0, 8226.0, 280.0),
-    ("Trader 4 rechts vor dem Hauptgebäude (neue Lage)", 8722.0, 8277.0, 280.0),
-    ("vor dem Hauptgebäude zwischen Trader 3 und 4 (neue Lage)", 8707.0, 8275.0, 282.0),
-    ("Trader 3 links vor dem Hauptgebäude (neue Lage)", 8704.0, 8290.0, 281.0),
+    ("Trader 5 rechts am Hauptgebäude, Ostmauer (neue Lage)", 8739.0, 8259.0, 280.0),
+    ("Trader 4 vor dem Hauptgebäude, rechts (neue Lage)", 8722.0, 8277.0, 282.0),
+    ("Trader 3 vor dem Hauptgebäude, links (neue Lage)", 8704.0, 8290.0, 281.0),
+    ("Trader 2 links am Hauptgebäude, Westmauer (neue Lage)", 8680.0, 8298.0, 281.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
