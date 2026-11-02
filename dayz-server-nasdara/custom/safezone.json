@@ -421,14 +421,224 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "TacticalBaconCan",
+      "name": "Fireplace",
       "pos": [
-        8603.0,
-        279.3,
-        8353.0
+        8621.073,
+        279.0,
+        8347.885
       ],
       "ypr": [
+        10.4762,
         0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "CookingStand",
+      "pos": [
+        8622.548,
+        279.3,
+        8347.612
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "pos": [
+        8625.262,
+        279.0,
+        8343.042
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "pos": [
+        8626.737,
+        279.0,
+        8342.77
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8623.988,
+        279.3,
+        8341.651
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8624.578,
+        279.3,
+        8341.542
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8625.168,
+        279.3,
+        8341.433
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8625.758,
+        279.3,
+        8341.324
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8626.348,
+        279.3,
+        8341.214
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Firewood",
+      "pos": [
+        8626.938,
+        279.3,
+        8341.105
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Matchbox",
+      "pos": [
+        8623.842,
+        279.3,
+        8340.864
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Matchbox",
+      "pos": [
+        8624.432,
+        279.3,
+        8340.755
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Matchbox",
+      "pos": [
+        8625.022,
+        279.3,
+        8340.646
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Matchbox",
+      "pos": [
+        8625.612,
+        279.3,
+        8340.537
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "pos": [
+        8626.535,
+        279.0,
+        8349.926
+      ],
+      "ypr": [
+        10.4762,
         0.0,
         0.0
       ],
@@ -438,12 +648,12 @@
     {
       "name": "TacticalBaconCan",
       "pos": [
-        8604.0,
+        8624.769,
         279.3,
-        8353.0
+        8348.625
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -453,12 +663,12 @@
     {
       "name": "TacticalBaconCan",
       "pos": [
-        8605.0,
+        8625.359,
         279.3,
-        8353.0
+        8348.516
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -468,12 +678,12 @@
     {
       "name": "TacticalBaconCan",
       "pos": [
-        8606.0,
+        8625.949,
         279.3,
-        8353.0
+        8348.407
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -483,12 +693,12 @@
     {
       "name": "BakedBeansCan",
       "pos": [
-        8607.0,
+        8626.539,
         279.3,
-        8353.0
+        8348.298
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -498,27 +708,12 @@
     {
       "name": "BakedBeansCan",
       "pos": [
-        8608.0,
+        8627.129,
         279.3,
-        8353.0
+        8348.189
       ],
       "ypr": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "BakedBeansCan",
-      "pos": [
-        8609.0,
-        279.3,
-        8353.0
-      ],
-      "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -528,12 +723,12 @@
     {
       "name": "PeachesCan",
       "pos": [
-        8610.0,
+        8627.719,
         279.3,
-        8353.0
+        8348.08
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -543,12 +738,12 @@
     {
       "name": "PeachesCan",
       "pos": [
-        8611.0,
+        8628.309,
         279.3,
-        8353.0
+        8347.97
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -556,14 +751,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "PeachesCan",
+      "name": "GoatSteakMeat",
       "pos": [
-        8612.0,
+        8624.623,
         279.3,
-        8353.0
+        8347.838
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -571,14 +766,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "GoatSteakMeat",
       "pos": [
-        8613.0,
+        8625.213,
         279.3,
-        8353.0
+        8347.729
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -586,14 +781,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "GoatSteakMeat",
       "pos": [
-        8614.0,
+        8625.803,
         279.3,
-        8353.0
+        8347.62
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -601,14 +796,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "ChickenBreastMeat",
       "pos": [
-        8615.0,
+        8626.393,
         279.3,
-        8353.0
+        8347.511
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -616,14 +811,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "ChickenBreastMeat",
       "pos": [
-        8616.0,
+        8626.983,
         279.3,
-        8353.0
+        8347.402
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -631,14 +826,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "ChickenBreastMeat",
       "pos": [
-        8617.0,
+        8627.573,
         279.3,
-        8353.0
+        8347.293
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -646,29 +841,14 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "WaterBottle",
+      "name": "Land_Wreck_Truck01_Aban1_Cistern_DE",
       "pos": [
-        8603.0,
-        279.3,
-        8355.0
+        8585.821,
+        279.0,
+        8344.234
       ],
       "ypr": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "WaterBottle",
-      "pos": [
-        8604.0,
-        279.3,
-        8355.0
-      ],
-      "ypr": [
-        0.0,
+        100.4762,
         0.0,
         0.0
       ],
@@ -678,12 +858,12 @@
     {
       "name": "WaterBottle",
       "pos": [
-        8605.0,
+        8590.63,
         279.3,
-        8355.0
+        8337.243
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -693,12 +873,12 @@
     {
       "name": "WaterBottle",
       "pos": [
-        8606.0,
+        8591.22,
         279.3,
-        8355.0
+        8337.134
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -708,12 +888,162 @@
     {
       "name": "WaterBottle",
       "pos": [
-        8607.0,
+        8591.81,
         279.3,
-        8355.0
+        8337.024
       ],
       "ypr": [
+        10.4762,
         0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8592.4,
+        279.3,
+        8336.915
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8592.99,
+        279.3,
+        8336.806
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8590.485,
+        279.3,
+        8336.456
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8591.075,
+        279.3,
+        8336.347
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8591.665,
+        279.3,
+        8336.238
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8592.255,
+        279.3,
+        8336.129
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "WaterBottle",
+      "pos": [
+        8592.845,
+        279.3,
+        8336.02
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Medical_Tent_Big",
+      "pos": [
+        8592.515,
+        279.0,
+        8369.436
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Roadblock_Table_DE",
+      "pos": [
+        8590.549,
+        279.0,
+        8369.8
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Roadblock_Table_DE",
+      "pos": [
+        8594.482,
+        279.0,
+        8369.073
+      ],
+      "ypr": [
+        10.4762,
         0.0,
         0.0
       ],
@@ -723,12 +1053,12 @@
     {
       "name": "BandageDressing",
       "pos": [
-        8608.0,
-        279.3,
-        8355.0
+        8589.959,
+        279.85,
+        8369.909
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -738,12 +1068,12 @@
     {
       "name": "BandageDressing",
       "pos": [
-        8609.0,
-        279.3,
-        8355.0
+        8590.352,
+        279.85,
+        8369.837
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -753,42 +1083,12 @@
     {
       "name": "BandageDressing",
       "pos": [
-        8610.0,
-        279.3,
-        8355.0
+        8590.745,
+        279.85,
+        8369.764
       ],
       "ypr": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "BandageDressing",
-      "pos": [
-        8611.0,
-        279.3,
-        8355.0
-      ],
-      "ypr": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "scale": 1.0,
-      "enableCEPersistency": 0
-    },
-    {
-      "name": "BandageDressing",
-      "pos": [
-        8612.0,
-        279.3,
-        8355.0
-      ],
-      "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -798,12 +1098,42 @@
     {
       "name": "DisinfectantSpray",
       "pos": [
-        8613.0,
-        279.3,
-        8355.0
+        8591.139,
+        279.85,
+        8369.691
       ],
       "ypr": [
+        10.4762,
         0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8593.892,
+        279.85,
+        8369.182
+      ],
+      "ypr": [
+        10.4762,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "BandageDressing",
+      "pos": [
+        8594.285,
+        279.85,
+        8369.109
+      ],
+      "ypr": [
+        10.4762,
         0.0,
         0.0
       ],
@@ -813,12 +1143,12 @@
     {
       "name": "DisinfectantSpray",
       "pos": [
-        8614.0,
-        279.3,
-        8355.0
+        8594.679,
+        279.85,
+        8369.036
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],
@@ -828,12 +1158,12 @@
     {
       "name": "FirstAidKit",
       "pos": [
-        8615.0,
-        279.3,
-        8355.0
+        8595.072,
+        279.85,
+        8368.964
       ],
       "ypr": [
-        0.0,
+        10.4762,
         0.0,
         0.0
       ],

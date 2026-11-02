@@ -85,9 +85,16 @@ die kartentypische Startkleidung.
 ### Safezone: Moschee südlich von Bam-e Sabz (`custom/safezone.json`)
 - **Kopie der großen Nasdara-Moschee** (28 Teile, ca. 100 × 100 m) bei **x 8610 / z 8354**,
   30 m westlich deiner Markierung, auf einer freien Fläche. Die Original-Moschee in Nasdara bleibt stehen.
-- **Im Innenhof nach jedem Restart neu:** 10× Essen (4 Dosenspeck, 3 Bohnen, 3 Pfirsiche),
-  10× Wasserflasche, Erste Hilfe (5 Verbände, 2 Desinfektionsspray, 1 Erste-Hilfe-Kasten).
-  Liegengebliebenes verschwindet beim Restart, es häuft sich also nichts an.
+- **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
+  - **Grillplatz (Osten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
+    4× Streichhölzern sowie 1 Kiste mit Essen: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche, 3 Ziegen- und 3 Hühnerfleisch.
+  - **Wasser (Südwesten):** Wasser-Tankwagen als Wasserquelle + 10 Wasserflaschen zum Befüllen.
+    Keine sonstigen Getränke.
+  - **Sanitätszelt (Nordwesten):** großes Sanitätszelt mit 2 Tischen, darauf 5 Verbände,
+    2 Desinfektionsspray, 1 Erste-Hilfe-Kasten.
+  - Die Items liegen neben den Kisten (in Kisten hineinlegen kann der Object Spawner nicht).
+  - Eine Couch gibt es in den Nasdara-Dateien nicht.
+  - Liegengebliebenes verschwindet beim Restart, es häuft sich also nichts an.
 - **Keine Zombies:** Zombie-Zonen im Umkreis von 300 m entfernt (`env/zombie_territories.xml`).
 - **Bot-Strafe:** Wer in der Safezone jemanden **tötet**, wird **30 Tage gebannt** (Notwehr ausgenommen).
   Im Bot: `/admin-safezone 8610 8354 75`.
