@@ -14215,8 +14215,8 @@
     </type>
     <type name="M4A1">
         <nominal>1</nominal>
-        <lifetime>7200</lifetime>
-        <restock>3600</restock>
+        <lifetime>14400</lifetime>
+        <restock>14400</restock>
         <min>1</min>
         <quantmin>30</quantmin>
         <quantmax>80</quantmax>
@@ -14224,6 +14224,8 @@
         <flags count_in_cargo="0" count_in_hoarder="0" count_in_map="1" count_in_player="0" crafted="0" deloot="0"/>
         <category name="weapons"/>
         <usage name="ContaminatedArea"/>
+        <usage name="Military"/>
+        <value name="Tier3"/>
         <value name="Unique"/>
     </type>
     <type name="M4A1_Black">
