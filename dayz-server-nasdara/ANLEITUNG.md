@@ -39,6 +39,10 @@ unter *Geplante Neustarts* einstellen. Die M4A1-Zeiten sind darauf abgestimmt.
 - **Loot-Respawn höchstens 15 Minuten:** 112 Items (vor allem Waffen und seltene Sachen) hatten
   30 Minuten bis 24 Stunden Wartezeit, jetzt 15 Minuten. Alle anderen respawnen wie bisher sofort
   bzw. schneller. Ausnahme: M4A1 (fest pro Restart, siehe oben).
+- **Zustand des Loots zwischen „abgenutzt“ und „stark beschädigt“** (`db/globals.xml`:
+  LootDamageMin 0.3 / LootDamageMax 0.85). Kein makelloser und kein ruinierter Loot mehr.
+  Auch Waffen und Optiken mit eigenen Zustandswerten (96 Einträge in `cfgspawnabletypes.xml`)
+  sind angeglichen. Fahrzeuge sind davon ausgenommen.
 - **Magazine** spawnen mit 10–90 % Füllung statt 5–50 %, also mal fast leer, mal fast voll.
 - **Benzinkanister und Wasserflaschen** spawnen immer voll (auch in der Welt, nicht nur im Auto).
 
@@ -57,7 +61,7 @@ unter *Geplante Neustarts* einstellen. Die M4A1-Zeiten sind darauf abgestimmt.
 
 ### Startausrüstung (`custom/startgear.json`)
 **Kartentypische Kleidung** in zufälligen Farben: **Turban**, Kameez-Hemd, Shalwar-Hose und
-**Sandalen**. Dazu Umhängetasche, 2× Essen (Cracker, Salzstangen),
+**Sandalen**. Dazu Umhängetasche, 2× Essen (Dosenspeck),
 3× Trinken (Wasserflasche, 2 Dosen), Verband, **Schiene**, Knicklicht, Papierkarte,
 1 zufälliges **Messer**, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
 - Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
