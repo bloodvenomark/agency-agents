@@ -14215,8 +14215,8 @@
     </type>
     <type name="M4A1">
         <nominal>1</nominal>
-        <lifetime>14400</lifetime>
-        <restock>14400</restock>
+        <lifetime>7200</lifetime>
+        <restock>7200</restock>
         <min>1</min>
         <quantmin>30</quantmin>
         <quantmax>80</quantmax>
@@ -14228,8 +14228,8 @@
     </type>
     <type name="M4A1_Black">
         <nominal>2</nominal>
-        <lifetime>14400</lifetime>
-        <restock>14400</restock>
+        <lifetime>7200</lifetime>
+        <restock>7200</restock>
         <min>2</min>
         <quantmin>30</quantmin>
         <quantmax>80</quantmax>

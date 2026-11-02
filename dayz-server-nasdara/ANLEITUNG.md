@@ -18,6 +18,9 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 
 Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den Server starten.
 
+**Neustart-Zeitplan:** alle 2 Stunden ab 00 Uhr (00, 02, 04, … 22 Uhr), im Nitrado-Webinterface
+unter *Geplante Neustarts* einstellen. Die M4A1-Zeiten sind darauf abgestimmt.
+
 ## Was geändert wurde
 
 ### Loot (`db/types.xml`)
@@ -25,11 +28,11 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
   bleiben einzeln, sonst gäbe es sie doppelt so oft.
 - **Plattenträger (Weste, Holster, Taschen) und Nachtsicht (Brille, Kopfband)** spawnen jetzt
   allgemein in **Tier 3 (gelb)** in Militärgebieten und weiterhin in Tier 4.
-- **M4A1 pro Restart-Zyklus (4 h): 1× in Gelb (Tier 3), 2× in Lila (Tier 4).**
+- **M4A1 pro Restart-Zyklus (2 h): 1× in Gelb (Tier 3), 2× in Lila (Tier 4).**
   - Normale M4A1: genau 1 Stück, nur in gelben Militärgebieten.
   - Schwarze M4A1 (`M4A1_Black`): genau 2 Stück, nur an den Tier-4-Orten, gleiche Ausstattung.
-  - Nach dem Looten kommt die nächste erst nach 4 Stunden. Ungelootet verschwindet sie nach
-    4 Stunden und spawnt woanders neu.
+  - Nach dem Looten kommt die nächste erst nach 2 Stunden. Ungelootet verschwindet sie nach
+    2 Stunden und spawnt woanders neu.
 - **Rest von Tier 4 bleibt Tier 4.** Etwa 10 % davon sind zusätzlich in Tier 3 möglich:
   AK-Schalldämpfer, CMAG-40er-Magazin, STANAG-60er-Magazin.
 - **Grüne Gebiete (Tier 1):** Kein Tier-4-Item wurde dort freigegeben.
