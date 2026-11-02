@@ -58,7 +58,7 @@
     "environmentMinTemps": [3.4, 5.4, 7.4, 8.4, 9.4, 12.4, 14.4, 13.4, 11.4, 8.4, 7.4, 4.4],
     "environmentMaxTemps": [17.4, 19.4, 22.4, 25.4, 29.4, 34.4, 38.4, 37.4, 34.4, 28.4, 22.4, 18.4],
     "wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0],
-    "playerRestrictedAreaFiles": ["custom/teleport_safezone.json"]
+    "playerRestrictedAreaFiles": ["custom/teleport_safezone.json", "custom/rueckreise_1.json", "custom/rueckreise_2.json", "custom/rueckreise_3.json", "custom/rueckreise_4.json", "custom/rueckreise_5.json", "custom/rueckreise_6.json"]
   },
   "BaseBuildingData":
   {

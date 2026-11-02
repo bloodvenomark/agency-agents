@@ -19,6 +19,7 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 | `custom/safezone.json` | `dayzOffline.nasdara/custom/safezone.json` (neu) |
 | `custom/teleport_dixi.json` | `dayzOffline.nasdara/custom/teleport_dixi.json` (neu) |
 | `custom/teleport_safezone.json` | `dayzOffline.nasdara/custom/teleport_safezone.json` (neu) |
+| `custom/rueckreise_1.json` … `rueckreise_6.json` | `dayzOffline.nasdara/custom/` (neu, alle 6) |
 
 Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den Server starten.
 
@@ -127,6 +128,13 @@ die kartentypische Startkleidung.
   Safezone-Moschee.
 - Technik: `playerRestrictedAreaFiles` in `cfggameplay.json` (eigentlich für den Bunker auf Sakhal,
   seit 1.26). Um jedes Klo liegt eine unsichtbare Zone von 4 × 4 m und 14 m Höhe.
+- **Rückreise:** Im Safezone-Hof stehen **6 Dixi-Klos** im Kreis um die Mitte (15 m), jedes in der
+  **Himmelsrichtung seiner Zielstadt** (die 6 größten Städte). Darin ausloggen → Ankunft neben dem
+  Dixi der Zielstadt, dort geht's wieder zurück. Zuordnung: `TELEPORTER.md`.
+  Die Ankunftshöhe in den Städten ist geschätzt und liegt zur Sicherheit 3 m höher (kurzer Fall
+  statt im Boden stecken). Bitte am Ziel-Dixi die Höhe messen und melden.
+  Ortsschilder: Die fertigen Ortsschilder der Karte stehen in keiner Server-Datei; dafür wird ihr
+  genauer Klassenname gebraucht.
 - Die Höhe der Klos ist aus den Gebäudedaten geschätzt (ca. ±2 m). Die Zone ist bewusst hoch, damit
   der Teleport auch bei leicht schwebendem oder eingesunkenem Klo funktioniert. Schwebt ein Klo stark
   oder ist es unsichtbar: Höhe am Klo messen und mit Nr. aus `TELEPORTER.md` melden.

@@ -256,9 +256,11 @@ ersetzungen = [
     # Safezone-Moschee mit Vorrat (Object Spawner)
     ('"objectSpawnersArr": []', '"objectSpawnersArr": ["custom/safezone.json", "custom/teleport_dixi.json"]'),
     # Relog-Teleporter: wer sich in einem Dixi-Klo ausloggt, landet beim Einloggen in der Safezone
+    # Rückreise-Zonen (custom/rueckreise_*.json) erzeugt teleporter_bau.py, daher vorher ausführen
     ('"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0]',
-     '"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0],\n    '
-     '"playerRestrictedAreaFiles": ["custom/teleport_safezone.json"]'),
+     '"wetnessWeightModifiers": [1.0, 1.0, 1.33, 1.66, 2.0],\n    "playerRestrictedAreaFiles": '
+     + json.dumps(["custom/teleport_safezone.json"]
+                  + sorted(f"custom/{d.name}" for d in (DST / "custom").glob("rueckreise_*.json")))),
     # Ausdauer nur noch beim Springen/Klettern (obstacleTraversal bleibt 1.0)
     ('"sprintStaminaModifierErc": 1.0', '"sprintStaminaModifierErc": 0.0'),
     ('"sprintStaminaModifierCro": 1.0', '"sprintStaminaModifierCro": 0.0'),

@@ -1289,6 +1289,96 @@
       ],
       "scale": 1.0,
       "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8691.96,
+        283.68,
+        8250.63
+      ],
+      "ypr": [
+        30.2,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8686.39,
+        282.79,
+        8270.89
+      ],
+      "ypr": [
+        119.1,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8708.39,
+        282.14,
+        8275.69
+      ],
+      "ypr": [
+        216.3,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8711.03,
+        282.27,
+        8273.2
+      ],
+      "ypr": [
+        230.2,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8714.36,
+        282.28,
+        8261.53
+      ],
+      "ypr": [
+        277.9,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
+    },
+    {
+      "name": "Land_Misc_Toilet_Mobile",
+      "pos": [
+        8704.24,
+        282.59,
+        8249.37
+      ],
+      "ypr": [
+        341.6,
+        0.0,
+        0.0
+      ],
+      "scale": 1.0,
+      "enableCEPersistency": 0
     }
   ]
 }

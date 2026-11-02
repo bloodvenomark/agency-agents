@@ -1,5 +1,21 @@
 # Relog-Teleporter (Dixi-Klos)
 
+## Rückreise aus der Safezone
+
+Im Hof der Safezone stehen Dixi-Klos im Kreis um die Mitte, jedes in der Himmelsrichtung
+seiner Zielstadt. Darin ausloggen -> Ankunft neben dem Dixi der Zielstadt (Nr. unten).
+
+| Klo im Hof | Richtung | Ziel | Dixi-Nr. dort | Ankunftshöhe |
+|---|---|---|---|---|
+| 1 | Südwesten | Stadt im Südwesten (x 7218 / z 5717) | 70 | geschätzt, bitte messen |
+| 2 | Nordwesten | Stadt im Nordwesten (x 3665 / z 11065) | 31 | geschätzt, bitte messen |
+| 3 | Nordosten | Stadt im Nordosten (x 10465 / z 10665) | 36 | geschätzt, bitte messen |
+| 4 | Nordosten | Stadt im Nordosten (x 13265 / z 12065) | 19 | geschätzt, bitte messen |
+| 5 | Osten | Stadt im Osten (x 10468 / z 8018) | 54 | geschätzt, bitte messen |
+| 6 | Süden | Stadt im Süden (x 10065 / z 4165) | 81 | geschätzt, bitte messen |
+
+## Hin zur Safezone
+
 Wer sich im Dixi-Klo ausloggt, landet beim nächsten Einloggen in der Safezone-Moschee.
 
 Schwebt ein Klo oder steckt es im Boden: Kartenwert (Höhe) am Klo messen und mit der Nr.
