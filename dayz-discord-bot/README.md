@@ -169,7 +169,7 @@ Auf Konsole gibt es keine echte Safezone ohne Schaden. Der Bot überwacht deshal
   **automatisch für 30 Tage gebannt** (`SAFEZONE_BANN_TAGE`). Treffer allein werden nicht bestraft.
 - **Notwehr** ist erlaubt: Wer in den letzten 2 Minuten zuerst angeschossen wurde und den
   Angreifer tötet, wird nicht gebannt.
-- Standard-Zone: Moschee südlich von Bam-e Sabz, Mitte x 8725 / z 8265, Radius 75 m.
+- Standard-Zone: Moschee südlich von Bam-e Sabz, Mitte x 8700 / z 8264, Radius 75 m.
 - Der Bann wird in die **Nitrado-Bannliste** eingetragen (Einstellung `bans`) und greift
   vermutlich erst nach dem nächsten Server-Neustart. Nach Ablauf entbannt der Bot automatisch.
 - Meldungen landen im privaten Kanal **🛡│admin-log** (nur für die Admin-Rolle sichtbar).
@@ -183,7 +183,7 @@ Auch Bauen lässt sich auf Konsole nicht technisch verhindern. Der Bot überwach
 - Alle anderen (auch nicht verknüpfte Spieler) werden im **🛡│admin-log** gemeldet und per DM
   verwarnt, höchstens einmal pro 10 Minuten. Mit `BAUVERBOT_BANN_TAGE` > 0 wird zusätzlich gebannt.
 - Abbauen müssen die Admins im Spiel, der Bot kann Gebäude nicht entfernen.
-- Standard-Zone: Safezone-Moschee, Mitte x 8725 / z 8265, Radius 150 m.
+- Standard-Zone: Safezone-Moschee, Mitte x 8700 / z 8264, Radius 150 m.
 - Die Rolle **Trader** legt der Bot automatisch an. Admins vergeben sie in Discord.
 - Voraussetzung: Im Nitrado-Webinterface muss das **Admin-Log für Platzieren/Bauen** aktiv sein.
 

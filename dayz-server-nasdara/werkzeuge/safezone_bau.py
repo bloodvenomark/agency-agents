@@ -12,23 +12,28 @@ import re
 import sys
 from pathlib import Path
 
-# Mittelpunkt: freie, baumlose Fläche ca. 55 m südöstlich der Markierung südlich von Bam-e Sabz
-# (Markierung per iZurvive-Raster bei x 8689 / z 8305; Bäume aus dem Kartenbild ausgewertet).
-MITTE_X, MITTE_Z = 8725.0, 8265.0
-# Gelände als schräge Ebene, geschätzt aus den Höhen der Objekte im Umkreis von 150 m:
-# Höhe in der Mitte, Anstieg pro Meter nach Osten (x) und Norden (z).
-BODEN = 275.1
+# Lage: auf der Straße südlich von Bam-e Sabz (Markierung bei x 8689 / z 8305). Die Straße kommt
+# im Südwesten von der Hauptstraße (Knick bei x 8652 / z 8193) und läuft gerade nach Nordosten
+# (Peilung 33.8°). Die Moschee steht auf dieser Achse, das Haupttor (Südtor gegenüber dem
+# Hauptgebäude) zeigt zur ankommenden Straße. Ca. 6 m Abstand zu den Häusern, ca. 2 % Bäume.
+MITTE_X, MITTE_Z = 8699.5, 8263.6
+STRASSE_PEILUNG = 33.8   # Richtung der Straße nach Nordosten; das Haupttor blickt entgegengesetzt
+# Gelände als schräge Ebene: Gefälle aus den Höhen der Objekte im Umkreis von 150 m geschätzt,
+# Höhe an einem im Spiel gemessenen Punkt verankert (Karte im Spiel: 281 m im Hof der alten Lage).
+MESS_X, MESS_Z, MESS_HOEHE = 8725.0, 8275.0, 281.0
+# Weitere Messungen (Karte im Spiel) an eindeutigen Stellen der bisher aufgebauten Moschee
+# (Mitte x 8725 / z 8265, alte Ausrichtung). Ab drei genauen Punkten wird daraus die Ebene berechnet.
+MESSUNGEN = [
+    ("innere Ecke rechts neben dem Hauptgebäude (Nordost)", 8772.0, 8299.0, 274.0),
+]
 GEFAELLE_OST, GEFAELLE_NORD = -0.066, 0.017
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
-# Im Spiel gemessene Bodenhöhe im Innenhof (Karte im Spiel, "Höhe 281 m"). Die Schätzung lag dort
-# ca. 5 m zu tief, die Items steckten im Boden. Einrichtung und Items stehen auf dieser Höhe.
-HOF_BODEN = 281.0
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
 
 def boden_bei(x: float, z: float) -> float:
-    """Geschätzte Bodenhöhe an einer Stelle (Ebene durch die Umgebung)."""
-    return BODEN + GEFAELLE_OST * (x - MITTE_X) + GEFAELLE_NORD * (z - MITTE_Z)
+    """Geschätzte Bodenhöhe an einer Stelle (Ebene durch den gemessenen Punkt)."""
+    return MESS_HOEHE + GEFAELLE_OST * (x - MESS_X) + GEFAELLE_NORD * (z - MESS_Z)
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.85       # Höhe der Tischplatte über dem Boden (geschätzt)
@@ -95,15 +100,21 @@ def objekt(name, x, y, z, gier=0.0, nicken=0.0, rollen=0.0):
             "scale": 1.0, "enableCEPersistency": 0}
 
 
+# Ausrichtung der Original-Moschee aus der Südmauer (Gierwinkel -169.5° => um 10.5° gedreht).
+# Die Kopie wird zusätzlich so gedreht, dass ihre Nordachse der Straße folgt (Haupttor zur Straße).
+sued = next(t for t in teile if t[0] == "Land_Mosque_Big_Wall" and abs(t[6] + 169.52) < 0.01)
+zusatz = STRASSE_PEILUNG - (sued[6] + 180.0)
+zr = math.radians(zusatz)
+
 objekte = []
 for n, x, y, z, rollen, nicken, gier in teile:
-    nx, nz = x - cx + MITTE_X, z - cz + MITTE_Z
+    dx, dz = x - cx, z - cz
+    nx = MITTE_X + dx * math.cos(zr) + dz * math.sin(zr)    # im Uhrzeigersinn um zusatz drehen
+    nz = MITTE_Z - dx * math.sin(zr) + dz * math.cos(zr)
     objekte.append(objekt(n, nx, y - ORIGINAL_BODEN + boden_bei(nx, nz) + HOEHE_KORREKTUR, nz,
-                          gier, nicken, rollen))
+                          gier + zusatz, nicken, rollen))
 
-# Ausrichtung der Moschee aus der Südmauer (Gierwinkel -169.5° => um 10.5° gedreht)
-sued = next(t for t in teile if t[0] == "Land_Mosque_Big_Wall" and abs(t[6] + 169.52) < 0.01)
-drehung = sued[6] + 180.0
+drehung = STRASSE_PEILUNG
 rad = math.radians(drehung)
 ost = (math.cos(rad), -math.sin(rad))      # u-Achse in Weltkoordinaten (x, z)
 nord = (math.sin(rad), math.cos(rad))      # v-Achse
@@ -137,7 +148,7 @@ for u, v, hoehe, name, gier in EINRICHTUNG:
         korrektur = 0.1
     else:
         korrektur = 0.0
-    objekte.append(objekt(name, x, HOF_BODEN + hoehe + korrektur, z, drehung + gier))
+    objekte.append(objekt(name, x, boden_bei(x, z) + hoehe + korrektur, z, drehung + gier))
     items.append(name)
 
 ziel = Path(sys.argv[2]) / "custom" / "safezone.json"
@@ -147,6 +158,6 @@ if len(sys.argv) > 3:
     Path(sys.argv[3]).write_text(json.dumps({"laeden": laeden}, indent=2, ensure_ascii=False), "utf-8")
     print(f"{sys.argv[3]}: {len(laeden)} Läden für den Bot")
 print(f"{ziel}: {len(teile)} Moschee-Teile + {len(items)} Items, Mitte x {MITTE_X} z {MITTE_Z}, "
-      f"Boden {BODEN} ±Gefälle (Ausdehnung "
+      f"Boden {boden_bei(MITTE_X, MITTE_Z):.1f} in der Mitte (Ausdehnung "
       f"{max(t[1] for t in teile) - min(t[1] for t in teile):.0f} x "
       f"{max(t[3] for t in teile) - min(t[3] for t in teile):.0f} m)")

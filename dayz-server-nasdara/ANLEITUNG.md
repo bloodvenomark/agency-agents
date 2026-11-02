@@ -75,7 +75,7 @@ die kartentypische Startkleidung.
 
 ### Spieler-Spawns (`cfgplayerspawnpoints.xml`)
 - **50 Spawnpunkte** für neue Charaktere statt 20, verteilt über die ganze Karte (Nord bis Süd).
-- **+1 Spawnpunkt in der Safezone-Moschee** (x 8725 / z 8265), also insgesamt 51.
+- **+1 Spawnpunkt in der Safezone-Moschee** (x 8700 / z 8264), also insgesamt 51.
 - **Nicht in Ortschaften:** jeder Punkt 400–900 m von der nächsten Ortschaft entfernt,
   mindestens 700 m von Militär und 500 m von den Giftgas-Tunneln.
 - Das Spiel sucht rund um jeden Punkt (200 × 200 m) eine trockene, nicht zu steile Stelle.
@@ -83,9 +83,11 @@ die kartentypische Startkleidung.
 - Spawns für Server-Wechsler (`hop`) sind unverändert.
 
 ### Safezone: Moschee südlich von Bam-e Sabz (`custom/safezone.json`)
-- **Kopie der großen Nasdara-Moschee** (28 Teile, ca. 100 × 100 m) bei **x 8725 / z 8265**,
-  ca. 55 m südöstlich deiner Markierung, auf einer freien, baumlosen Fläche. Jedes Teil steht
-  auf seiner eigenen geschätzten Bodenhöhe (Gelände fällt nach Osten um ca. 6 % ab). Die Original-Moschee in Nasdara bleibt stehen.
+- **Kopie der großen Nasdara-Moschee** (28 Teile, ca. 100 × 100 m) bei **x 8700 / z 8264**,
+  südlich deiner Markierung **auf der Straße**: Die Straße kommt im Südwesten von der Hauptstraße
+  und führt **gerade ins Haupttor** (das Tor gegenüber dem Hauptgebäude). Ca. 2 % Bäume, ca. 6 m
+  Abstand zu den Häusern. Jedes Teil steht auf seiner eigenen geschätzten Bodenhöhe, verankert am
+  im Spiel gemessenen Wert von 281 m (Gelände nicht eben, fällt nach Osten ab). Die Original-Moschee in Nasdara bleibt stehen.
 - **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
   - **Grillplatz (Südosten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
     4× Streichhölzern sowie 2 Kisten mit Essen **obendrauf**: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche
@@ -110,10 +112,10 @@ die kartentypische Startkleidung.
   - Liegengebliebenes verschwindet beim Restart, es häuft sich also nichts an.
 - **Keine Zombies:** Zombie-Zonen im Umkreis von 300 m entfernt (`env/zombie_territories.xml`).
 - **Bot-Strafe:** Wer in der Safezone jemanden **tötet**, wird **30 Tage gebannt** (Notwehr ausgenommen).
-  Im Bot: `/admin-safezone 8725 8265 75`.
+  Im Bot: `/admin-safezone 8700 8264 75`.
 - Eingetragen in `cfggameplay.json` unter `objectSpawnersArr`.
 - **Bauverbot (Bot):** Im Umkreis von 150 m dürfen nur Spieler mit der Discord-Rolle **Trader**
-  oder **Admin** bauen. Andere werden gemeldet und verwarnt. Im Bot: `/admin-bauverbot 8725 8265 150`.
+  oder **Admin** bauen. Andere werden gemeldet und verwarnt. Im Bot: `/admin-bauverbot 8700 8264 150`.
 
 ### Sonstiges (`cfggameplay.json`)
 - **Papierkarte zeigt einen Punkt an der eigenen Position** (`displayPlayerPosition` + `ignoreNavItemsOwnership`, Karte muss im Inventar sein, Kompass/GPS nicht nötig).
@@ -132,7 +134,7 @@ die kartentypische Startkleidung.
 5. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
 6. **Spawns:** Ein paar Mal neu spawnen. Landet man immer im Gelände außerhalb von Orten?
    Liegt ein Spawn ungünstig (Berg, Wasser), Nummer aus `spawns_vorschau.png` melden.
-7. **Safezone:** Zur Moschee laufen (x 8725 / z 8265). Steht sie sauber auf dem Boden, oder schwebt
+7. **Safezone:** Zur Moschee laufen (x 8700 / z 8264). Steht sie sauber auf dem Boden, oder schwebt
    bzw. versinkt sie? Liegen Essen, Wasser und Erste Hilfe im Hof und lassen sich aufheben?
    Höhe falsch → Höhe von `/admin-position` (in der Hofmitte stehend) an mich schicken.
 8. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?

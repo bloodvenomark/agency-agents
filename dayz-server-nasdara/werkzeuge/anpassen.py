@@ -179,8 +179,8 @@ bericht.append(f"globals.xml: ZombieMaxCount 1000 -> 1300, Loot-Schaden {LOOT_SC
 # --- env/zombie_territories.xml: Zombies +30 % -------------------------------
 (DST / "env").mkdir(exist_ok=True)
 zt = (SRC / "zombie_territories.xml").read_text("utf-8")
-# Safezone (Moschee bei x 8725 / z 8265): keine Zombie-Zonen im Umkreis von 300 m
-SAFEZONE, SAFEZONE_ZOMBIEFREI = (8725.0, 8265.0), 300
+# Safezone (Moschee bei x 8700 / z 8264): keine Zombie-Zonen im Umkreis von 300 m
+SAFEZONE, SAFEZONE_ZOMBIEFREI = (8699.5, 8263.6), 300
 zonen_vorher = zt.count("<zone ")
 zt = re.sub(r'\s*<zone [^>]*x="([\d.]+)" z="([\d.]+)"[^>]*/>',
             lambda m: "" if math.dist((float(m.group(1)), float(m.group(2))), SAFEZONE) < SAFEZONE_ZOMBIEFREI

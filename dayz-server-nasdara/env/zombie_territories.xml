@@ -429,7 +429,6 @@
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="4714.67" z="11224" r="50"/>
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="7397.33" z="9837.33" r="50"/>
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="8682.67" z="9277.33" r="50"/>
-        <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="8434.67" z="8168" r="50"/>
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="8445.33" z="7402.67" r="50"/>
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="6749.33" z="4229.33" r="50"/>
         <zone name="InfectedSolitude" smin="0" smax="0" dmin="1" dmax="4" x="9928" z="3642.67" r="50"/>

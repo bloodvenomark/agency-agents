@@ -3,54 +3,54 @@
     {
       "name": "Trader 1",
       "rolle": "Trader 1",
-      "x": 8686.58,
-      "z": 8249.73,
-      "blick": 100.48,
+      "x": 8658.18,
+      "z": 8264.79,
+      "blick": 123.8,
       "breite": 18.0,
       "tiefe": 12.0
     },
     {
       "name": "Trader 2",
       "rolle": "Trader 2",
-      "x": 8693.86,
-      "z": 8289.06,
-      "blick": 100.48,
+      "x": 8680.43,
+      "z": 8298.03,
+      "blick": 123.8,
       "breite": 18.0,
       "tiefe": 12.0
     },
     {
       "name": "Trader 3",
       "rolle": "Trader 3",
-      "x": 8718.55,
-      "z": 8290.6,
-      "blick": 190.48,
+      "x": 8703.71,
+      "z": 8289.66,
+      "blick": 213.8,
       "breite": 18.0,
       "tiefe": 12.0
     },
     {
       "name": "Trader 4",
       "rolle": "Trader 4",
-      "x": 8740.18,
-      "z": 8286.6,
-      "blick": 190.48,
+      "x": 8721.99,
+      "z": 8277.42,
+      "blick": 213.8,
       "breite": 18.0,
       "tiefe": 12.0
     },
     {
       "name": "Trader 5",
       "rolle": "Trader 5",
-      "x": 8762.69,
-      "z": 8276.34,
-      "blick": -79.52,
+      "x": 8738.6,
+      "z": 8259.09,
+      "blick": -56.2,
       "breite": 18.0,
       "tiefe": 12.0
     },
     {
       "name": "Trader 6",
       "rolle": "Trader 6",
-      "x": 8755.42,
-      "z": 8237.0,
-      "blick": -79.52,
+      "x": 8716.35,
+      "z": 8225.85,
+      "blick": -56.2,
       "breite": 18.0,
       "tiefe": 12.0
     }
