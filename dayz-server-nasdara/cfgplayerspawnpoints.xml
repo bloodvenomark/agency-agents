@@ -130,7 +130,7 @@
             -->
             <group name="AllSpawnpoints" lifetime="0">
                 <!-- Safezone-Moschee suedlich von Bam-e Sabz -->
-                <pos x="8610.0" z="8354.0" />
+                <pos x="8725.0" z="8265.0" />
                 <!-- 50 Spawns ausserhalb von Ortschaften (400-900 m Abstand), verteilt ueber die ganze Karte -->
                 <pos x="8465.0" z="6865.0" />
                 <pos x="3665.0" z="15765.0" />
