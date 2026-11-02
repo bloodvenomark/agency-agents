@@ -99,7 +99,7 @@ def boden_bei(x: float, z: float) -> float:
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.7        # Höhe der Tischplatte über dem Boden (0.85 war zu hoch, Spray schwebte)
-KISTEN_HOEHE = 1.2       # Ablagehöhe auf den Holzkisten (0.8 war zu tief, Essen steckte drin)
+KISTEN_HOEHE = 1.2       # Ablagehöhe auf den Holzkisten (Land_Roadblock_WoodenCrate_DE), geschätzt
 
 # Einrichtung im Innenhof. Koordinaten relativ zur Hofmitte, ausgerichtet an den Mauern:
 # u = entlang der Südmauer nach Osten, v = nach Norden (Richtung Hauptgebäude), in Metern.
@@ -109,11 +109,11 @@ EINRICHTUNG = [
     # Grillplatz (Südost): Feuerstelle mit Grillrost
     (8, -18, 0.0, "Fireplace", 0), (9.5, -18, 0.3, "CookingStand", 0),
     # Kisten mit Holz und Streichhölzern
-    (13, -22, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0), (14.5, -22, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0),
+    (13, -22, 0.0, "Land_Roadblock_WoodenCrate_DE", 0), (14.5, -22, 0.0, "Land_Roadblock_WoodenCrate_DE", 0),
     *[(12 + i * 0.6, -23.6, 0.3, "Firewood", 0) for i in range(6)],
     *[(12 + i * 0.6, -24.4, 0.3, "Matchbox", 0) for i in range(4)],
     # Zwei Kisten mit Essen obendrauf: links Dosen, rechts Fleisch
-    (11.5, -15, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0), (13.5, -15, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0),
+    (11.5, -15, 0.0, "Land_Roadblock_WoodenCrate_DE", 0), (13.5, -15, 0.0, "Land_Roadblock_WoodenCrate_DE", 0),
     *[(11.5 + (i % 4 - 1.5) * 0.2, -15 + (i // 4 - 0.5) * 0.25, KISTEN_HOEHE, n, 0) for i, n in enumerate(
         ["TacticalBaconCan"] * 3 + ["BakedBeansCan"] * 2 + ["PeachesCan"] * 2)],
     *[(13.5 + (i % 3 - 1) * 0.25, -15 + (i // 3 - 0.5) * 0.25, KISTEN_HOEHE, n, 0) for i, n in enumerate(
@@ -218,7 +218,7 @@ for u, v, hoehe, name, gier in EINRICHTUNG:
     z = MITTE_Z + u * ost[1] + v * nord[1]
     # Gebäude (Land_) leicht einsinken lassen, Tische und Kisten nicht (sonst stimmt die Höhe der
     # Ablagefläche nicht); lose Items am Boden etwas höher, auf Tischen/Kisten knapp über der Fläche
-    if name in ("Land_Roadblock_Table_DE", "Land_Misc_WoodenCrate_Spawn_DE"):
+    if name in ("Land_Roadblock_Table_DE", "Land_Roadblock_WoodenCrate_DE"):
         korrektur = 0.0
     elif name.startswith("Land_"):
         korrektur = HOEHE_KORREKTUR

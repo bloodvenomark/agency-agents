@@ -991,7 +991,7 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "name": "Land_Roadblock_WoodenCrate_DE",
       "pos": [
         8698.064,
         283.516,
@@ -1006,7 +1006,7 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "name": "Land_Roadblock_WoodenCrate_DE",
       "pos": [
         8699.311,
         283.325,
@@ -1171,7 +1171,7 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "name": "Land_Roadblock_WoodenCrate_DE",
       "pos": [
         8700.712,
         283.137,
@@ -1186,7 +1186,7 @@
       "enableCEPersistency": 0
     },
     {
-      "name": "Land_Misc_WoodenCrate_Spawn_DE",
+      "name": "Land_Roadblock_WoodenCrate_DE",
       "pos": [
         8702.374,
         282.917,

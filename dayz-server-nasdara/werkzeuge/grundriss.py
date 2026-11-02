@@ -34,7 +34,7 @@ for l in laeden:
     ax.annotate("", xy=(fx + v[0] * 4, fz + v[1] * 4), xytext=(fx, fz), arrowprops=dict(arrowstyle="->"))
     ax.text(l["x"], l["z"], l["name"], ha="center", va="center", fontsize=9, weight="bold")
 gruppen = [
-    ("Grill + Kisten + Essen", ("Fireplace", "CookingStand", "Land_Misc_WoodenCrate_Spawn_DE", "Firewood",
+    ("Grill + Kisten + Essen", ("Fireplace", "CookingStand", "Land_Roadblock_WoodenCrate_DE", "Firewood",
                                 "Matchbox", "TacticalBaconCan", "BakedBeansCan", "PeachesCan",
                                 "GoatSteakMeat", "ChickenBreastMeat"), "#6d4c41", "o"),
     ("Wasser-Tankwagen + Flaschen", ("Land_Wreck_Truck01_Aban1_Cistern_DE", "WaterBottle"), "#0277bd", "P"),
