@@ -20,6 +20,10 @@ MITTE_X, MITTE_Z = 8725.0, 8265.0
 BODEN = 275.1
 GEFAELLE_OST, GEFAELLE_NORD = -0.066, 0.017
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
+# Im Spiel gemessene Bodenhöhe im Innenhof (Karte im Spiel, "Höhe 281 m"). Die Schätzung lag dort
+# ca. 5 m zu tief, die Items steckten im Boden. Einrichtung und Items stehen auf dieser Höhe.
+HOF_BODEN = 281.0
+ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
 
 def boden_bei(x: float, z: float) -> float:
@@ -120,9 +124,9 @@ for name, u, v, blick, marker in TRADER:
 for u, v, hoehe, name, gier in EINRICHTUNG:
     x = MITTE_X + u * ost[0] + v * nord[0]
     z = MITTE_Z + u * ost[1] + v * nord[1]
-    # Gebäude (Land_/StaticObj_) leicht einsinken lassen, lose Items knapp über dem Boden
-    korrektur = HOEHE_KORREKTUR if name.startswith("Land_") else 0.0
-    objekte.append(objekt(name, x, boden_bei(x, z) + hoehe + korrektur, z, drehung + gier))
+    # Gebäude (Land_) leicht einsinken lassen, lose Items etwas über dem gemessenen Hofboden
+    korrektur = HOEHE_KORREKTUR if name.startswith("Land_") else ITEM_ZUSCHLAG if hoehe < 2 else 0.0
+    objekte.append(objekt(name, x, HOF_BODEN + hoehe + korrektur, z, drehung + gier))
     items.append(name)
 
 ziel = Path(sys.argv[2]) / "custom" / "safezone.json"
