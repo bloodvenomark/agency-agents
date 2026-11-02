@@ -29,37 +29,60 @@ MESSUNGEN = [
     ("Mauer vorne rechts (Südost)", 8757.0, 8218.0, 272.0),
     # Messung in der neuen, zur Straße gedrehten Lage
     ("Sanitätszelt (neue Lage)", 8677.0, 8257.0, 284.0),
+    ("Wasser-Tankwagen (neue Lage, schwebte ca. 2-3 m)", 8661.0, 8246.0, 285.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
 
-def _flaeche(punkte):
-    """Koeffizienten a, b, c, d der Fläche (kleinste Quadrate, Gauß-Elimination)."""
-    zeilen = [(1.0, x - MESS_X, z - MESS_Z, (x - MESS_X) * (z - MESS_Z), h) for _, x, z, h in punkte]
-    n = 4
-    a = [[sum(r[i] * r[j] for r in zeilen) for j in range(n)] for i in range(n)]
-    b = [sum(r[i] * r[n] for r in zeilen) for i in range(n)]
+KORREKTUR_RADIUS = 30.0   # Reichweite der örtlichen Korrektur um jeden Messpunkt (m)
+
+
+def _loese(a, b):
+    """Lineares Gleichungssystem a*x = b (Gauß-Elimination)."""
+    n = len(b)
+    a = [zeile[:] for zeile in a]
+    b = b[:]
     for i in range(n):
         for k in range(i + 1, n):
             f = a[k][i] / a[i][i]
             a[k] = [a[k][j] - f * a[i][j] for j in range(n)]
             b[k] -= f * b[i]
-    loesung = [0.0] * n
+    x = [0.0] * n
     for i in reversed(range(n)):
-        loesung[i] = (b[i] - sum(a[i][j] * loesung[j] for j in range(i + 1, n))) / a[i][i]
-    return loesung
+        x[i] = (b[i] - sum(a[i][j] * x[j] for j in range(i + 1, n))) / a[i][i]
+    return x
+
+
+def _flaeche(punkte):
+    """Koeffizienten a, b, c, d der bilinearen Fläche (kleinste Quadrate)."""
+    zeilen = [(1.0, x - MESS_X, z - MESS_Z, (x - MESS_X) * (z - MESS_Z), h) for _, x, z, h in punkte]
+    a = [[sum(r[i] * r[j] for r in zeilen) for j in range(4)] for i in range(4)]
+    return _loese(a, [sum(r[i] * r[4] for r in zeilen) for i in range(4)])
+
+
+def _grundflaeche(x: float, z: float) -> float:
+    a, b, c, d = FLAECHE
+    dx, dz = x - MESS_X, z - MESS_Z
+    return a + b * dx + c * dz + d * dx * dz
+
+
+def _kern(x1, z1, x2, z2):
+    return math.exp(-((x1 - x2) ** 2 + (z1 - z2) ** 2) / KORREKTUR_RADIUS ** 2)
 
 
 FLAECHE = _flaeche(MESSUNGEN)
+# Örtliche Korrektur (radiale Basisfunktionen), damit jeder Messpunkt genau getroffen wird
+_RESTE = [h - _grundflaeche(x, z) for _, x, z, h in MESSUNGEN]
+_GEWICHTE = _loese([[_kern(x1, z1, x2, z2) for _, x2, z2, _ in MESSUNGEN] for _, x1, z1, _ in MESSUNGEN],
+                   _RESTE)
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
 
 def boden_bei(x: float, z: float) -> float:
-    """Bodenhöhe an einer Stelle aus der gemessenen Fläche."""
-    a, b, c, d = FLAECHE
-    dx, dz = x - MESS_X, z - MESS_Z
-    return a + b * dx + c * dz + d * dx * dz
+    """Bodenhöhe an einer Stelle: Fläche durch alle Messungen plus örtliche Korrektur."""
+    return _grundflaeche(x, z) + sum(w * _kern(x, z, mx, mz)
+                                     for w, (_, mx, mz, _) in zip(_GEWICHTE, MESSUNGEN))
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.7        # Höhe der Tischplatte über dem Boden (0.85 war zu hoch, Spray schwebte)
