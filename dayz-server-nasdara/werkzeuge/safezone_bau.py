@@ -35,6 +35,7 @@ MESSUNGEN = [
     ("Trader 4 vor dem Hauptgebäude, rechts (neue Lage)", 8722.0, 8277.0, 282.0),
     ("Trader 3 vor dem Hauptgebäude, links (neue Lage)", 8704.0, 8290.0, 281.0),
     ("Trader 2 links am Hauptgebäude, Westmauer (neue Lage)", 8680.0, 8298.0, 281.0),
+    ("Trader 1 vorne links beim Wasser-Tankwagen (neue Lage)", 8658.0, 8265.0, 284.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
 
