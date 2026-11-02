@@ -11,6 +11,7 @@ Im Nitrado-Dateibrowser unter `dayzps_missions/dayzOffline.nasdara/`:
 | `db/types.xml` | `dayzOffline.nasdara/db/types.xml` |
 | `db/events.xml` | `dayzOffline.nasdara/db/events.xml` |
 | `db/globals.xml` | `dayzOffline.nasdara/db/globals.xml` |
+| `env/zombie_territories.xml` | `dayzOffline.nasdara/env/zombie_territories.xml` |
 | `cfgspawnabletypes.xml` | `dayzOffline.nasdara/cfgspawnabletypes.xml` |
 | `cfggameplay.json` | `dayzOffline.nasdara/cfggameplay.json` |
 | `custom/startgear.json` | `dayzOffline.nasdara/custom/startgear.json` (neu) |
@@ -19,22 +20,50 @@ Danach im Webinterface prüfen, dass **cfggameplay.json aktiviert** ist, und den
 
 ## Was geändert wurde
 
-| Wunsch | Änderung |
-|---|---|
-| Loot +10 % | `types.xml`: nominal/min aller Items × 1,1 (gesamt 25.080 → 27.672 Items, +10,3 %). Sehr seltene Items mit 1–4 Stück bleiben gleich, damit z. B. NVGs nicht doppelt so oft spawnen. |
-| Fahrzeuge +50 % | `events.xml`: alle aktiven Fahrzeug-Events × 1,5 (z. B. Sedan 8 → 12, Motorräder 30 → 45, LKW 6 → 9). Spawnpunkte reichen überall. |
-| Fahrzeuge voll ausgestattet | `cfgspawnabletypes.xml`: alle Anbauteile (Räder, Türen, Batterie, Kühler, Zündkerze, Licht) bei 26 Fahrzeugtypen auf 100 %. |
-| Mehr Zombies | `events.xml`: Infected-Events +30 %, `globals.xml`: ZombieMaxCount 1000 → 1300. |
-| Startausrüstung | `custom/startgear.json`: Kleidung, Umhängetasche, 2× Essen (Cracker, Salzstangen), 3× Trinken (Wasserflasche, 2 Dosen), Verband, Knicklicht, Papierkarte, 1 zufällige Pistole ohne Magazin + etwas Munition. Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. |
-| Karte zeigt Position | `cfggameplay.json`: `displayPlayerPosition` = true (nur mit Karte im Inventar). |
-| Einstürzende Bauten | `cfggameplay.json`: `disableItemFalling` = true. Bitte testen, siehe unten. |
+### Loot (`db/types.xml`)
+- **+50 %** für alle Items (gesamt 25.080 → 37.738). Einzelstücke (nominal 1, z. B. M4A1, FAL, AUG)
+  bleiben einzeln, sonst gäbe es sie doppelt so oft.
+- **Plattenträger (Weste, Holster, Taschen) und Nachtsicht (Brille, Kopfband)** spawnen jetzt
+  allgemein in **Tier 3 (gelb)** in Militärgebieten und weiterhin in Tier 4.
+- **Rest von Tier 4 bleibt Tier 4.** Etwa 10 % davon sind zusätzlich in Tier 3 möglich:
+  AK-Schalldämpfer, CMAG-40er-Magazin, STANAG-60er-Magazin.
+- **Grüne Gebiete (Tier 1):** Kein Tier-4-Item wurde dort freigegeben.
+- **Magazine** spawnen mit 10–90 % Füllung statt 5–50 %, also mal fast leer, mal fast voll.
+- **Benzinkanister und Wasserflaschen** spawnen immer voll (auch in der Welt, nicht nur im Auto).
+
+### Waffen (`cfgspawnabletypes.xml`)
+- Alle 51 Magazin-Plätze an Waffen auf **50 %**: Waffen kommen mal mit, mal ohne Magazin.
+
+### Fahrzeuge
+- **+50 %** (`db/events.xml`), z. B. Sedan 8 → 12, Motorräder 30 → 45, LKW 6 → 9.
+- **Voll ausgestattet:** alle Räder, Türen, Batterie, Kühler, Zündkerze und Lichter bei 26 Fahrzeugtypen.
+- **Ladung:** Autos und LKW (16 Typen) haben **1 vollen Benzinkanister + 5 volle Wasserflaschen**
+  im Kofferraum. Damit können Spieler Tank und Kühler selbst füllen. Motorräder haben keinen Stauraum.
+
+### Zombies (+30 %)
+- `env/zombie_territories.xml`: Zombies pro Zone +30 %.
+- `db/events.xml`: Infected-Events +30 %, `db/globals.xml`: Obergrenze 1000 → 1300.
+
+### Startausrüstung (`custom/startgear.json`)
+Kleidung, Umhängetasche, 2× Essen (Cracker, Salzstangen), 3× Trinken (Wasserflasche, 2 Dosen),
+Verband, Knicklicht, Papierkarte, 1 zufällige Pistole **ohne Magazin** mit etwas Munition.
+Pistolen: Makarov, CZ75, Glock 19, P1, FNX45, Colt 1911, MKII. Kein Revolver.
+
+### Sonstiges (`cfggameplay.json`)
+- Karte zeigt die eigene Position (mit Karte im Inventar).
+- `disableItemFalling` = true gegen einstürzende Bauten.
+- Basisschaden unverändert (kommt später).
 
 ## Bitte nach dem ersten Start testen
 
-1. **Startausrüstung:** Neuen Charakter spawnen. Ist alles da? Wie viel Munition?
-2. **Karte:** Papierkarte öffnen. Zeigt sie Nasdara und deine Position?
-3. **Fahrzeuge:** Ein paar Fahrzeuge anschauen. Sind alle Teile dran?
-4. **Wachturm:** Einen Testturm bauen und das unterste Stockwerk abbauen. Bleiben Nachbarbauten stehen?
+1. **Startausrüstung:** Ist alles da? Wie viel Munition?
+2. **Karte:** Zeigt die Papierkarte Nasdara und deine Position?
+3. **Fahrzeuge:** Sind alle Teile dran? Liegen Kanister und Wasserflaschen im Kofferraum, und sind sie voll?
+4. **Wachturm:** Testturm bauen, unterstes Stockwerk abbauen. Bleiben Nachbarbauten stehen?
+5. **Loot:** Nach 1–2 Stunden mal Militärgebiete in Gelb abgehen. Gibt es Plattenträger/Nachtsicht?
 
 Wenn etwas fehlt oder der Server nicht startet: die Originaldatei zurückspielen und mir
 den Fehler schicken.
+
+Hinweis: Durch +50 % Loot braucht der Server nach dem Hochladen einige Neustarts, bis die Welt
+richtig gefüllt ist.
