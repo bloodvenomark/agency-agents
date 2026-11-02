@@ -18,24 +18,46 @@ from pathlib import Path
 # Hauptgebäude) zeigt zur ankommenden Straße. Ca. 6 m Abstand zu den Häusern, ca. 2 % Bäume.
 MITTE_X, MITTE_Z = 8699.5, 8263.6
 STRASSE_PEILUNG = 33.8   # Richtung der Straße nach Nordosten; das Haupttor blickt entgegengesetzt
-# Gelände als schräge Ebene: Gefälle aus den Höhen der Objekte im Umkreis von 150 m geschätzt
-# (bestätigt durch die Messungen unten), Grundhöhe aus den Messungen im Spiel (Karte im Spiel)
-# an eindeutigen Stellen der vorher aufgebauten Moschee (Mitte x 8725 / z 8265, alte Ausrichtung).
-GEFAELLE_OST, GEFAELLE_NORD = -0.066, 0.017
+# Gelände aus Messungen im Spiel (Karte im Spiel, "Höhe") an eindeutigen Stellen der vorher
+# aufgebauten Moschee (Mitte x 8725 / z 8265, alte Ausrichtung). Das Gelände ist verdreht (vorne
+# 14 m Gefälle, hinten 5 m), daher keine Ebene, sondern eine bilineare Fläche durch die Messpunkte:
+# h = a + b*dx + c*dz + d*dx*dz. Weitere Messungen ergänzen -> Ausgleich nach kleinsten Quadraten.
 MESSUNGEN = [
     ("innere Ecke links neben dem Hauptgebäude (Nordwest)", 8693.0, 8314.0, 279.0),
     ("innere Ecke rechts neben dem Hauptgebäude (Nordost)", 8772.0, 8299.0, 274.0),
+    ("Mauer vorne links (Südwest)", 8678.0, 8233.0, 286.0),
+    ("Mauer vorne rechts (Südost)", 8757.0, 8218.0, 272.0),
 ]
 MESS_X, MESS_Z = 8725.0, 8265.0
-MESS_HOEHE = sum(h - GEFAELLE_OST * (x - MESS_X) - GEFAELLE_NORD * (z - MESS_Z)
-                 for _, x, z, h in MESSUNGEN) / len(MESSUNGEN)
+
+
+def _flaeche(punkte):
+    """Koeffizienten a, b, c, d der Fläche (kleinste Quadrate, Gauß-Elimination)."""
+    zeilen = [(1.0, x - MESS_X, z - MESS_Z, (x - MESS_X) * (z - MESS_Z), h) for _, x, z, h in punkte]
+    n = 4
+    a = [[sum(r[i] * r[j] for r in zeilen) for j in range(n)] for i in range(n)]
+    b = [sum(r[i] * r[n] for r in zeilen) for i in range(n)]
+    for i in range(n):
+        for k in range(i + 1, n):
+            f = a[k][i] / a[i][i]
+            a[k] = [a[k][j] - f * a[i][j] for j in range(n)]
+            b[k] -= f * b[i]
+    loesung = [0.0] * n
+    for i in reversed(range(n)):
+        loesung[i] = (b[i] - sum(a[i][j] * loesung[j] for j in range(i + 1, n))) / a[i][i]
+    return loesung
+
+
+FLAECHE = _flaeche(MESSUNGEN)
 HOEHE_KORREKTUR = -0.8   # Gebäude lieber etwas einsinken lassen als schweben (Schätzung ±2 m)
 ITEM_ZUSCHLAG = 0.5      # lose Items etwas höher, da die Karte auf ganze Meter rundet
 
 
 def boden_bei(x: float, z: float) -> float:
-    """Geschätzte Bodenhöhe an einer Stelle (Ebene durch den gemessenen Punkt)."""
-    return MESS_HOEHE + GEFAELLE_OST * (x - MESS_X) + GEFAELLE_NORD * (z - MESS_Z)
+    """Bodenhöhe an einer Stelle aus der gemessenen Fläche."""
+    a, b, c, d = FLAECHE
+    dx, dz = x - MESS_X, z - MESS_Z
+    return a + b * dx + c * dz + d * dx * dz
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.85       # Höhe der Tischplatte über dem Boden (geschätzt)
