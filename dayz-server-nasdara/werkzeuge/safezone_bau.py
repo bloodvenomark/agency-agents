@@ -32,6 +32,7 @@ def boden_bei(x: float, z: float) -> float:
 
 ORIGINAL_BODEN = 179.249  # Bodenhöhe der Original-Moschee (Mauern)
 TISCH_HOEHE = 0.85       # Höhe der Tischplatte über dem Boden (geschätzt)
+KISTEN_HOEHE = 0.8       # Höhe der Holzkisten (Land_Misc_WoodenCrate_Spawn_DE), geschätzt
 
 # Einrichtung im Innenhof. Koordinaten relativ zur Hofmitte, ausgerichtet an den Mauern:
 # u = entlang der Südmauer nach Osten, v = nach Norden (Richtung Hauptgebäude), in Metern.
@@ -44,11 +45,11 @@ EINRICHTUNG = [
     (13, -22, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0), (14.5, -22, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0),
     *[(12 + i * 0.6, -23.6, 0.3, "Firewood", 0) for i in range(6)],
     *[(12 + i * 0.6, -24.4, 0.3, "Matchbox", 0) for i in range(4)],
-    # Kiste mit Essen und Fleisch
-    (13, -15, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0),
-    *[(11.5 + i * 0.6, -16.6, 0.3, n, 0) for i, n in enumerate(
+    # Zwei Kisten mit Essen obendrauf: links Dosen, rechts Fleisch
+    (11.5, -15, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0), (13.5, -15, 0.0, "Land_Misc_WoodenCrate_Spawn_DE", 0),
+    *[(11.5 + (i % 4 - 1.5) * 0.2, -15 + (i // 4 - 0.5) * 0.25, KISTEN_HOEHE, n, 0) for i, n in enumerate(
         ["TacticalBaconCan"] * 3 + ["BakedBeansCan"] * 2 + ["PeachesCan"] * 2)],
-    *[(11.5 + i * 0.6, -17.4, 0.3, n, 0) for i, n in enumerate(
+    *[(13.5 + (i % 3 - 1) * 0.25, -15 + (i // 3 - 0.5) * 0.25, KISTEN_HOEHE, n, 0) for i, n in enumerate(
         ["GoatSteakMeat"] * 3 + ["ChickenBreastMeat"] * 3)],
     # Wasser-Tankwagen (an der Südmauer) mit leeren Flaschen daneben (keine Getränke)
     (-22, -36, 0.0, "Land_Wreck_Truck01_Aban1_Cistern_DE", 90),
@@ -124,9 +125,9 @@ for name, u, v, blick, marker in TRADER:
 for u, v, hoehe, name, gier in EINRICHTUNG:
     x = MITTE_X + u * ost[0] + v * nord[0]
     z = MITTE_Z + u * ost[1] + v * nord[1]
-    # Gebäude (Land_) leicht einsinken lassen, Tische nicht (sonst stimmt die Tischhöhe nicht);
-    # lose Items am Boden etwas höher, Items auf Tischen nur knapp über der Platte
-    if name == "Land_Roadblock_Table_DE":
+    # Gebäude (Land_) leicht einsinken lassen, Tische und Kisten nicht (sonst stimmt die Höhe der
+    # Ablagefläche nicht); lose Items am Boden etwas höher, auf Tischen/Kisten knapp über der Fläche
+    if name in ("Land_Roadblock_Table_DE", "Land_Misc_WoodenCrate_Spawn_DE"):
         korrektur = 0.0
     elif name.startswith("Land_"):
         korrektur = HOEHE_KORREKTUR

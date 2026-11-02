@@ -87,8 +87,9 @@ die kartentypische Startkleidung.
   ca. 55 m südöstlich deiner Markierung, auf einer freien, baumlosen Fläche. Jedes Teil steht
   auf seiner eigenen geschätzten Bodenhöhe (Gelände fällt nach Osten um ca. 6 % ab). Die Original-Moschee in Nasdara bleibt stehen.
 - **Eingerichteter Innenhof** (Grundriss: `safezone_grundriss.png`), nach jedem Restart neu:
-  - **Grillplatz (Osten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
-    4× Streichhölzern sowie 1 Kiste mit Essen: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche, 3 Ziegen- und 3 Hühnerfleisch.
+  - **Grillplatz (Südosten):** Feuerstelle + Grillrost. Daneben 2 Holzkisten mit 6× Feuerholz und
+    4× Streichhölzern sowie 2 Kisten mit Essen **obendrauf**: 3 Dosenspeck, 2 Bohnen, 2 Pfirsiche
+    (linke Kiste) und 3 Ziegen- und 3 Hühnerfleisch (rechte Kiste).
   - **Wasser (Südwesten):** Wasser-Tankwagen als Wasserquelle + 10 Wasserflaschen zum Befüllen.
     Keine sonstigen Getränke.
   - **Sanitätszelt (Nordwesten):** großes Sanitätszelt mit 2 Tischen, darauf 5 Verbände,
